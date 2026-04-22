@@ -40,8 +40,6 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
-            /* Bottom padding handles the mobile nav spacing. 
-               We increase it slightly to ensure the footer doesn't get covered */
             padding-bottom: 0; 
         }
 
@@ -69,6 +67,13 @@
             max-width: 1100px; 
             z-index: 1000;
             border: 1px solid rgba(255,255,255,0.6);
+            /* Added smooth transition for the scroll hide/show effect */
+            transition: transform 0.4s cubic-bezier(0.3, 1, 0.2, 1);
+        }
+
+        /* Class applied via JS when scrolling down */
+        .desktop-nav.scroll-down {
+            transform: translate(-50%, -150%);
         }
 
         .brand {
@@ -326,7 +331,6 @@
             margin-top: 60px;
             border-top-left-radius: 40px;
             border-top-right-radius: 40px;
-            /* Adjust bottom padding to accommodate mobile nav if visible */
             padding-bottom: calc(40px + env(safe-area-inset-bottom)); 
         }
 
@@ -343,7 +347,7 @@
             height: 60px;
             border-radius: 8px;
             margin-bottom: 24px;
-            background: var(--white); /* Added white background in case logo has transparent elements that clash with dark bg */
+            background: var(--white);
             padding: 4px;
         }
 
@@ -438,7 +442,7 @@
         }
 
         .btn-subscribe:hover {
-            background: #581c87; /* Slightly darker purple */
+            background: #581c87;
         }
 
         .footer-bottom {
@@ -477,6 +481,12 @@
             padding-bottom: env(safe-area-inset-bottom);
             border-top-left-radius: 24px;
             border-top-right-radius: 24px;
+            /* Added smooth transition for mobile scroll hide/show */
+            transition: transform 0.4s cubic-bezier(0.3, 1, 0.2, 1);
+        }
+
+        .mobile-nav.scroll-down {
+            transform: translateY(150%);
         }
 
         .mobile-nav-inner {
@@ -526,6 +536,11 @@
             justify-content: center;
             font-size: 1.5rem;
             z-index: 999;
+            transition: transform 0.4s cubic-bezier(0.3, 1, 0.2, 1);
+        }
+        
+        .fab-quote.scroll-down {
+            transform: translateX(150%);
         }
 
         /* --- Media Queries --- */
@@ -568,6 +583,11 @@
                 display: flex;
                 justify-content: center;
                 box-shadow: var(--shadow-sm);
+                transition: transform 0.4s cubic-bezier(0.3, 1, 0.2, 1);
+            }
+            
+            .mobile-header.scroll-down {
+                transform: translateY(-100%);
             }
             
             .mobile-header img {
@@ -593,7 +613,6 @@
             }
             
             body {
-                /* Add padding so the footer content isn't hidden behind the fixed mobile nav */
                 padding-bottom: 90px; 
             }
 
@@ -612,7 +631,6 @@
                 text-align: center;
             }
             
-            /* Extra padding at the very bottom of the footer specifically for mobile */
             .site-footer {
                 padding-bottom: 120px; 
             }
@@ -627,11 +645,11 @@
 </head>
 <body>
 
-    <header class="mobile-header">
+    <header class="mobile-header" id="mobileHeader">
         <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Funeral Cover Logo">
     </header>
 
-    <nav class="desktop-nav">
+    <nav class="desktop-nav" id="desktopNav">
         <a href="#" class="brand">
             <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Funeral Cover Logo">
         </a>
@@ -795,11 +813,11 @@
         </div>
     </footer>
 
-    <a href="#plans" class="fab-quote">
+    <a href="#plans" class="fab-quote" id="fabQuote">
         <i class='bx bx-right-arrow-alt'></i>
     </a>
 
-    <nav class="mobile-nav">
+    <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-inner">
             <a href="#" class="mobile-nav-item active">
                 <i class='bx bxs-home'></i>
@@ -821,12 +839,12 @@
     </nav>
 
     <script>
+        // Mobile Bottom Nav Active State Logic
         const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
         
         mobileNavItems.forEach(item => {
             item.addEventListener('click', function() {
                 mobileNavItems.forEach(nav => nav.classList.remove('active'));
-                
                 this.classList.add('active');
                 
                 mobileNavItems.forEach(nav => {
@@ -838,6 +856,34 @@
                     }
                 });
             });
+        });
+
+        // Hide/Show Navigation on Scroll Logic
+        let lastScrollY = window.scrollY;
+        const desktopNav = document.getElementById('desktopNav');
+        const mobileHeader = document.getElementById('mobileHeader');
+        const mobileNav = document.getElementById('mobileNav');
+        const fabQuote = document.getElementById('fabQuote');
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            
+            // Add a small buffer (50px) so it doesn't trigger on the very first pixel of scroll
+            if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                // Scrolling DOWN - Hide Navigations
+                desktopNav.classList.add('scroll-down');
+                mobileHeader.classList.add('scroll-down');
+                mobileNav.classList.add('scroll-down');
+                fabQuote.classList.add('scroll-down');
+            } else {
+                // Scrolling UP - Show Navigations
+                desktopNav.classList.remove('scroll-down');
+                mobileHeader.classList.remove('scroll-down');
+                mobileNav.classList.remove('scroll-down');
+                fabQuote.classList.remove('scroll-down');
+            }
+            
+            lastScrollY = currentScrollY;
         });
     </script>
 </body>
