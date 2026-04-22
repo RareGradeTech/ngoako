@@ -3,353 +3,581 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Premium Funeral Cover Calculator</title>
+    <title>Serenity Funeral Cover</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
     <style>
         :root {
-            --primary: #6C5CE7;
-            --primary-hover: #5A4FCF;
-            --bg-dark: #0F1016;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #FFFFFF;
-            --text-muted: #A0A5B5;
+            --primary: #2B6CB0;
+            --primary-light: #EBF8FF;
+            --text-dark: #1A202C;
+            --text-muted: #718096;
+            --bg-light: #F7FAFC;
+            --white: #FFFFFF;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --shadow-nav: 0 10px 40px rgba(0, 0, 0, 0.08);
+            --radius-pill: 50px;
+            --radius-card: 24px;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            /* Subtle background gradient */
-            background-image: radial-gradient(circle at top right, rgba(108, 92, 231, 0.15), transparent 40%),
-                              radial-gradient(circle at bottom left, rgba(108, 92, 231, 0.1), transparent 40%);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for mobile nav */
         }
 
-        /* Glassmorphism Card */
-        .calculator-card {
-            background: var(--glass-bg);
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Desktop Pill Navigation --- */
+        .desktop-nav {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 32px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 12px 24px;
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow-nav);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 900px;
+            z-index: 1000;
+            border: 1px solid rgba(255,255,255,0.4);
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 32px;
+        .brand {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .header h2 {
+        .brand i {
             font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 8px;
         }
 
-        .header p {
-            color: var(--text-muted);
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
             font-size: 0.95rem;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
         }
 
-        .form-group {
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .btn-quote {
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-quote:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.3);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 160px 5% 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 480px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-md);
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-nav);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .floating-badge i {
+            font-size: 2rem;
+            color: #48BB78;
+        }
+
+        /* --- Features Section --- */
+        .features {
+            padding: 80px 5%;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            padding: 32px;
+            background: var(--bg-light);
+            border-radius: var(--radius-card);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
             margin-bottom: 24px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
             color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        select {
-            width: 100%;
-            padding: 16px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            color: var(--text-main);
-            font-size: 1rem;
-            appearance: none;
-            outline: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        select:focus {
-            border-color: var(--primary);
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        select option {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-        }
-
-        .btn-calculate {
-            width: 100%;
-            padding: 16px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            margin-top: 10px;
-        }
-
-        .btn-calculate:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .btn-calculate:active {
-            transform: scale(0.98);
-        }
-
-        /* Bottom Sheet Styles */
-        .bottom-sheet-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease;
-            z-index: 999;
-        }
-
-        .bottom-sheet {
-            position: fixed;
-            bottom: -100%;
-            left: 0;
-            width: 100%;
-            background: #1A1C23;
-            border-top-left-radius: 24px;
-            border-top-right-radius: 24px;
-            padding: 24px 24px 40px;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
-            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000;
-        }
-
-        .bottom-sheet.active {
-            bottom: 0;
-        }
-
-        .bottom-sheet-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .drag-handle {
-            width: 40px;
-            height: 5px;
-            background: var(--glass-border);
-            border-radius: 10px;
-            margin: 0 auto 20px;
-        }
-
-        .quote-result {
-            text-align: center;
-        }
-
-        .quote-price {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 10px 0;
-        }
-
-        .quote-label {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        .benefits-list {
-            list-style: none;
-            margin-top: 24px;
-            text-align: left;
-            background: rgba(0,0,0,0.2);
-            padding: 16px;
-            border-radius: 12px;
-        }
-
-        .benefits-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--glass-border);
             font-size: 0.95rem;
         }
 
-        .benefits-list li:last-child {
-            border-bottom: none;
+        /* --- Plans Section --- */
+        .plans {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .benefits-list li::before {
-            content: "✓";
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .plan-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .plan-card.popular {
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: var(--white);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
             color: var(--primary);
-            font-weight: bold;
-            margin-right: 10px;
+            margin: 20px 0;
         }
 
-        .btn-close {
-            width: 100%;
-            padding: 14px;
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            margin-top: 24px;
-            cursor: pointer;
+        .plan-price span {
             font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--bg-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+        }
+
+        .plan-features li i {
+            color: #48BB78;
+            font-size: 1.2rem;
+        }
+
+        .btn-plan {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .plan-card.popular .btn-plan {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* --- Mobile Bottom Navigation --- */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom);
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+        }
+
+        .mobile-nav-inner {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 70px;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            color: var(--text-muted);
+            flex: 1;
+            height: 100%;
+        }
+
+        .mobile-nav-item i {
+            font-size: 1.5rem;
+        }
+
+        .mobile-nav-item span {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .mobile-nav-item.active {
+            color: var(--primary);
+        }
+
+        /* Floating Action Button for Mobile Quote */
+        .fab-quote {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: var(--primary);
+            color: var(--white);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.4);
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 999;
+        }
+
+        /* --- Media Queries --- */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 120px;
+            }
+            .hero-content p {
+                margin: 0 auto 32px;
+            }
+            .floating-badge {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none; /* Hide Pill Nav on Mobile */
+            }
+            
+            .mobile-nav {
+                display: block; /* Show Bottom Nav */
+            }
+
+            .fab-quote {
+                display: flex; /* Show floating quote button */
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            body {
+                padding-bottom: 90px; /* Adjust padding for bottom nav */
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="calculator-card">
-        <div class="header">
-            <h2>Cover Calculator</h2>
-            <p>Customize your plan to see your monthly premium</p>
+    <nav class="desktop-nav">
+        <a href="#" class="brand">
+            <i class='bx bx-leaf'></i>
+            Serenity
+        </a>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#plans">Plans</a></li>
+            <li><a href="#features">Benefits</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <a href="#plans" class="btn-quote">Get Covered</a>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Dignified Cover for Your Loved Ones.</h1>
+                <p>Comprehensive funeral solutions designed to relieve financial and logistical burdens, allowing you to focus on what truly matters.</p>
+                <a href="#plans" class="btn-quote" style="display: inline-block; padding: 16px 32px; font-size: 1.1rem;">View Our Plans</a>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Peaceful Family Moment" class="hero-image">
+                <div class="floating-badge">
+                    <i class='bx bxs-check-shield'></i>
+                    <div>
+                        <strong>Trusted Nationwide</strong>
+                        <p style="margin:0; font-size: 0.85rem; color: var(--text-muted);">Over 100 Branches</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="section-header">
+                <h2>Benefits While You Live</h2>
+                <p style="color: var(--text-muted);">Enjoy value from your policy immediately, not just in the afterlife.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon-box"><i class='bx bx-wallet'></i></div>
+                    <h3>10% Cash Back</h3>
+                    <p>Receive 10% of your premiums back if you do not claim over a period of 5 years.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class='bx bx-cart-alt'></i></div>
+                    <h3>Grocery Discounts</h3>
+                    <p>Standard monthly discounts on groceries, shopping, and travel worth up to R1,250 every month.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon-box"><i class='bx bx-restaurant'></i></div>
+                    <h3>Full Catering Support</h3>
+                    <p>Our skilled team ensures all catering arrangements are managed, including the Inkomo Plan.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="plans" class="plans">
+            <div class="section-header">
+                <h2>Simple, Transparent Plans</h2>
+                <p style="color: var(--text-muted);">Carefully put together to accommodate various budgets and needs.</p>
+            </div>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <h3>Silver Plus</h3>
+                    <div class="plan-price">R95<span>/month</span></div>
+                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Perfect starting cover for single members.</p>
+                    <ul class="plan-features">
+                        <li><i class='bx bx-check'></i> Half view flat lid casket</li>
+                        <li><i class='bx bx-check'></i> 100 Chairs & Programs</li>
+                        <li><i class='bx bx-check'></i> 1 Bus provided</li>
+                        <li><i class='bx bx-check'></i> R1,000 Cash Benefit</li>
+                    </ul>
+                    <button class="btn-plan">Select Plan</button>
+                </div>
+
+                <div class="plan-card popular">
+                    <div class="popular-tag">Most Popular</div>
+                    <h3>Platinum Plus</h3>
+                    <div class="plan-price">R170<span>/month</span></div>
+                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Comprehensive cover with premium benefits.</p>
+                    <ul class="plan-features">
+                        <li><i class='bx bx-check'></i> Standard dome casket</li>
+                        <li><i class='bx bx-check'></i> 200 Chairs & Programs</li>
+                        <li><i class='bx bx-check'></i> 2 Buses provided</li>
+                        <li><i class='bx bx-check'></i> R2,000 Cash + Rewards</li>
+                    </ul>
+                    <button class="btn-plan">Select Plan</button>
+                </div>
+                
+                <div class="plan-card">
+                    <h3>Family Cover</h3>
+                    <div class="plan-price">R245<span>/month</span></div>
+                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Protect your entire household under one policy.</p>
+                    <ul class="plan-features">
+                        <li><i class='bx bx-check'></i> Covers principal & spouse</li>
+                        <li><i class='bx bx-check'></i> Covers children under 21</li>
+                        <li><i class='bx bx-check'></i> Full Platinum benefits</li>
+                        <li><i class='bx bx-check'></i> No waiting period for accidents</li>
+                    </ul>
+                    <button class="btn-plan">Select Plan</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="#plans" class="fab-quote">
+        <i class='bx bx-right-arrow-alt'></i>
+    </a>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-inner">
+            <a href="#" class="mobile-nav-item active">
+                <i class='bx bxs-home'></i>
+                <span>Home</span>
+            </a>
+            <a href="#plans" class="mobile-nav-item">
+                <i class='bx bxs-shield-plus'></i>
+                <span>Plans</span>
+            </a>
+            <a href="#features" class="mobile-nav-item">
+                <i class='bx bxs-star'></i>
+                <span>Benefits</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class='bx bxs-user-circle'></i>
+                <span>Profile</span>
+            </a>
         </div>
-
-        <div class="form-group">
-            <label for="planTier">Plan Tier</label>
-            <select id="planTier">
-                <option value="casket">Casket Plus Plan</option>
-                <option value="silver">Silver Plus Plan</option>
-                <option value="gold">Gold Plus Plan</option>
-                <option value="platinum">Platinum Plus Plan</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="memberType">Member Structure</label>
-            <select id="memberType">
-                <option value="single">Single Member</option>
-                <option value="parent">Single Parent</option>
-                <option value="family">Family</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="ageBracket">Age Bracket</label>
-            <select id="ageBracket">
-                <option value="16-64">16 - 64 Years</option>
-                <option value="65-84">65 - 84 Years</option>
-            </select>
-        </div>
-
-        <button class="btn-calculate" onclick="calculateQuote()">Get Quote</button>
-    </div>
-
-    <div class="bottom-sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
-    <div class="bottom-sheet" id="bottomSheet">
-        <div class="drag-handle"></div>
-        <div class="quote-result">
-            <div class="quote-label" id="quoteTitle">Your Estimated Premium</div>
-            <div class="quote-price" id="quoteAmount">R0</div>
-            <div class="quote-label">per month</div>
-            
-            <ul class="benefits-list" id="benefitsList">
-                </ul>
-
-            <button class="btn-close" onclick="closeSheet()">Close</button>
-        </div>
-    </div>
+    </nav>
 
     <script>
-        // Data Structure mirroring the specific pricing matrix
-        const pricingData = {
-            casket: {
-                name: "Casket Plus",
-                benefits: ["Half View Flat Lid Casket", "100 Chairs & Funeral Programs", "Hearse & Family Gazebo", "Standard Wash & Prep"],
-                rates: { "single_16-64": 70, "parent_16-64": 85, "family_16-64": 120 }
-            },
-            silver: {
-                name: "Silver Plus",
-                benefits: ["Half View Flat Lid Casket", "100 Chairs & Funeral Programs", "1 Bus Provided", "R1000 Cash Benefit"],
-                rates: { "single_16-64": 95, "single_65-84": 200, "parent_16-64": 120, "parent_65-84": 230, "family_16-64": 150 }
-            },
-            gold: {
-                name: "Gold Plus",
-                benefits: ["3 Tier Casket", "150 Chairs & Funeral Programs", "1 Bus Provided", "R1000 Cash Benefit + R1500 iSave"],
-                rates: { "single_16-64": 150, "parent_16-64": 180, "family_16-64": 210 }
-            },
-            platinum: {
-                name: "Platinum Plus",
-                benefits: ["Standard Dome Casket", "200 Chairs & Funeral Programs", "2 Buses Provided", "R2000 Cash Benefit + R2000 iSave"],
-                rates: { "single_16-64": 170, "parent_16-64": 200, "family_16-64": 245 }
-            }
-        };
-
-        function calculateQuote() {
-            const plan = document.getElementById('planTier').value;
-            const member = document.getElementById('memberType').value;
-            const age = document.getElementById('ageBracket').value;
-            
-            const lookupKey = `${member}_${age}`;
-            const selectedPlan = pricingData[plan];
-            const price = selectedPlan.rates[lookupKey];
-
-            const amountDisplay = document.getElementById('quoteAmount');
-            const titleDisplay = document.getElementById('quoteTitle');
-            const benefitsList = document.getElementById('benefitsList');
-
-            if (price) {
-                amountDisplay.innerText = `R${price}`;
-                amountDisplay.style.color = 'var(--primary)';
-                titleDisplay.innerText = `${selectedPlan.name} Premium`;
+        // Simple JS to handle active states on mobile nav
+        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+        
+        mobileNavItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all
+                mobileNavItems.forEach(nav => nav.classList.remove('active'));
                 
-                // Populate benefits
-                benefitsList.innerHTML = '';
-                selectedPlan.benefits.forEach(benefit => {
-                    const li = document.createElement('li');
-                    li.innerText = benefit;
-                    benefitsList.appendChild(li);
+                // Add active class to clicked
+                this.classList.add('active');
+                
+                // Toggle filled/outline icons for that native app feel
+                mobileNavItems.forEach(nav => {
+                    const icon = nav.querySelector('i');
+                    if (nav.classList.contains('active')) {
+                        icon.classList.replace('bx-', 'bxs-');
+                    } else {
+                        icon.classList.replace('bxs-', 'bx-');
+                    }
                 });
-                benefitsList.style.display = 'block';
-            } else {
-                amountDisplay.innerText = "Custom Quote";
-                amountDisplay.style.color = 'var(--text-main)';
-                titleDisplay.innerText = "Age/Member combination requires consultation";
-                benefitsList.style.display = 'none';
-            }
-
-            openSheet();
-        }
-
-        // Bottom Sheet Logic
-        const sheet = document.getElementById('bottomSheet');
-        const overlay = document.getElementById('sheetOverlay');
-
-        function openSheet() {
-            sheet.classList.add('active');
-            overlay.classList.add('active');
-        }
-
-        function closeSheet() {
-            sheet.classList.remove('active');
-            overlay.classList.remove('active');
-        }
+            });
+        });
     </script>
 </body>
 </html>
