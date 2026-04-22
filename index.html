@@ -9,19 +9,23 @@
     
     <style>
         :root {
-            /* Updated to match a premium purple logo color scheme */
             --primary: #6B21A8; /* Rich Purple */
-            --primary-light: #F3E8FF; /* Soft light purple for backgrounds */
+            --primary-light: #F3E8FF; 
             --text-dark: #1A202C;
             --text-muted: #718096;
             --bg-light: #F7FAFC;
             --white: #FFFFFF;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-            --shadow-nav: 0 15px 40px rgba(107, 33, 168, 0.08); /* Tinted shadow */
+            --shadow-nav: 0 15px 40px rgba(107, 33, 168, 0.08); 
             --radius-pill: 50px;
             --radius-card: 24px;
-            --radius-nav: 20px; /* New rounded corner for the larger nav */
+            --radius-nav: 20px; 
+            
+            /* Footer Specific Variables */
+            --footer-bg: #1e1b4b; /* Very dark purple/indigo */
+            --footer-text: #e2e8f0;
+            --footer-muted: #94a3b8;
         }
 
         * {
@@ -36,7 +40,9 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
-            padding-bottom: 80px; /* Space for mobile nav */
+            /* Bottom padding handles the mobile nav spacing. 
+               We increase it slightly to ensure the footer doesn't get covered */
+            padding-bottom: 0; 
         }
 
         a {
@@ -44,7 +50,7 @@
             color: inherit;
         }
 
-        /* --- Desktop Floating Card Navigation (Redesigned for larger logo) --- */
+        /* --- Desktop Floating Card Navigation --- */
         .desktop-nav {
             position: fixed;
             top: 24px;
@@ -53,14 +59,14 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 12px 32px; /* Extra padding */
-            border-radius: var(--radius-nav); /* Rounded card instead of tight pill */
+            padding: 12px 32px;
+            border-radius: var(--radius-nav); 
             box-shadow: var(--shadow-nav);
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 95%;
-            max-width: 1100px; /* Slightly wider to accommodate bigger logo */
+            max-width: 1100px; 
             z-index: 1000;
             border: 1px solid rgba(255,255,255,0.6);
         }
@@ -71,10 +77,10 @@
         }
 
         .brand img {
-            height: 75px; /* Significantly larger logo */
+            height: 75px; 
             width: auto;
-            border-radius: 8px; /* Softer radius in case the logo isn't a perfect circle */
-            object-fit: contain; /* Ensures the whole logo is visible without cropping */
+            border-radius: 8px; 
+            object-fit: contain; 
         }
 
         .nav-links {
@@ -111,7 +117,7 @@
 
         /* --- Hero Section --- */
         .hero {
-            padding: 180px 5% 80px; /* Increased top padding to clear the larger nav */
+            padding: 180px 5% 80px; 
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
@@ -311,6 +317,150 @@
             background: var(--primary);
             color: var(--white);
         }
+        
+        /* --- Footer Section --- */
+        .site-footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 80px 5% 40px;
+            margin-top: 60px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            /* Adjust bottom padding to accommodate mobile nav if visible */
+            padding-bottom: calc(40px + env(safe-area-inset-bottom)); 
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand img {
+            height: 60px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            background: var(--white); /* Added white background in case logo has transparent elements that clash with dark bg */
+            padding: 4px;
+        }
+
+        .footer-desc {
+            color: var(--footer-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            max-width: 320px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--footer-muted);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .newsletter-form input {
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--primary);
+        }
+
+        .newsletter-form input::placeholder {
+            color: var(--footer-muted);
+        }
+
+        .btn-subscribe {
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: none;
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-subscribe:hover {
+            background: #581c87; /* Slightly darker purple */
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--footer-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--white);
+        }
 
         /* --- Mobile Bottom Navigation --- */
         .mobile-nav {
@@ -394,6 +544,10 @@
                 width: 90%;
                 justify-content: center;
             }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -401,7 +555,7 @@
                 display: none;
             }
             
-            /* Mobile logo header - adding this so the logo is still visible on mobile */
+            /* Mobile logo header */
             .mobile-header {
                 position: fixed;
                 top: 0;
@@ -431,7 +585,7 @@
             }
 
             .hero {
-                padding-top: 120px; /* Adjust for mobile header */
+                padding-top: 120px; 
             }
 
             .hero h1 {
@@ -439,15 +593,31 @@
             }
             
             body {
-                padding-bottom: 90px;
+                /* Add padding so the footer content isn't hidden behind the fixed mobile nav */
+                padding-bottom: 90px; 
             }
 
             .section-header h2 {
                 font-size: 2rem;
             }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            
+            /* Extra padding at the very bottom of the footer specifically for mobile */
+            .site-footer {
+                padding-bottom: 120px; 
+            }
         }
         
-        /* Hide mobile header on desktop */
         @media (min-width: 769px) {
             .mobile-header {
                 display: none;
@@ -469,7 +639,7 @@
             <li><a href="#" class="active">Home</a></li>
             <li><a href="#plans">Plans</a></li>
             <li><a href="#features">Benefits</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#footer">Contact</a></li>
         </ul>
         <a href="#plans" class="btn-quote">Get Covered</a>
     </nav>
@@ -566,6 +736,65 @@
         </section>
     </main>
 
+    <footer id="footer" class="site-footer">
+        <div class="footer-grid">
+            
+            <div class="footer-brand-section">
+                <div class="footer-brand">
+                    <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Funeral Cover Logo">
+                </div>
+                <p class="footer-desc">
+                    Providing dignified and comprehensive funeral solutions. We relieve the financial and logistical burdens during your most difficult times, allowing you to focus on family.
+                </p>
+                <div class="social-links">
+                    <a href="#"><i class='bx bxl-facebook'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                    <a href="#"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-heading">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#plans">Funeral Cover</a></li>
+                    <li><a href="#">Tombstones</a></li>
+                    <li><a href="#">Repatriation</a></li>
+                    <li><a href="#">Catering Services</a></li>
+                    <li><a href="#">Rewards Program</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-heading">Contact Us</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class='bx bx-phone' style="margin-right: 8px;"></i> 086 000 0000</a></li>
+                    <li><a href="#"><i class='bx bx-envelope' style="margin-right: 8px;"></i> info@cover.co.za</a></li>
+                    <li><a href="#"><i class='bx bxl-whatsapp' style="margin-right: 8px;"></i> WhatsApp Us</a></li>
+                    <li><a href="#"><i class='bx bx-map' style="margin-right: 8px;"></i> Find a Branch</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-heading">Stay Updated</h4>
+                <p class="footer-desc" style="margin-bottom: 16px;">Subscribe to our newsletter for the latest updates and benefits.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn-subscribe">Subscribe</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Designed and Developed by Rare Grade Tech. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
     <a href="#plans" class="fab-quote">
         <i class='bx bx-right-arrow-alt'></i>
     </a>
@@ -584,9 +813,9 @@
                 <i class='bx bxs-star'></i>
                 <span>Benefits</span>
             </a>
-            <a href="#" class="mobile-nav-item">
-                <i class='bx bxs-user-circle'></i>
-                <span>Profile</span>
+            <a href="#footer" class="mobile-nav-item">
+                <i class='bx bxs-envelope'></i>
+                <span>Contact</span>
             </a>
         </div>
     </nav>
