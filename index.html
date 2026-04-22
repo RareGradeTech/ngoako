@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Premium Funeral Cover Calculator</title>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --primary-hover: #5A4FCF;
+            --bg-dark: #0F1016;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #FFFFFF;
+            --text-muted: #A0A5B5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            /* Subtle background gradient */
+            background-image: radial-gradient(circle at top right, rgba(108, 92, 231, 0.15), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(108, 92, 231, 0.1), transparent 40%);
+        }
+
+        /* Glassmorphism Card */
+        .calculator-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 1rem;
+            appearance: none;
+            outline: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        select:focus {
+            border-color: var(--primary);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        select option {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+        }
+
+        .btn-calculate {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            margin-top: 10px;
+        }
+
+        .btn-calculate:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-calculate:active {
+            transform: scale(0.98);
+        }
+
+        /* Bottom Sheet Styles */
+        .bottom-sheet-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+        }
+
+        .bottom-sheet {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: #1A1C23;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            padding: 24px 24px 40px;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .bottom-sheet.active {
+            bottom: 0;
+        }
+
+        .bottom-sheet-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drag-handle {
+            width: 40px;
+            height: 5px;
+            background: var(--glass-border);
+            border-radius: 10px;
+            margin: 0 auto 20px;
+        }
+
+        .quote-result {
+            text-align: center;
+        }
+
+        .quote-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .quote-label {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-top: 24px;
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .benefits-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 0.95rem;
+        }
+
+        .benefits-list li:last-child {
+            border-bottom: none;
+        }
+
+        .benefits-list li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .btn-close {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-top: 24px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-card">
+        <div class="header">
+            <h2>Cover Calculator</h2>
+            <p>Customize your plan to see your monthly premium</p>
+        </div>
+
+        <div class="form-group">
+            <label for="planTier">Plan Tier</label>
+            <select id="planTier">
+                <option value="casket">Casket Plus Plan</option>
+                <option value="silver">Silver Plus Plan</option>
+                <option value="gold">Gold Plus Plan</option>
+                <option value="platinum">Platinum Plus Plan</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="memberType">Member Structure</label>
+            <select id="memberType">
+                <option value="single">Single Member</option>
+                <option value="parent">Single Parent</option>
+                <option value="family">Family</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="ageBracket">Age Bracket</label>
+            <select id="ageBracket">
+                <option value="16-64">16 - 64 Years</option>
+                <option value="65-84">65 - 84 Years</option>
+            </select>
+        </div>
+
+        <button class="btn-calculate" onclick="calculateQuote()">Get Quote</button>
+    </div>
+
+    <div class="bottom-sheet-overlay" id="sheetOverlay" onclick="closeSheet()"></div>
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="drag-handle"></div>
+        <div class="quote-result">
+            <div class="quote-label" id="quoteTitle">Your Estimated Premium</div>
+            <div class="quote-price" id="quoteAmount">R0</div>
+            <div class="quote-label">per month</div>
+            
+            <ul class="benefits-list" id="benefitsList">
+                </ul>
+
+            <button class="btn-close" onclick="closeSheet()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Data Structure mirroring the specific pricing matrix
+        const pricingData = {
+            casket: {
+                name: "Casket Plus",
+                benefits: ["Half View Flat Lid Casket", "100 Chairs & Funeral Programs", "Hearse & Family Gazebo", "Standard Wash & Prep"],
+                rates: { "single_16-64": 70, "parent_16-64": 85, "family_16-64": 120 }
+            },
+            silver: {
+                name: "Silver Plus",
+                benefits: ["Half View Flat Lid Casket", "100 Chairs & Funeral Programs", "1 Bus Provided", "R1000 Cash Benefit"],
+                rates: { "single_16-64": 95, "single_65-84": 200, "parent_16-64": 120, "parent_65-84": 230, "family_16-64": 150 }
+            },
+            gold: {
+                name: "Gold Plus",
+                benefits: ["3 Tier Casket", "150 Chairs & Funeral Programs", "1 Bus Provided", "R1000 Cash Benefit + R1500 iSave"],
+                rates: { "single_16-64": 150, "parent_16-64": 180, "family_16-64": 210 }
+            },
+            platinum: {
+                name: "Platinum Plus",
+                benefits: ["Standard Dome Casket", "200 Chairs & Funeral Programs", "2 Buses Provided", "R2000 Cash Benefit + R2000 iSave"],
+                rates: { "single_16-64": 170, "parent_16-64": 200, "family_16-64": 245 }
+            }
+        };
+
+        function calculateQuote() {
+            const plan = document.getElementById('planTier').value;
+            const member = document.getElementById('memberType').value;
+            const age = document.getElementById('ageBracket').value;
+            
+            const lookupKey = `${member}_${age}`;
+            const selectedPlan = pricingData[plan];
+            const price = selectedPlan.rates[lookupKey];
+
+            const amountDisplay = document.getElementById('quoteAmount');
+            const titleDisplay = document.getElementById('quoteTitle');
+            const benefitsList = document.getElementById('benefitsList');
+
+            if (price) {
+                amountDisplay.innerText = `R${price}`;
+                amountDisplay.style.color = 'var(--primary)';
+                titleDisplay.innerText = `${selectedPlan.name} Premium`;
+                
+                // Populate benefits
+                benefitsList.innerHTML = '';
+                selectedPlan.benefits.forEach(benefit => {
+                    const li = document.createElement('li');
+                    li.innerText = benefit;
+                    benefitsList.appendChild(li);
+                });
+                benefitsList.style.display = 'block';
+            } else {
+                amountDisplay.innerText = "Custom Quote";
+                amountDisplay.style.color = 'var(--text-main)';
+                titleDisplay.innerText = "Age/Member combination requires consultation";
+                benefitsList.style.display = 'none';
+            }
+
+            openSheet();
+        }
+
+        // Bottom Sheet Logic
+        const sheet = document.getElementById('bottomSheet');
+        const overlay = document.getElementById('sheetOverlay');
+
+        function openSheet() {
+            sheet.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        function closeSheet() {
+            sheet.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
