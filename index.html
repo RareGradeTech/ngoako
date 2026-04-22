@@ -313,6 +313,100 @@
             gap: 30px;
         }
 
+        /* --- Plans Grid (Added back for Home Tab) --- */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .plan-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-card.popular {
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: var(--white);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 32px;
+            flex-grow: 1;
+        }
+
+        .plan-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--bg-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .plan-features li i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .btn-plan {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .plan-card.popular .btn-plan {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-plan:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
         /* --- Gallery Grid --- */
         .gallery-grid {
             display: grid;
@@ -551,7 +645,7 @@
             <div class="hero-content">
                 <h1>Compassion & Craftsmanship Meet.</h1>
                 <p>Ngoako Tombstone & Funeral Services professional team is here to accompany you through the sensitive journey of saying goodbye, providing support, and ensuring that every detail is handled with the utmost care.</p>
-                <button class="btn-quote" style="padding: 16px 32px; font-size: 1.1rem;" onclick="routeTo('services')">View Our Services</button>
+                <button class="btn-quote" style="padding: 16px 32px; font-size: 1.1rem;" onclick="document.getElementById('plans-section').scrollIntoView({behavior: 'smooth'})">View Our Plans</button>
             </div>
             <div class="hero-image-wrapper">
                 <div class="hero-carousel-wrapper">
@@ -567,6 +661,55 @@
                         <strong>100% Black-Owned</strong>
                         <p style="margin:0; font-size: 0.85rem; color: var(--text-muted);">Trusted Professional Care</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="plans-section" class="content-container" style="padding-top: 40px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 2.5rem; color: var(--text-dark); margin-bottom: 16px;">Our Coverage Plans</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Carefully put together to accommodate various budgets and needs, providing peace of mind when it matters most.</p>
+            </div>
+            
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Silver Plus</h3>
+                    <div class="plan-price">R95<span>/month</span></div>
+                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Perfect starting cover for single members.</p>
+                    <ul class="plan-features">
+                        <li><i class='bx bx-check'></i> Half view flat lid casket</li>
+                        <li><i class='bx bx-check'></i> Tents & Chairs setup</li>
+                        <li><i class='bx bx-check'></i> Free mortuary facilities</li>
+                        <li><i class='bx bx-check'></i> Hearse transport provided</li>
+                    </ul>
+                    <button class="btn-plan" onclick="routeTo('services')">Select Plan</button>
+                </div>
+
+                <div class="plan-card popular">
+                    <div class="popular-tag">Most Popular</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Platinum Plus</h3>
+                    <div class="plan-price">R170<span>/month</span></div>
+                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Comprehensive cover with premium benefits.</p>
+                    <ul class="plan-features">
+                        <li><i class='bx bx-check'></i> Standard dome casket</li>
+                        <li><i class='bx bx-check'></i> High-quality Tombstone</li>
+                        <li><i class='bx bx-check'></i> Full Catering Support</li>
+                        <li><i class='bx bx-check'></i> Transport & Hearse</li>
+                    </ul>
+                    <button class="btn-plan" onclick="routeTo('services')">Select Plan</button>
+                </div>
+                
+                <div class="plan-card">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 8px;">Family Cover</h3>
+                    <div class="plan-price">R245<span>/month</span></div>
+                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Protect your entire household under one policy.</p>
+                    <ul class="plan-features">
+                        <li><i class='bx bx-check'></i> Covers principal & spouse</li>
+                        <li><i class='bx bx-check'></i> Covers children under 21</li>
+                        <li><i class='bx bx-check'></i> Full Platinum benefits</li>
+                        <li><i class='bx bx-check'></i> Death certificate assistance</li>
+                    </ul>
+                    <button class="btn-plan" onclick="routeTo('services')">Select Plan</button>
                 </div>
             </div>
         </section>
