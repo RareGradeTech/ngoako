@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Funeral Cover</title>
+    <title>Ngoako Tombstone & Funeral Services</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
@@ -22,8 +22,7 @@
             --radius-card: 24px;
             --radius-nav: 20px; 
             
-            /* Footer Specific Variables */
-            --footer-bg: #1e1b4b; /* Very dark purple/indigo */
+            --footer-bg: #1e1b4b; 
             --footer-text: #e2e8f0;
             --footer-muted: #94a3b8;
         }
@@ -48,6 +47,65 @@
             color: inherit;
         }
 
+        /* --- Page Routing System (SPA Tabs) --- */
+        .page-view {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page-view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Full Screen Redirect Spinner --- */
+        .redirect-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .redirect-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--primary-light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        .redirect-text {
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* --- Desktop Floating Card Navigation --- */
         .desktop-nav {
             position: fixed;
@@ -67,18 +125,11 @@
             max-width: 1100px; 
             z-index: 1000;
             border: 1px solid rgba(255,255,255,0.6);
-            /* Added smooth transition for the scroll hide/show effect */
             transition: transform 0.4s cubic-bezier(0.3, 1, 0.2, 1);
         }
 
-        /* Class applied via JS when scrolling down */
         .desktop-nav.scroll-down {
             transform: translate(-50%, -150%);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
         }
 
         .brand img {
@@ -86,19 +137,21 @@
             width: auto;
             border-radius: 8px; 
             object-fit: contain; 
+            cursor: pointer;
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 24px;
             list-style: none;
         }
 
         .nav-links a {
             font-weight: 500;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
             transition: color 0.3s ease;
+            cursor: pointer;
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -113,6 +166,8 @@
             font-weight: 600;
             font-size: 0.95rem;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            border: none;
         }
 
         .btn-quote:hover {
@@ -120,7 +175,7 @@
             box-shadow: 0 6px 16px rgba(107, 33, 168, 0.3);
         }
 
-        /* --- Hero Section --- */
+        /* --- Hero Section & Carousel --- */
         .hero {
             padding: 180px 5% 80px; 
             max-width: 1200px;
@@ -145,16 +200,34 @@
             max-width: 480px;
         }
 
-        .hero-image-wrapper {
+        .hero-carousel-wrapper {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .carousel-inner {
+            width: 100%;
+            height: 100%;
             position: relative;
         }
 
-        .hero-image {
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 500px;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
             object-fit: cover;
-            border-radius: var(--radius-card);
-            box-shadow: var(--shadow-md);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
         }
 
         .floating-badge {
@@ -168,6 +241,7 @@
             display: flex;
             align-items: center;
             gap: 16px;
+            z-index: 10;
         }
 
         .floating-badge i {
@@ -175,154 +249,113 @@
             color: var(--primary);
         }
 
-        /* --- Features Section --- */
-        .features {
-            padding: 80px 5%;
-            background: var(--white);
-        }
-
-        .section-header {
+        /* --- Universal Page Headers --- */
+        .page-header {
+            padding: 180px 5% 60px;
             text-align: center;
-            margin-bottom: 60px;
+            background: linear-gradient(to bottom, var(--primary-light), var(--bg-light));
+            margin-bottom: 40px;
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
+        .page-header h1 {
+            font-size: 3rem;
+            color: var(--primary);
             margin-bottom: 16px;
         }
 
-        .features-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-card {
-            padding: 32px;
-            background: var(--bg-light);
-            border-radius: var(--radius-card);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .icon-box {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-light);
-            color: var(--primary);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 24px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
+        .page-header p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* --- Plans Section --- */
-        .plans {
-            padding: 80px 5%;
-            max-width: 1200px;
+            font-size: 1.1rem;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .plans-grid {
+        /* --- Content Layouts --- */
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5% 80px;
+        }
+
+        .text-block {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 40px;
+        }
+
+        .text-block h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .text-block p {
+            margin-bottom: 16px;
+            color: var(--text-muted);
+        }
+
+        .text-block ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+            color: var(--text-muted);
+        }
+
+        .text-block li {
+            margin-bottom: 8px;
+        }
+
+        /* Service Grid specific */
+        .service-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .plan-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: var(--radius-card);
+        /* --- Gallery Grid --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
             box-shadow: var(--shadow-sm);
+            height: 250px;
             position: relative;
-            border: 1px solid rgba(0,0,0,0.03);
         }
 
-        .plan-card.popular {
-            border: 2px solid var(--primary);
-            box-shadow: var(--shadow-md);
-        }
-
-        .popular-tag {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: var(--white);
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .plan-price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 20px 0;
-        }
-
-        .plan-price span {
-            font-size: 1rem;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .plan-features {
-            list-style: none;
-            margin-bottom: 32px;
-        }
-
-        .plan-features li {
-            padding: 12px 0;
-            border-bottom: 1px solid var(--bg-light);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-muted);
-        }
-
-        .plan-features li i {
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-
-        .btn-plan {
+        .gallery-item img {
             width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid var(--primary);
-            background: transparent;
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        .plan-card.popular .btn-plan {
-            background: var(--primary);
-            color: var(--white);
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
-        
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 12px;
+            font-size: 0.9rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
         /* --- Footer Section --- */
         .site-footer {
             background-color: var(--footer-bg);
@@ -358,28 +391,6 @@
             max-width: 320px;
         }
 
-        .social-links {
-            display: flex;
-            gap: 16px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
         .footer-heading {
             font-size: 1.2rem;
             font-weight: 600;
@@ -399,50 +410,11 @@
             color: var(--footer-muted);
             font-size: 0.95rem;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
 
         .footer-links a:hover {
             color: var(--white);
-        }
-
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .newsletter-form input {
-            padding: 14px 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--white);
-            font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .newsletter-form input:focus {
-            border-color: var(--primary);
-        }
-
-        .newsletter-form input::placeholder {
-            color: var(--footer-muted);
-        }
-
-        .btn-subscribe {
-            padding: 14px 20px;
-            border-radius: 12px;
-            border: none;
-            background: var(--primary);
-            color: var(--white);
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .btn-subscribe:hover {
-            background: #581c87;
         }
 
         .footer-bottom {
@@ -455,15 +427,6 @@
             align-items: center;
             color: var(--footer-muted);
             font-size: 0.85rem;
-        }
-
-        .footer-bottom-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-bottom-links a:hover {
-            color: var(--white);
         }
 
         /* --- Mobile Bottom Navigation --- */
@@ -481,7 +444,6 @@
             padding-bottom: env(safe-area-inset-bottom);
             border-top-left-radius: 24px;
             border-top-right-radius: 24px;
-            /* Added smooth transition for mobile scroll hide/show */
             transition: transform 0.4s cubic-bezier(0.3, 1, 0.2, 1);
         }
 
@@ -505,6 +467,7 @@
             color: var(--text-muted);
             flex: 1;
             height: 100%;
+            cursor: pointer;
         }
 
         .mobile-nav-item i {
@@ -520,30 +483,6 @@
             color: var(--primary);
         }
 
-        /* Floating Action Button for Mobile Quote */
-        .fab-quote {
-            display: none;
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            background: var(--primary);
-            color: var(--white);
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(107, 33, 168, 0.4);
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            z-index: 999;
-            transition: transform 0.4s cubic-bezier(0.3, 1, 0.2, 1);
-        }
-        
-        .fab-quote.scroll-down {
-            transform: translateX(150%);
-        }
-
-        /* --- Media Queries --- */
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -559,199 +498,233 @@
                 width: 90%;
                 justify-content: center;
             }
-            
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-            
-            /* Mobile logo header */
+            .desktop-nav { display: none; }
             .mobile-header {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                padding: 16px 20px;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(10px);
-                z-index: 999;
-                display: flex;
-                justify-content: center;
-                box-shadow: var(--shadow-sm);
+                position: fixed; top: 0; left: 0; width: 100%; padding: 16px 20px;
+                background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+                z-index: 999; display: flex; justify-content: center; box-shadow: var(--shadow-sm);
                 transition: transform 0.4s cubic-bezier(0.3, 1, 0.2, 1);
             }
-            
-            .mobile-header.scroll-down {
-                transform: translateY(-100%);
-            }
-            
-            .mobile-header img {
-                height: 50px;
-                width: auto;
-                object-fit: contain;
-            }
-
-            .mobile-nav {
-                display: block;
-            }
-
-            .fab-quote {
-                display: flex;
-            }
-
-            .hero {
-                padding-top: 120px; 
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            body {
-                padding-bottom: 90px; 
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
-            }
-            
-            .site-footer {
-                padding-bottom: 120px; 
-            }
+            .mobile-header.scroll-down { transform: translateY(-100%); }
+            .mobile-header img { height: 50px; width: auto; object-fit: contain; }
+            .mobile-nav { display: block; }
+            .hero { padding-top: 120px; }
+            .page-header { padding-top: 120px; }
+            body { padding-bottom: 90px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .site-footer { padding-bottom: 120px; }
         }
-        
-        @media (min-width: 769px) {
-            .mobile-header {
-                display: none;
-            }
-        }
+        @media (min-width: 769px) { .mobile-header { display: none; } }
     </style>
 </head>
 <body>
 
+    <div class="redirect-overlay" id="loader">
+        <div class="spinner"></div>
+        <div class="redirect-text">Loading...</div>
+    </div>
+
     <header class="mobile-header" id="mobileHeader">
-        <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Funeral Cover Logo">
+        <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Logo" onclick="routeTo('home')">
     </header>
 
     <nav class="desktop-nav" id="desktopNav">
-        <a href="#" class="brand">
-            <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Funeral Cover Logo">
+        <a class="brand" onclick="routeTo('home')">
+            <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Ngoako Logo">
         </a>
         <ul class="nav-links">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="#plans">Plans</a></li>
-            <li><a href="#features">Benefits</a></li>
-            <li><a href="#footer">Contact</a></li>
+            <li><a class="nav-btn active" onclick="routeTo('home')" data-target="home">Home</a></li>
+            <li><a class="nav-btn" onclick="routeTo('about')" data-target="about">About Us</a></li>
+            <li><a class="nav-btn" onclick="routeTo('services')" data-target="services">Services</a></li>
+            <li><a class="nav-btn" onclick="routeTo('gallery')" data-target="gallery">Gallery</a></li>
         </ul>
-        <a href="#plans" class="btn-quote">Get Covered</a>
+        <button class="btn-quote" onclick="routeTo('services')">Our Services</button>
     </nav>
 
-    <main>
+    <main id="page-home" class="page-view active">
         <section class="hero">
             <div class="hero-content">
-                <h1>Dignified Cover for Your Loved Ones.</h1>
-                <p>Comprehensive funeral solutions designed to relieve financial and logistical burdens, allowing you to focus on what truly matters.</p>
-                <a href="#plans" class="btn-quote" style="display: inline-block; padding: 16px 32px; font-size: 1.1rem;">View Our Plans</a>
+                <h1>Compassion & Craftsmanship Meet.</h1>
+                <p>Ngoako Tombstone & Funeral Services professional team is here to accompany you through the sensitive journey of saying goodbye, providing support, and ensuring that every detail is handled with the utmost care.</p>
+                <button class="btn-quote" style="padding: 16px 32px; font-size: 1.1rem;" onclick="routeTo('services')">View Our Services</button>
             </div>
             <div class="hero-image-wrapper">
-                <img src="https://z-p3-scontent.fjnb12-1.fna.fbcdn.net/v/t39.30808-6/566354701_1404288298372530_8596139540517112074_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHrtgoUsAopXMaF_mj1D6VNuHFLaZpFweK4cUtpmkXB4n8nir33Y3ACUzHNWbGqYEWd5c8-TapUFBxkqXLdc-N0&_nc_ohc=rUo6lipMBGEQ7kNvwFJ7x76&_nc_oc=AdpN219vqupLJTbLqh5qGf6GCa5Ez1dyIIL9IkYDcCjop4Ls8RfxU0ldb7fYIEyq9Vg&_nc_zt=23&_nc_ht=z-p3-scontent.fjnb12-1.fna&_nc_gid=0xySHsHRrwyrxhTrLrvHCg&_nc_ss=7a3a8&oh=00_Af1nopWWQAIX-H19yrE3KmB5-bIlc6ksWLRbGoZUVcX4bg&oe=69EE6DBD" alt="Peaceful Family Moment" class="hero-image">
+                <div class="hero-carousel-wrapper">
+                    <div class="carousel-inner" id="heroCarousel">
+                        <img src="https://z-p3-scontent.fjnb12-1.fna.fbcdn.net/v/t39.30808-6/566354701_1404288298372530_8596139540517112074_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHrtgoUsAopXMaF_mj1D6VNuHFLaZpFweK4cUtpmkXB4n8nir33Y3ACUzHNWbGqYEWd5c8-TapUFBxkqXLdc-N0&_nc_ohc=rUo6lipMBGEQ7kNvwFJ7x76&_nc_oc=AdpN219vqupLJTbLqh5qGf6GCa5Ez1dyIIL9IkYDcCjop4Ls8RfxU0ldb7fYIEyq9Vg&_nc_zt=23&_nc_ht=z-p3-scontent.fjnb12-1.fna&_nc_gid=0xySHsHRrwyrxhTrLrvHCg&_nc_ss=7a3a8&oh=00_Af1nopWWQAIX-H19yrE3KmB5-bIlc6ksWLRbGoZUVcX4bg&oe=69EE6DBD" class="carousel-slide active" alt="Funeral Moment">
+                        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="carousel-slide" alt="Flowers">
+                        <img src="https://images.unsplash.com/photo-1628191010210-a59de33e5941?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="carousel-slide" alt="Dignity">
+                    </div>
+                </div>
                 <div class="floating-badge">
                     <i class='bx bxs-check-shield'></i>
                     <div>
-                        <strong>Trusted Nationwide</strong>
-                        <p style="margin:0; font-size: 0.85rem; color: var(--text-muted);">Over 100 Branches</p>
+                        <strong>100% Black-Owned</strong>
+                        <p style="margin:0; font-size: 0.85rem; color: var(--text-muted);">Trusted Professional Care</p>
                     </div>
                 </div>
             </div>
         </section>
+    </main>
 
-        <section id="features" class="features">
-            <div class="section-header">
-                <h2>Benefits While You Live</h2>
-                <p style="color: var(--text-muted);">Enjoy value from your policy immediately, not just in the afterlife.</p>
+    <main id="page-about" class="page-view">
+        <div class="page-header">
+            <h1>About Us</h1>
+            <p>Providing compassionate support and ensuring every detail is handled with the utmost care.</p>
+        </div>
+        <div class="content-container">
+            <div class="text-block">
+                <h2>Company Overview</h2>
+                <p>NGOAKO TOMBSTONE & FUNERAL SERVICES is a distinguished provider of tombstone design, manufacturing, and comprehensive funeral services. With a profound commitment to compassion, integrity, and personalized care, we help families navigate the challenging journey of bidding farewell to their loved ones with dignity and respect.</p>
+                <p>We provide comprehensive solutions to clients across various households and industries. What sets us apart is our commitment to providing comprehensive solutions under one roof—saving our clients time and effort in coordinating multiple service providers.</p>
+                <p>The company is 100% black-owned, and 100% black managed.</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon-box"><i class='bx bx-wallet'></i></div>
-                    <h3>10% Cash Back</h3>
-                    <p>Receive 10% of your premiums back if you do not claim over a period of 5 years.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon-box"><i class='bx bx-cart-alt'></i></div>
-                    <h3>Grocery Discounts</h3>
-                    <p>Standard monthly discounts on groceries, shopping, and travel worth up to R1,250 every month.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon-box"><i class='bx bx-restaurant'></i></div>
-                    <h3>Full Catering Support</h3>
-                    <p>Our skilled team ensures all catering arrangements are managed, including the Inkomo Plan.</p>
-                </div>
-            </div>
-        </section>
 
-        <section id="plans" class="plans">
-            <div class="section-header">
-                <h2>Simple, Transparent Plans</h2>
-                <p style="color: var(--text-muted);">Carefully put together to accommodate various budgets and needs.</p>
+            <div class="service-grid">
+                <div class="text-block">
+                    <h2>Vision</h2>
+                    <p>To be the service provider that is most highly regarded and relied upon. We want to earn a good name for ourselves in the community as a responsible employer, and we also want to have a stellar reputation among the companies we do business with.</p>
+                </div>
+                <div class="text-block">
+                    <h2>Mission</h2>
+                    <p>Our goal is to provide an outstanding level of service delivery to each one of our customers across the entirety of South Africa. Our primary focus will be on enhancing public safety. We are going to set the company up so that it can become the most successful and most widely recognized brand in the funeral services.</p>
+                </div>
             </div>
-            <div class="plans-grid">
-                <div class="plan-card">
-                    <h3>Silver Plus</h3>
-                    <div class="plan-price">R95<span>/month</span></div>
-                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Perfect starting cover for single members.</p>
-                    <ul class="plan-features">
-                        <li><i class='bx bx-check'></i> Half view flat lid casket</li>
-                        <li><i class='bx bx-check'></i> 100 Chairs & Programs</li>
-                        <li><i class='bx bx-check'></i> 1 Bus provided</li>
-                        <li><i class='bx bx-check'></i> R1,000 Cash Benefit</li>
+
+            <div class="text-block">
+                <h2>Objectives & Quality Policy</h2>
+                <ul>
+                    <li>To provide quality and professional services always.</li>
+                    <li>To ensure customer satisfaction.</li>
+                    <li>To create employment opportunities for local people.</li>
+                </ul>
+                <p>Our dedication to excellence is ingrained in our culture. We prioritize <strong>Customer Satisfaction</strong>, maintain a culture of <strong>Quality Excellence</strong>, prioritize <strong>Compliance and Safety</strong>, and believe in the power of <strong>Continuous Improvement</strong> to drive our success.</p>
+            </div>
+            
+            <div class="text-block">
+                <h2>Empowerment Policy</h2>
+                <ul>
+                    <li>Black Economic Empowerment</li>
+                    <li>Women Empowerment</li>
+                    <li>Affirmative Action</li>
+                    <li>Youth Empowerment</li>
+                    <li>Workplace diversity and inclusion</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <main id="page-services" class="page-view">
+        <div class="page-header">
+            <h1>Our Services</h1>
+            <p>Comprehensive solutions under one roof, providing quality, reliability, and on-time delivery.</p>
+        </div>
+        <div class="content-container">
+            <div class="service-grid">
+                
+                <div class="text-block">
+                    <i class='bx bx-cube-alt' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
+                    <h2>Tombstone Design & Manufacturing</h2>
+                    <p>Our unique range of affordable, high quality tombstones come in various colors and designs. They are made of SABS specs, having been designed to stand the test of time and elements.</p>
+                    <ul>
+                        <li>Customized tombstones crafted from high-quality materials.</li>
+                        <li>Personalized designs (engravings, photographs, epitaphs).</li>
+                        <li>Various styles and finishes to suit individual preferences.</li>
+                        <li>Markers for gravesites.</li>
                     </ul>
-                    <button class="btn-plan">Select Plan</button>
                 </div>
 
-                <div class="plan-card popular">
-                    <div class="popular-tag">Most Popular</div>
-                    <h3>Platinum Plus</h3>
-                    <div class="plan-price">R170<span>/month</span></div>
-                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Comprehensive cover with premium benefits.</p>
-                    <ul class="plan-features">
-                        <li><i class='bx bx-check'></i> Standard dome casket</li>
-                        <li><i class='bx bx-check'></i> 200 Chairs & Programs</li>
-                        <li><i class='bx bx-check'></i> 2 Buses provided</li>
-                        <li><i class='bx bx-check'></i> R2,000 Cash + Rewards</li>
+                <div class="text-block">
+                    <i class='bx bx-calendar-star' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
+                    <h2>Funeral Planning & Arrangements</h2>
+                    <p>We assist families in planning and organizing funeral services tailored to cultural and religious preferences.</p>
+                    <ul>
+                        <li>Professional coordination with cemeteries and crematoriums.</li>
+                        <li>Embalming room equipment.</li>
+                        <li>Caskets/Coffins & Urns supply.</li>
+                        <li>Hearse / Van provision.</li>
+                        <li>Decoration tools and flowers.</li>
                     </ul>
-                    <button class="btn-plan">Select Plan</button>
+                </div>
+
+                <div class="text-block">
+                    <i class='bx bx-transfer-alt' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
+                    <h2>Exhumation Services</h2>
+                    <p>The delicate removal and relocation of human remains handled with compassion, respect, and expertise.</p>
+                    <ul>
+                        <li>Legal Consultation & permit assistance.</li>
+                        <li>Sensitive Communication & Family Support.</li>
+                        <li>Expert Team with proper equipment.</li>
+                        <li>Reburial Services guidance.</li>
+                    </ul>
                 </div>
                 
-                <div class="plan-card">
-                    <h3>Family Cover</h3>
-                    <div class="plan-price">R245<span>/month</span></div>
-                    <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;">Protect your entire household under one policy.</p>
-                    <ul class="plan-features">
-                        <li><i class='bx bx-check'></i> Covers principal & spouse</li>
-                        <li><i class='bx bx-check'></i> Covers children under 21</li>
-                        <li><i class='bx bx-check'></i> Full Platinum benefits</li>
-                        <li><i class='bx bx-check'></i> No waiting period for accidents</li>
+                <div class="text-block">
+                    <i class='bx bx-restaurant' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
+                    <h2>Catering Services</h2>
+                    <p>Relieving the burden of organizing gatherings during difficult times.</p>
+                    <ul>
+                        <li>Tents, Tables, and Chairs.</li>
+                        <li>Mobile Toilets and VIP Toilets.</li>
+                        <li>Decorations.</li>
+                        <li>Foods and Drinks according to capacity given.</li>
                     </ul>
-                    <button class="btn-plan">Select Plan</button>
+                </div>
+                
+                <div class="text-block">
+                    <i class='bx bx-group' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
+                    <h2>Member's Benefits</h2>
+                    <ul>
+                        <li>Free mortuary facilities.</li>
+                        <li>Free transport.</li>
+                        <li>Free callout day or Night.</li>
+                        <li>Supply of coffin stand & screen.</li>
+                        <li>Death certificate, Claims & Name plate assistance.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <main id="page-gallery" class="page-view">
+        <div class="page-header">
+            <h1>Gallery</h1>
+            <p>A glimpse into our professional setups, dignified transport, and high-quality craftsmanship.</p>
+        </div>
+        <div class="content-container">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Setup">
+                    <div class="gallery-caption">Professional Service Setup</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://z-p3-scontent.fjnb12-1.fna.fbcdn.net/v/t39.30808-6/566354701_1404288298372530_8596139540517112074_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHrtgoUsAopXMaF_mj1D6VNuHFLaZpFweK4cUtpmkXB4n8nir33Y3ACUzHNWbGqYEWd5c8-TapUFBxkqXLdc-N0&_nc_ohc=rUo6lipMBGEQ7kNvwFJ7x76&_nc_oc=AdpN219vqupLJTbLqh5qGf6GCa5Ez1dyIIL9IkYDcCjop4Ls8RfxU0ldb7fYIEyq9Vg&_nc_zt=23&_nc_ht=z-p3-scontent.fjnb12-1.fna&_nc_gid=0xySHsHRrwyrxhTrLrvHCg&_nc_ss=7a3a8&oh=00_Af1nopWWQAIX-H19yrE3KmB5-bIlc6ksWLRbGoZUVcX4bg&oe=69EE6DBD" alt="Funeral">
+                    <div class="gallery-caption">Dignified Ceremonies</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1628191010210-a59de33e5941?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Flowers">
+                    <div class="gallery-caption">Floral Arrangements</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1596700755171-d6abafcb641a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tombstone">
+                    <div class="gallery-caption">Quality Craftsmanship</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Transport">
+                    <div class="gallery-caption">Professional Transport Fleet</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Catering">
+                    <div class="gallery-caption">Catering Services</div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer id="footer" class="site-footer">
@@ -759,53 +732,51 @@
             
             <div class="footer-brand-section">
                 <div class="footer-brand">
-                    <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Funeral Cover Logo">
+                    <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Logo">
                 </div>
                 <p class="footer-desc">
-                    Providing dignified and comprehensive funeral solutions. We relieve the financial and logistical burdens during your most difficult times, allowing you to focus on family.
+                    Providing dignified and comprehensive funeral solutions. We relieve the financial and logistical burdens during your most difficult times.
                 </p>
                 <div class="social-links">
                     <a href="#"><i class='bx bxl-facebook'></i></a>
                     <a href="#"><i class='bx bxl-twitter'></i></a>
                     <a href="#"><i class='bx bxl-instagram'></i></a>
-                    <a href="#"><i class='bx bxl-linkedin'></i></a>
                 </div>
             </div>
 
             <div>
                 <h4 class="footer-heading">Services</h4>
                 <ul class="footer-links">
-                    <li><a href="#plans">Funeral Cover</a></li>
-                    <li><a href="#">Tombstones</a></li>
-                    <li><a href="#">Repatriation</a></li>
-                    <li><a href="#">Catering Services</a></li>
-                    <li><a href="#">Rewards Program</a></li>
+                    <li><a onclick="routeTo('services')">Tombstones</a></li>
+                    <li><a onclick="routeTo('services')">Funeral Planning</a></li>
+                    <li><a onclick="routeTo('services')">Exhumation</a></li>
+                    <li><a onclick="routeTo('services')">Catering</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="footer-heading">Contact Us</h4>
                 <ul class="footer-links">
-                    <li><a href="#"><i class='bx bx-phone' style="margin-right: 8px;"></i> 086 000 0000</a></li>
-                    <li><a href="#"><i class='bx bx-envelope' style="margin-right: 8px;"></i> info@cover.co.za</a></li>
-                    <li><a href="#"><i class='bx bxl-whatsapp' style="margin-right: 8px;"></i> WhatsApp Us</a></li>
-                    <li><a href="#"><i class='bx bx-map' style="margin-right: 8px;"></i> Find a Branch</a></li>
+                    <li><a><i class='bx bx-phone' style="margin-right: 8px;"></i> 015 065 0613</a></li>
+                    <li><a><i class='bx bx-mobile' style="margin-right: 8px;"></i> 082 777 4825</a></li>
+                    <li><a><i class='bx bx-envelope' style="margin-right: 8px;"></i> ngoakofun@webmail.com</a></li>
+                    <li><a><i class='bx bx-map' style="margin-right: 8px;"></i> 04 Thabo Mbeki Street, Mokopane, Limpopo, 0600</a></li>
                 </ul>
             </div>
 
             <div>
-                <h4 class="footer-heading">Stay Updated</h4>
-                <p class="footer-desc" style="margin-bottom: 16px;">Subscribe to our newsletter for the latest updates and benefits.</p>
-                <form class="newsletter-form" onsubmit="event.preventDefault();">
-                    <input type="email" placeholder="Enter your email address" required>
-                    <button type="submit" class="btn-subscribe">Subscribe</button>
-                </form>
+                <h4 class="footer-heading">Company Details</h4>
+                <ul class="footer-links">
+                    <li>Reg No: 2004/119268/23</li>
+                    <li>Tax: 9144911154</li>
+                    <li>www.ngoakofuneralservices.co.za</li>
+                </ul>
             </div>
 
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 Designed and Developed by Rare Grade Tech. All rights reserved.</p>
+            <p>&copy; 2026 Designed and Developed by Arbor Code. All rights reserved.</p>
             <div class="footer-bottom-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms & Conditions</a>
@@ -813,76 +784,105 @@
         </div>
     </footer>
 
-    <a href="#plans" class="fab-quote" id="fabQuote">
-        <i class='bx bx-right-arrow-alt'></i>
-    </a>
-
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-inner">
-            <a href="#" class="mobile-nav-item active">
+            <a class="mobile-nav-item active" onclick="routeTo('home')" data-target="home">
                 <i class='bx bxs-home'></i>
                 <span>Home</span>
             </a>
-            <a href="#plans" class="mobile-nav-item">
+            <a class="mobile-nav-item" onclick="routeTo('about')" data-target="about">
+                <i class='bx bxs-info-circle'></i>
+                <span>About</span>
+            </a>
+            <a class="mobile-nav-item" onclick="routeTo('services')" data-target="services">
                 <i class='bx bxs-shield-plus'></i>
-                <span>Plans</span>
+                <span>Services</span>
             </a>
-            <a href="#features" class="mobile-nav-item">
-                <i class='bx bxs-star'></i>
-                <span>Benefits</span>
-            </a>
-            <a href="#footer" class="mobile-nav-item">
-                <i class='bx bxs-envelope'></i>
-                <span>Contact</span>
+            <a class="mobile-nav-item" onclick="routeTo('gallery')" data-target="gallery">
+                <i class='bx bxs-image'></i>
+                <span>Gallery</span>
             </a>
         </div>
     </nav>
 
     <script>
-        // Mobile Bottom Nav Active State Logic
-        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
-        
-        mobileNavItems.forEach(item => {
-            item.addEventListener('click', function() {
-                mobileNavItems.forEach(nav => nav.classList.remove('active'));
-                this.classList.add('active');
-                
-                mobileNavItems.forEach(nav => {
+        // --- Single Page Application (SPA) Routing Logic ---
+        function routeTo(pageId) {
+            const loader = document.getElementById('loader');
+            
+            // 1. Show the full screen loader
+            loader.classList.add('active');
+
+            // 2. Wait a moment to simulate network loading, then switch content
+            setTimeout(() => {
+                // Hide all pages
+                document.querySelectorAll('.page-view').forEach(page => {
+                    page.classList.remove('active');
+                });
+
+                // Show target page
+                document.getElementById('page-' + pageId).classList.add('active');
+
+                // Update Desktop Nav Active State
+                document.querySelectorAll('.desktop-nav .nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if(btn.dataset.target === pageId) btn.classList.add('active');
+                });
+
+                // Update Mobile Nav Active State
+                document.querySelectorAll('.mobile-nav-item').forEach(nav => {
+                    nav.classList.remove('active');
                     const icon = nav.querySelector('i');
-                    if (nav.classList.contains('active')) {
-                        icon.classList.replace('bx-', 'bxs-');
-                    } else {
-                        icon.classList.replace('bxs-', 'bx-');
+                    icon.classList.replace('bxs-', 'bx-'); // Reset to outline
+
+                    if(nav.dataset.target === pageId) {
+                        nav.classList.add('active');
+                        icon.classList.replace('bx-', 'bxs-'); // Set to solid
                     }
                 });
-            });
-        });
 
-        // Hide/Show Navigation on Scroll Logic
+                // Scroll to top
+                window.scrollTo(0, 0);
+
+                // 3. Hide the loader
+                loader.classList.remove('active');
+
+            }, 600); // 600ms fake loading delay
+        }
+
+        // --- Hero Carousel Logic ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Rotate every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // --- Hide/Show Navigation on Scroll Logic ---
         let lastScrollY = window.scrollY;
         const desktopNav = document.getElementById('desktopNav');
         const mobileHeader = document.getElementById('mobileHeader');
         const mobileNav = document.getElementById('mobileNav');
-        const fabQuote = document.getElementById('fabQuote');
 
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
             
-            // Add a small buffer (50px) so it doesn't trigger on the very first pixel of scroll
             if (currentScrollY > lastScrollY && currentScrollY > 50) {
-                // Scrolling DOWN - Hide Navigations
+                // Scrolling DOWN
                 desktopNav.classList.add('scroll-down');
                 mobileHeader.classList.add('scroll-down');
                 mobileNav.classList.add('scroll-down');
-                fabQuote.classList.add('scroll-down');
             } else {
-                // Scrolling UP - Show Navigations
+                // Scrolling UP
                 desktopNav.classList.remove('scroll-down');
                 mobileHeader.classList.remove('scroll-down');
                 mobileNav.classList.remove('scroll-down');
-                fabQuote.classList.remove('scroll-down');
             }
-            
             lastScrollY = currentScrollY;
         });
     </script>
