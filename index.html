@@ -40,6 +40,7 @@
             color: var(--text-dark);
             line-height: 1.6;
             padding-bottom: 0; 
+            overflow-x: hidden; /* Prevent accidental horizontal scroll */
         }
 
         a {
@@ -602,6 +603,7 @@
             color: var(--primary);
         }
 
+        /* --- Media Queries --- */
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
@@ -614,24 +616,55 @@
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
+        /* MOBILE SPECIFIC OPTIMIZATIONS */
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
+            
             .mobile-header {
-                position: fixed; top: 0; left: 0; width: 100%; padding: 16px 20px;
+                position: fixed; top: 0; left: 0; width: 100%; padding: 12px 20px;
                 background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
                 z-index: 999; display: flex; justify-content: center; box-shadow: var(--shadow-sm);
                 transition: transform 0.4s cubic-bezier(0.3, 1, 0.2, 1);
             }
             .mobile-header.scroll-down { transform: translateY(-100%); }
-            .mobile-header img { height: 50px; width: auto; object-fit: contain; }
+            .mobile-header img { height: 45px; width: auto; object-fit: contain; }
+            
             .mobile-nav { display: block; }
-            .hero { padding-top: 120px; }
-            .page-header { padding-top: 120px; }
+            
             body { padding-bottom: 90px; }
+            
+            /* Adjust Hero for Mobile */
+            .hero { 
+                padding-top: 110px; 
+                padding-bottom: 40px;
+                gap: 30px; 
+            }
+            .hero h1 { font-size: 2.2rem; margin-bottom: 16px; }
+            .hero-content p { font-size: 1rem; margin-bottom: 24px; }
+            .hero-carousel-wrapper { height: 300px; border-radius: 16px; } /* Smaller image on mobile */
+            
+            /* Universal Containers */
+            .page-header { padding: 130px 15px 40px; }
+            .page-header h1 { font-size: 2.2rem; }
+            .content-container { padding: 0 15px 60px; }
+            
+            /* Force 1-Column Grids to Prevent Overflow */
+            .card-grid, .plans-grid, .gallery-grid { 
+                grid-template-columns: 1fr; 
+                gap: 20px;
+            }
+            
+            /* Shrink Card Padding */
+            .plan-card { padding: 24px; }
+            .image-card-content { padding: 20px; }
+            .gallery-item { height: 200px; }
+            
+            /* Footer Adjustments */
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
             .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
             .site-footer { padding-bottom: 120px; }
         }
+        
         @media (min-width: 769px) { .mobile-header { display: none; } }
     </style>
 </head>
@@ -664,7 +697,7 @@
             <div class="hero-content">
                 <h1>Compassion & Craftsmanship Meet.</h1>
                 <p>Ngoako Tombstone & Funeral Services professional team is here to accompany you through the sensitive journey of saying goodbye, providing support, and ensuring that every detail is handled with the utmost care.</p>
-                <button class="btn-quote" style="padding: 16px 32px; font-size: 1.1rem;" onclick="document.getElementById('plans-section').scrollIntoView({behavior: 'smooth'})">View Our Plans</button>
+                <button class="btn-quote" style="padding: 16px 32px; font-size: 1.1rem; width: 100%; max-width: 250px;" onclick="document.getElementById('plans-section').scrollIntoView({behavior: 'smooth'})">View Our Plans</button>
             </div>
             <div class="hero-image-wrapper">
                 <div class="hero-carousel-wrapper">
@@ -887,7 +920,7 @@
                     <div class="gallery-caption">Floral Arrangements</div>
                 </div>
                 <div class="gallery-item">
-                    <img src=https://z-p3-scontent.fjnb12-1.fna.fbcdn.net/v/t39.30808-6/498633487_1257610996373595_1864511241055509727_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeGQFRYtpXFn8mt-lYSI2hZWoFWKhckkuVGgVYqFySS5UZsQkqiawTPQfZzYuIQw8J5ursq9mLEp8N1jlPDz8q6h&_nc_ohc=LX6mDZSeDYkQ7kNvwFtovNX&_nc_oc=AdoojzV-L8aa757w24n71VIptELLIjRchlC8U9Y0eWMUUg1ao2IvCGQSktk0tPmml2I&_nc_zt=23&_nc_ht=z-p3-scontent.fjnb12-1.fna&_nc_gid=BB2DUrg_wiQWqhVJBFPOrw&_nc_ss=7a3a8&oh=00_Af3Qud7zqI0CFQchnBKTge5LWPNi_hujkgmmgYhB5162aQ&oe=69EE9F0D" alt="Tombstone">
+                    <img src="https://z-p3-scontent.fjnb12-1.fna.fbcdn.net/v/t39.30808-6/498633487_1257610996373595_1864511241055509727_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeGQFRYtpXFn8mt-lYSI2hZWoFWKhckkuVGgVYqFySS5UZsQkqiawTPQfZzYuIQw8J5ursq9mLEp8N1jlPDz8q6h&_nc_ohc=LX6mDZSeDYkQ7kNvwFtovNX&_nc_oc=AdoojzV-L8aa757w24n71VIptELLIjRchlC8U9Y0eWMUUg1ao2IvCGQSktk0tPmml2I&_nc_zt=23&_nc_ht=z-p3-scontent.fjnb12-1.fna&_nc_gid=BB2DUrg_wiQWqhVJBFPOrw&_nc_ss=7a3a8&oh=00_Af3Qud7zqI0CFQchnBKTge5LWPNi_hujkgmmgYhB5162aQ&oe=69EE9F0D" alt="Tombstone">
                     <div class="gallery-caption">Quality Craftsmanship</div>
                 </div>
                 <div class="gallery-item">
