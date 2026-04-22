@@ -16,7 +16,7 @@
             --bg-light: #F7FAFC;
             --white: #FFFFFF;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             --shadow-nav: 0 15px 40px rgba(107, 33, 168, 0.08); 
             --radius-pill: 50px;
             --radius-card: 24px;
@@ -230,25 +230,6 @@
             opacity: 1;
         }
 
-        .floating-badge {
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            background: var(--white);
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-nav);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            z-index: 10;
-        }
-
-        .floating-badge i {
-            font-size: 2rem;
-            color: var(--primary);
-        }
-
         /* --- Universal Page Headers --- */
         .page-header {
             padding: 180px 5% 60px;
@@ -270,50 +251,78 @@
             margin: 0 auto;
         }
 
-        /* --- Content Layouts --- */
+        /* --- Content Layouts & Card Grids --- */
         .content-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 5% 80px;
         }
 
-        .text-block {
-            background: var(--white);
-            padding: 40px;
-            border-radius: var(--radius-card);
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 40px;
-        }
-
-        .text-block h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-        }
-
-        .text-block p {
-            margin-bottom: 16px;
-            color: var(--text-muted);
-        }
-
-        .text-block ul {
-            margin-left: 20px;
-            margin-bottom: 16px;
-            color: var(--text-muted);
-        }
-
-        .text-block li {
-            margin-bottom: 8px;
-        }
-
-        /* Service Grid specific */
-        .service-grid {
+        .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
-        /* --- Plans Grid (Added back for Home Tab) --- */
+        /* Image Cards for About and Services */
+        .image-card {
+            background: var(--white);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .image-card-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-card-content h2 {
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .image-card-content h2 i {
+            font-size: 2rem;
+        }
+
+        .image-card-content p {
+            margin-bottom: 16px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .image-card-content ul {
+            margin-left: 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .image-card-content li {
+            margin-bottom: 8px;
+        }
+
+        /* --- Plans Grid (Home Tab) --- */
         .plans-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -330,10 +339,20 @@
             border: 1px solid rgba(0,0,0,0.03);
             display: flex;
             flex-direction: column;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-md);
         }
 
         .plan-card.popular {
             border: 2px solid var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .plan-card.popular:hover {
             box-shadow: var(--shadow-md);
         }
 
@@ -420,17 +439,23 @@
             box-shadow: var(--shadow-sm);
             height: 250px;
             position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .gallery-caption {
@@ -440,10 +465,10 @@
             width: 100%;
             background: rgba(0,0,0,0.7);
             color: white;
-            padding: 12px;
-            font-size: 0.9rem;
+            padding: 16px;
+            font-size: 1rem;
             transform: translateY(100%);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .gallery-item:hover .gallery-caption {
@@ -586,12 +611,6 @@
             .hero-content p {
                 margin: 0 auto 32px;
             }
-            .floating-badge {
-                left: 50%;
-                transform: translateX(-50%);
-                width: 90%;
-                justify-content: center;
-            }
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
@@ -655,13 +674,6 @@
                         <img src="https://images.unsplash.com/photo-1628191010210-a59de33e5941?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="carousel-slide" alt="Dignity">
                     </div>
                 </div>
-                <div class="floating-badge">
-                    <i class='bx bxs-check-shield'></i>
-                    <div>
-                        <strong>100% Black-Owned</strong>
-                        <p style="margin:0; font-size: 0.85rem; color: var(--text-muted);">Trusted Professional Care</p>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -721,43 +733,54 @@
             <p>Providing compassionate support and ensuring every detail is handled with the utmost care.</p>
         </div>
         <div class="content-container">
-            <div class="text-block">
-                <h2>Company Overview</h2>
-                <p>NGOAKO TOMBSTONE & FUNERAL SERVICES is a distinguished provider of tombstone design, manufacturing, and comprehensive funeral services. With a profound commitment to compassion, integrity, and personalized care, we help families navigate the challenging journey of bidding farewell to their loved ones with dignity and respect.</p>
-                <p>We provide comprehensive solutions to clients across various households and industries. What sets us apart is our commitment to providing comprehensive solutions under one roof—saving our clients time and effort in coordinating multiple service providers.</p>
-                <p>The company is 100% black-owned, and 100% black managed.</p>
-            </div>
-
-            <div class="service-grid">
-                <div class="text-block">
-                    <h2>Vision</h2>
-                    <p>To be the service provider that is most highly regarded and relied upon. We want to earn a good name for ourselves in the community as a responsible employer, and we also want to have a stellar reputation among the companies we do business with.</p>
+            <div class="card-grid">
+                
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Company Overview">
+                    <div class="image-card-content">
+                        <h2>Company Overview</h2>
+                        <p>NGOAKO TOMBSTONE & FUNERAL SERVICES is a distinguished provider of tombstone design, manufacturing, and comprehensive funeral services. With a profound commitment to compassion, integrity, and personalized care, we help families navigate the challenging journey of bidding farewell to their loved ones with dignity and respect.</p>
+                        <p>What sets us apart is our commitment to providing comprehensive solutions under one roof—saving our clients time and effort. The company is 100% black-owned, and 100% black managed.</p>
+                    </div>
                 </div>
-                <div class="text-block">
-                    <h2>Mission</h2>
-                    <p>Our goal is to provide an outstanding level of service delivery to each one of our customers across the entirety of South Africa. Our primary focus will be on enhancing public safety. We are going to set the company up so that it can become the most successful and most widely recognized brand in the funeral services.</p>
-                </div>
-            </div>
 
-            <div class="text-block">
-                <h2>Objectives & Quality Policy</h2>
-                <ul>
-                    <li>To provide quality and professional services always.</li>
-                    <li>To ensure customer satisfaction.</li>
-                    <li>To create employment opportunities for local people.</li>
-                </ul>
-                <p>Our dedication to excellence is ingrained in our culture. We prioritize <strong>Customer Satisfaction</strong>, maintain a culture of <strong>Quality Excellence</strong>, prioritize <strong>Compliance and Safety</strong>, and believe in the power of <strong>Continuous Improvement</strong> to drive our success.</p>
-            </div>
-            
-            <div class="text-block">
-                <h2>Empowerment Policy</h2>
-                <ul>
-                    <li>Black Economic Empowerment</li>
-                    <li>Women Empowerment</li>
-                    <li>Affirmative Action</li>
-                    <li>Youth Empowerment</li>
-                    <li>Workplace diversity and inclusion</li>
-                </ul>
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" alt="Vision and Mission">
+                    <div class="image-card-content">
+                        <h2>Vision & Mission</h2>
+                        <p><strong>Vision:</strong> To be the service provider that is most highly regarded and relied upon. We want to earn a good name for ourselves in the community as a responsible employer, and we also want to have a stellar reputation among the companies we do business with.</p>
+                        <p><strong>Mission:</strong> Our goal is to provide an outstanding level of service delivery to each one of our customers across the entirety of South Africa, ensuring customers receive timely and high-quality service.</p>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80" alt="Quality Policy">
+                    <div class="image-card-content">
+                        <h2>Objectives & Quality</h2>
+                        <p>Our dedication to excellence is ingrained in our culture. Our objectives are to provide quality services always, ensure customer satisfaction, and create local employment.</p>
+                        <ul>
+                            <li><strong>Customer Satisfaction:</strong> Actively seeking feedback to continually improve.</li>
+                            <li><strong>Quality Excellence:</strong> Fostering a mind-set of continuous improvement.</li>
+                            <li><strong>Compliance and Safety:</strong> Providing a safe working environment.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80" alt="Empowerment">
+                    <div class="image-card-content">
+                        <h2>Empowerment Policy</h2>
+                        <p>We believe in building a workforce and business model that supports the growth and development of our community.</p>
+                        <ul>
+                            <li>Black Economic Empowerment</li>
+                            <li>Women Empowerment</li>
+                            <li>Affirmative Action</li>
+                            <li>Youth Empowerment</li>
+                            <li>Workplace diversity and inclusion</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>
@@ -768,67 +791,76 @@
             <p>Comprehensive solutions under one roof, providing quality, reliability, and on-time delivery.</p>
         </div>
         <div class="content-container">
-            <div class="service-grid">
+            <div class="card-grid">
                 
-                <div class="text-block">
-                    <i class='bx bx-cube-alt' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
-                    <h2>Tombstone Design & Manufacturing</h2>
-                    <p>Our unique range of affordable, high quality tombstones come in various colors and designs. They are made of SABS specs, having been designed to stand the test of time and elements.</p>
-                    <ul>
-                        <li>Customized tombstones crafted from high-quality materials.</li>
-                        <li>Personalized designs (engravings, photographs, epitaphs).</li>
-                        <li>Various styles and finishes to suit individual preferences.</li>
-                        <li>Markers for gravesites.</li>
-                    </ul>
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1596700755171-d6abafcb641a?auto=format&fit=crop&w=800&q=80" alt="Tombstone Design">
+                    <div class="image-card-content">
+                        <h2><i class='bx bx-cube-alt'></i> Tombstone Design</h2>
+                        <p>Our unique range of affordable, high quality tombstones come in various colors and designs. Made to SABS specs to withstand the elements.</p>
+                        <ul>
+                            <li>Customized materials & designs.</li>
+                            <li>Personalized engravings & epitaphs.</li>
+                            <li>Various styles and finishes.</li>
+                            <li>Markers for gravesites.</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="text-block">
-                    <i class='bx bx-calendar-star' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
-                    <h2>Funeral Planning & Arrangements</h2>
-                    <p>We assist families in planning and organizing funeral services tailored to cultural and religious preferences.</p>
-                    <ul>
-                        <li>Professional coordination with cemeteries and crematoriums.</li>
-                        <li>Embalming room equipment.</li>
-                        <li>Caskets/Coffins & Urns supply.</li>
-                        <li>Hearse / Van provision.</li>
-                        <li>Decoration tools and flowers.</li>
-                    </ul>
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80" alt="Funeral Planning">
+                    <div class="image-card-content">
+                        <h2><i class='bx bx-calendar-star'></i> Funeral Planning</h2>
+                        <p>We assist families in planning and organizing funeral services tailored to cultural and religious preferences.</p>
+                        <ul>
+                            <li>Coordination with cemeteries.</li>
+                            <li>Caskets, Coffins & Urns.</li>
+                            <li>Hearse / Van provision.</li>
+                            <li>Decoration tools and flowers.</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="text-block">
-                    <i class='bx bx-transfer-alt' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
-                    <h2>Exhumation Services</h2>
-                    <p>The delicate removal and relocation of human remains handled with compassion, respect, and expertise.</p>
-                    <ul>
-                        <li>Legal Consultation & permit assistance.</li>
-                        <li>Sensitive Communication & Family Support.</li>
-                        <li>Expert Team with proper equipment.</li>
-                        <li>Reburial Services guidance.</li>
-                    </ul>
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1628191010210-a59de33e5941?auto=format&fit=crop&w=800&q=80" alt="Exhumation Services">
+                    <div class="image-card-content">
+                        <h2><i class='bx bx-transfer-alt'></i> Exhumation</h2>
+                        <p>The delicate removal and relocation of human remains handled with absolute compassion, respect, and expertise.</p>
+                        <ul>
+                            <li>Legal & permit assistance.</li>
+                            <li>Sensitive Family Support.</li>
+                            <li>Expert Team with proper equipment.</li>
+                            <li>Reburial Services guidance.</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="text-block">
-                    <i class='bx bx-restaurant' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
-                    <h2>Catering Services</h2>
-                    <p>Relieving the burden of organizing gatherings during difficult times.</p>
-                    <ul>
-                        <li>Tents, Tables, and Chairs.</li>
-                        <li>Mobile Toilets and VIP Toilets.</li>
-                        <li>Decorations.</li>
-                        <li>Foods and Drinks according to capacity given.</li>
-                    </ul>
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80" alt="Catering Services">
+                    <div class="image-card-content">
+                        <h2><i class='bx bx-restaurant'></i> Catering Services</h2>
+                        <p>Relieving the burden of organizing gatherings during difficult times so you can focus on family.</p>
+                        <ul>
+                            <li>Tents, Tables, and Chairs.</li>
+                            <li>Mobile Toilets and VIP Toilets.</li>
+                            <li>Custom Decorations.</li>
+                            <li>Foods and Drinks according to capacity.</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="text-block">
-                    <i class='bx bx-group' style="font-size: 2.5rem; color: var(--primary); margin-bottom: 16px;"></i>
-                    <h2>Member's Benefits</h2>
-                    <ul>
-                        <li>Free mortuary facilities.</li>
-                        <li>Free transport.</li>
-                        <li>Free callout day or Night.</li>
-                        <li>Supply of coffin stand & screen.</li>
-                        <li>Death certificate, Claims & Name plate assistance.</li>
-                    </ul>
+                <div class="image-card">
+                    <img src="https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?auto=format&fit=crop&w=800&q=80" alt="Member Benefits">
+                    <div class="image-card-content">
+                        <h2><i class='bx bx-group'></i> Member's Benefits</h2>
+                        <p>Exclusive benefits for our covered members ensuring everything is handled smoothly and without delay.</p>
+                        <ul>
+                            <li>Free mortuary facilities.</li>
+                            <li>Free transport & callout day/night.</li>
+                            <li>Supply of coffin stand & screen.</li>
+                            <li>Death certificate & Claims assistance.</li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
