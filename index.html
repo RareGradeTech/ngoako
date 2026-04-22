@@ -9,18 +9,19 @@
     
     <style>
         :root {
-            /* Updated to match a premium logo color scheme */
-            --primary: #1A4731; 
-            --primary-light: #E8F0EC;
+            /* Updated to match a premium purple logo color scheme */
+            --primary: #6B21A8; /* Rich Purple */
+            --primary-light: #F3E8FF; /* Soft light purple for backgrounds */
             --text-dark: #1A202C;
             --text-muted: #718096;
             --bg-light: #F7FAFC;
             --white: #FFFFFF;
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-            --shadow-nav: 0 10px 40px rgba(0, 0, 0, 0.08);
+            --shadow-nav: 0 15px 40px rgba(107, 33, 168, 0.08); /* Tinted shadow */
             --radius-pill: 50px;
             --radius-card: 24px;
+            --radius-nav: 20px; /* New rounded corner for the larger nav */
         }
 
         * {
@@ -43,25 +44,25 @@
             color: inherit;
         }
 
-        /* --- Desktop Pill Navigation --- */
+        /* --- Desktop Floating Card Navigation (Redesigned for larger logo) --- */
         .desktop-nav {
             position: fixed;
             top: 24px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 8px 24px;
-            border-radius: var(--radius-pill);
+            padding: 12px 32px; /* Extra padding */
+            border-radius: var(--radius-nav); /* Rounded card instead of tight pill */
             box-shadow: var(--shadow-nav);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 90%;
-            max-width: 900px;
+            width: 95%;
+            max-width: 1100px; /* Slightly wider to accommodate bigger logo */
             z-index: 1000;
-            border: 1px solid rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.6);
         }
 
         .brand {
@@ -70,11 +71,10 @@
         }
 
         .brand img {
-            height: 45px; /* Sized for the pill nav */
+            height: 75px; /* Significantly larger logo */
             width: auto;
-            border-radius: 50%; /* Makes the logo circular if it isn't already */
-            object-fit: cover;
-            box-shadow: var(--shadow-sm);
+            border-radius: 8px; /* Softer radius in case the logo isn't a perfect circle */
+            object-fit: contain; /* Ensures the whole logo is visible without cropping */
         }
 
         .nav-links {
@@ -85,7 +85,7 @@
 
         .nav-links a {
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--text-muted);
             transition: color 0.3s ease;
         }
@@ -97,7 +97,7 @@
         .btn-quote {
             background: var(--primary);
             color: var(--white);
-            padding: 10px 24px;
+            padding: 12px 28px;
             border-radius: var(--radius-pill);
             font-weight: 600;
             font-size: 0.95rem;
@@ -106,12 +106,12 @@
 
         .btn-quote:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(26, 71, 49, 0.3);
+            box-shadow: 0 6px 16px rgba(107, 33, 168, 0.3);
         }
 
         /* --- Hero Section --- */
         .hero {
-            padding: 160px 5% 80px;
+            padding: 180px 5% 80px; /* Increased top padding to clear the larger nav */
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
@@ -371,7 +371,7 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(26, 71, 49, 0.4);
+            box-shadow: 0 4px 12px rgba(107, 33, 168, 0.4);
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
@@ -383,7 +383,7 @@
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
-                padding-top: 120px;
+                padding-top: 140px;
             }
             .hero-content p {
                 margin: 0 auto 32px;
@@ -401,12 +401,37 @@
                 display: none;
             }
             
+            /* Mobile logo header - adding this so the logo is still visible on mobile */
+            .mobile-header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding: 16px 20px;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                z-index: 999;
+                display: flex;
+                justify-content: center;
+                box-shadow: var(--shadow-sm);
+            }
+            
+            .mobile-header img {
+                height: 50px;
+                width: auto;
+                object-fit: contain;
+            }
+
             .mobile-nav {
                 display: block;
             }
 
             .fab-quote {
                 display: flex;
+            }
+
+            .hero {
+                padding-top: 120px; /* Adjust for mobile header */
             }
 
             .hero h1 {
@@ -421,9 +446,20 @@
                 font-size: 2rem;
             }
         }
+        
+        /* Hide mobile header on desktop */
+        @media (min-width: 769px) {
+            .mobile-header {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <header class="mobile-header">
+        <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Funeral Cover Logo">
+    </header>
 
     <nav class="desktop-nav">
         <a href="#" class="brand">
