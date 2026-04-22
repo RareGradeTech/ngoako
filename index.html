@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Serenity Funeral Cover</title>
+    <title>Funeral Cover</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
     <style>
         :root {
-            --primary: #2B6CB0;
-            --primary-light: #EBF8FF;
+            /* Updated to match a premium logo color scheme */
+            --primary: #1A4731; 
+            --primary-light: #E8F0EC;
             --text-dark: #1A202C;
             --text-muted: #718096;
             --bg-light: #F7FAFC;
@@ -51,7 +52,7 @@
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 12px 24px;
+            padding: 8px 24px;
             border-radius: var(--radius-pill);
             box-shadow: var(--shadow-nav);
             display: flex;
@@ -64,16 +65,16 @@
         }
 
         .brand {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 8px;
         }
 
-        .brand i {
-            font-size: 1.5rem;
+        .brand img {
+            height: 45px; /* Sized for the pill nav */
+            width: auto;
+            border-radius: 50%; /* Makes the logo circular if it isn't already */
+            object-fit: cover;
+            box-shadow: var(--shadow-sm);
         }
 
         .nav-links {
@@ -105,7 +106,7 @@
 
         .btn-quote:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.3);
+            box-shadow: 0 4px 12px rgba(26, 71, 49, 0.3);
         }
 
         /* --- Hero Section --- */
@@ -160,7 +161,7 @@
 
         .floating-badge i {
             font-size: 2rem;
-            color: #48BB78;
+            color: var(--primary);
         }
 
         /* --- Features Section --- */
@@ -289,7 +290,7 @@
         }
 
         .plan-features li i {
-            color: #48BB78;
+            color: var(--primary);
             font-size: 1.2rem;
         }
 
@@ -370,7 +371,7 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.4);
+            box-shadow: 0 4px 12px rgba(26, 71, 49, 0.4);
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
@@ -397,15 +398,15 @@
 
         @media (max-width: 768px) {
             .desktop-nav {
-                display: none; /* Hide Pill Nav on Mobile */
+                display: none;
             }
             
             .mobile-nav {
-                display: block; /* Show Bottom Nav */
+                display: block;
             }
 
             .fab-quote {
-                display: flex; /* Show floating quote button */
+                display: flex;
             }
 
             .hero h1 {
@@ -413,7 +414,7 @@
             }
             
             body {
-                padding-bottom: 90px; /* Adjust padding for bottom nav */
+                padding-bottom: 90px;
             }
 
             .section-header h2 {
@@ -426,8 +427,7 @@
 
     <nav class="desktop-nav">
         <a href="#" class="brand">
-            <i class='bx bx-leaf'></i>
-            Serenity
+            <img src="https://i.postimg.cc/25vPyk1J/Whats-App-Image-2026-04-22-at-13-45-01.jpg" alt="Funeral Cover Logo">
         </a>
         <ul class="nav-links">
             <li><a href="#" class="active">Home</a></li>
@@ -556,18 +556,14 @@
     </nav>
 
     <script>
-        // Simple JS to handle active states on mobile nav
         const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
         
         mobileNavItems.forEach(item => {
             item.addEventListener('click', function() {
-                // Remove active class from all
                 mobileNavItems.forEach(nav => nav.classList.remove('active'));
                 
-                // Add active class to clicked
                 this.classList.add('active');
                 
-                // Toggle filled/outline icons for that native app feel
                 mobileNavItems.forEach(nav => {
                     const icon = nav.querySelector('i');
                     if (nav.classList.contains('active')) {
