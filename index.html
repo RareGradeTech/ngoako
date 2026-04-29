@@ -11,8 +11,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#9C27B0', // Deep Purple (Used for primary text/buttons in light mode)
-                        secondary: '#E5B4E2', // Soft Pink (Used for accents)
+                        primary: '#6e0db2', // Main Purple
+                        secondary: '#f086ee', // Pink
+                        darkPurple: '#3f0771', // Dark Purple
                         light: '#F8FAFC', // Slate 50 background
                         card: 'rgba(255, 255, 255, 0.85)', // Light glassmorphism
                     },
@@ -39,7 +40,7 @@
             text-transform: uppercase;
         }
         .text-outline {
-            -webkit-text-stroke: 1.5px #9C27B0;
+            -webkit-text-stroke: 1.5px #6e0db2;
             color: transparent;
         }
         .pill {
@@ -52,8 +53,8 @@
         }
         .card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(156, 39, 176, 0.15);
-            border-color: rgba(156, 39, 176, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(110, 13, 178, 0.15); /* #6e0db2 RGB */
+            border-color: rgba(110, 13, 178, 0.3);
         }
         /* Navbar Scroll Logic */
         nav {
@@ -65,7 +66,7 @@
         .nav-scrolled {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(156, 39, 176, 0.1);
+            border-bottom: 1px solid rgba(110, 13, 178, 0.1);
             padding-top: 0.75rem !important;
             padding-bottom: 0.75rem !important;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
@@ -75,14 +76,14 @@
         }
         .hover-lift:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(156, 39, 176, 0.1);
+            box-shadow: 0 15px 30px rgba(110, 13, 178, 0.1);
         }
         .btn-primary {
             transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
         .btn-primary:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(156, 39, 176, 0.3);
+            box-shadow: 0 0 15px rgba(110, 13, 178, 0.4);
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -102,7 +103,7 @@
             border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #9C27B0;
+            background: #6e0db2;
         }
         .hero-shimmer {
             position: relative;
@@ -118,7 +119,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(229, 180, 226, 0.3),
+                rgba(240, 134, 238, 0.25), /* #f086ee RGB */
                 transparent
             );
             animation: heroShimmer 1.5s linear infinite;
@@ -142,7 +143,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, rgba(248, 250, 252, 0.95), rgba(229, 180, 226, 0.3));
+            background: linear-gradient(45deg, rgba(248, 250, 252, 0.95), rgba(240, 134, 238, 0.25)); /* #f086ee RGB */
             z-index: 1;
         }
         #cta-content {
@@ -162,7 +163,7 @@
             <a href="#services" class="hover:text-primary transition-colors">Services</a>
             <a href="#about" class="hover:text-primary transition-colors">About Us</a>
             <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
-            <button onclick="showJoinModal()" class="bg-primary text-white font-heading font-bold px-8 py-3 rounded-pill uppercase tracking-wider btn-primary pill shadow-md">
+            <button onclick="showJoinModal()" class="bg-primary text-white font-heading font-bold px-8 py-3 rounded-pill uppercase tracking-wider btn-primary pill shadow-md hover:bg-darkPurple transition-colors duration-300">
                 Get Assistance
             </button>
         </div>
@@ -178,7 +179,7 @@
 
     <div id="mobile-menu-panel" class="fixed top-0 right-0 bottom-0 w-72 bg-white z-[70] transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
         <div class="flex justify-end p-5 border-b border-slate-100">
-            <button onclick="toggleMobileMenu()" class="text-slate-500 hover:text-primary transition-colors p-2 rounded-full hover:bg-purple-50">
+            <button onclick="toggleMobileMenu()" class="text-slate-500 hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -191,7 +192,7 @@
             <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-primary transition-colors">Contact</a>
             
             <div class="pt-6 border-t border-slate-100">
-                <button onclick="toggleMobileMenu(); showJoinModal();" class="w-full bg-primary text-white font-heading font-bold px-6 py-4 rounded-pill uppercase tracking-wider shadow-md hover:shadow-primary/40 transition-all">
+                <button onclick="toggleMobileMenu(); showJoinModal();" class="w-full bg-primary hover:bg-darkPurple text-white font-heading font-bold px-6 py-4 rounded-pill uppercase tracking-wider shadow-md hover:shadow-primary/40 transition-all">
                     Get Assistance
                 </button>
             </div>
@@ -216,14 +217,14 @@
         <div id="hero-content" class="relative z-10 max-w-3xl animate-fadeInUp hero-shimmer">
             <div id="hero-text">
                 <h4 class="text-primary font-heading tracking-[0.2em] mb-4 text-sm md:text-base font-bold">Compassion & Craftsmanship</h4>
-                <h1 id="hero-main-heading" class="text-5xl md:text-8xl font-bold leading-none mb-6 text-slate-900">
+                <h1 id="hero-main-heading" class="text-5xl md:text-8xl font-bold leading-none mb-6 text-darkPurple">
                     HONOURING <span class="text-outline">MEMORIES</span>
                 </h1>
                 <p id="hero-subtext" class="text-slate-600 text-base md:text-xl mb-10 max-w-xl font-medium">
                     We are here to accompany you through the sensitive journey of saying goodbye, providing support, and ensuring that every detail is handled with the utmost care.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button onclick="showJoinModal()" id="hero-button" class="bg-primary text-white font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill btn-primary pill shadow-lg text-center">
+                    <button onclick="showJoinModal()" id="hero-button" class="bg-primary hover:bg-darkPurple text-white font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill btn-primary pill shadow-lg text-center transition-colors">
                         Contact Us Now
                     </button>
                     <button onclick="showVideoModal()" class="border-2 border-primary text-primary font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill hover:bg-primary hover:text-white transition-colors duration-300 text-center">
@@ -233,15 +234,15 @@
                
                 <div class="flex flex-wrap gap-8 md:gap-10 mt-16 border-t border-slate-200 pt-8">
                     <div>
-                        <h3 id="stat-trainers" class="text-2xl md:text-3xl font-bold text-slate-900 mb-1">100%</h3>
+                        <h3 id="stat-trainers" class="text-2xl md:text-3xl font-bold text-darkPurple mb-1">100%</h3>
                         <p class="text-slate-500 text-xs md:text-sm font-medium">Black-Owned</p>
                     </div>
                     <div>
-                        <h3 id="stat-members" class="text-2xl md:text-3xl font-bold text-slate-900 mb-1">24/7</h3>
+                        <h3 id="stat-members" class="text-2xl md:text-3xl font-bold text-darkPurple mb-1">24/7</h3>
                         <p class="text-slate-500 text-xs md:text-sm font-medium">Free Callout</p>
                     </div>
                     <div>
-                        <h3 id="stat-programs" class="text-2xl md:text-3xl font-bold text-slate-900 mb-1">SABS</h3>
+                        <h3 id="stat-programs" class="text-2xl md:text-3xl font-bold text-darkPurple mb-1">SABS</h3>
                         <p class="text-slate-500 text-xs md:text-sm font-medium">Specs Compliant</p>
                     </div>
                 </div>
@@ -253,46 +254,46 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
             <div>
                 <h4 class="text-primary font-heading tracking-[0.2em] mb-2 text-sm font-bold">Comprehensive Solutions</h4>
-                <h2 class="text-4xl md:text-5xl font-bold text-slate-900">OUR <span class="text-primary">SERVICES</span></h2>
+                <h2 class="text-4xl md:text-5xl font-bold text-darkPurple">OUR <span class="text-primary">SERVICES</span></h2>
             </div>
             <a href="#" class="text-slate-500 hover:text-primary mt-4 md:mt-0 font-heading tracking-wider uppercase border-b border-slate-300 pb-1 font-medium transition-colors">View All</a>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="card bg-white p-8 hover-lift group border border-slate-200 rounded-3xl shadow-sm">
-                <div class="w-14 h-14 bg-purple-50 text-primary flex items-center justify-center rounded-full mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <div class="w-14 h-14 bg-secondary/20 text-primary flex items-center justify-center rounded-full mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 </div>
-                <h3 id="service1-title" class="text-2xl font-bold mb-3 text-slate-900">Tombstone Design</h3>
+                <h3 id="service1-title" class="text-2xl font-bold mb-3 text-darkPurple">Tombstone Design</h3>
                 <p id="service1-desc" class="text-slate-600 text-sm mb-6 leading-relaxed">Customized tombstones crafted from high-quality materials, designed to stand the test of time.</p>
-                <button onclick="openServiceDetail('tombstone')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
+                <button onclick="openServiceDetail('tombstone')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2 group-hover:text-darkPurple transition-colors">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
             </div>
             
             <div class="card bg-white p-8 hover-lift group border border-slate-200 rounded-3xl shadow-sm">
-                <div class="w-14 h-14 bg-purple-50 text-primary flex items-center justify-center rounded-full mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <div class="w-14 h-14 bg-secondary/20 text-primary flex items-center justify-center rounded-full mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                 </div>
-                <h3 id="service2-title" class="text-2xl font-bold mb-3 text-slate-900">Funeral Planning</h3>
+                <h3 id="service2-title" class="text-2xl font-bold mb-3 text-darkPurple">Funeral Planning</h3>
                 <p id="service2-desc" class="text-slate-600 text-sm mb-6 leading-relaxed">Full-service funeral planning tailored to cultural and religious preferences with professional coordination.</p>
-                <button onclick="openServiceDetail('funeral')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
+                <button onclick="openServiceDetail('funeral')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2 group-hover:text-darkPurple transition-colors">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
             </div>
             
             <div class="card bg-white p-8 hover-lift group border border-slate-200 rounded-3xl shadow-sm">
-                <div class="w-14 h-14 bg-purple-50 text-primary flex items-center justify-center rounded-full mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                <div class="w-14 h-14 bg-secondary/20 text-primary flex items-center justify-center rounded-full mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                 </div>
-                <h3 id="service3-title" class="text-2xl font-bold mb-3 text-slate-900">Exhumation Services</h3>
+                <h3 id="service3-title" class="text-2xl font-bold mb-3 text-darkPurple">Exhumation Services</h3>
                 <p id="service3-desc" class="text-slate-600 text-sm mb-6 leading-relaxed">Expert handling of the removal and relocation of human remains with compassion, respect, and proper legal consultation.</p>
-                <button onclick="openServiceDetail('exhumation')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
+                <button onclick="openServiceDetail('exhumation')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2 group-hover:text-darkPurple transition-colors">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
             </div>
         </div>
     </section>
 
     <section id="cta-section" class="py-20 relative text-center border-t border-b border-slate-200">
         <div id="cta-content" class="relative z-10 max-w-4xl mx-auto px-6">
-            <h2 id="cta-main-heading" class="text-4xl md:text-7xl font-bold mb-6 text-slate-900 text-outline animate-fadeInUp">DIGNITY & RESPECT</h2>
+            <h2 id="cta-main-heading" class="text-4xl md:text-7xl font-bold mb-6 text-darkPurple text-outline animate-fadeInUp">DIGNITY & RESPECT</h2>
             <p id="cta-sub-paragraph" class="text-lg md:text-xl text-slate-700 mb-10 font-medium">Rely on us as your trusted partner, saving you time and effort by providing comprehensive solutions under one roof.</p>
-            <button onclick="showJoinModal()" id="cta-button" class="bg-primary text-white font-heading font-bold px-12 py-5 text-lg md:text-xl uppercase tracking-wider rounded-pill btn-primary pill shadow-lg shadow-primary/30">
+            <button onclick="showJoinModal()" id="cta-button" class="bg-primary hover:bg-darkPurple text-white font-heading font-bold px-12 py-5 text-lg md:text-xl uppercase tracking-wider rounded-pill btn-primary pill shadow-lg shadow-primary/30 transition-colors">
                 Reach Out To Us
             </button>
         </div>
@@ -309,7 +310,7 @@
                 </div>
                 
                 <div>
-                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/20 pb-2">Our Services</h4>
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-darkPurple border-b border-primary/20 pb-2">Our Services</h4>
                     <ul class="space-y-4 text-sm text-slate-600 font-medium">
                         <li><a href="#" class="hover:text-primary transition-colors">Tombstones</a></li>
                         <li><a href="#" class="hover:text-primary transition-colors">Funeral Planning</a></li>
@@ -320,7 +321,7 @@
                 </div>
                 
                 <div>
-                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/20 pb-2">Member Benefits</h4>
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-darkPurple border-b border-primary/20 pb-2">Member Benefits</h4>
                     <ul class="space-y-4 text-sm text-slate-600 font-medium">
                         <li><a href="#" class="hover:text-primary transition-colors">Free Mortuary Facilities</a></li>
                         <li><a href="#" class="hover:text-primary transition-colors">Free Transport</a></li>
@@ -329,7 +330,7 @@
                 </div>
                 
                 <div>
-                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/20 pb-2">Contact</h4>
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-darkPurple border-b border-primary/20 pb-2">Contact</h4>
                     <div class="space-y-4 text-sm text-slate-600 font-medium">
                         <p class="flex items-start gap-3">
                             <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -362,7 +363,7 @@
 
     <div id="join-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[80] px-4">
         <div class="bg-white border border-slate-200 w-full max-w-lg rounded-3xl p-6 md:p-8 animate-fadeInUp shadow-2xl">
-            <h3 class="text-2xl font-bold mb-6 text-slate-900">How Can We Help?</h3>
+            <h3 class="text-2xl font-bold mb-6 text-darkPurple">How Can We Help?</h3>
             <form id="join-form" onsubmit="handleJoinSubmit(event)">
                 <div class="space-y-6">
                     <input id="join-name" type="text" placeholder="Full Name" required class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-5 py-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-slate-900 transition-colors">
@@ -378,7 +379,7 @@
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 mt-8">
                     <button type="button" onclick="hideJoinModal()" class="flex-1 py-4 border border-slate-300 text-slate-600 font-medium rounded-full hover:bg-slate-50 transition-colors order-2 sm:order-1">Cancel</button>
-                    <button id="submit-btn" type="submit" class="flex-1 py-4 bg-primary text-white font-bold rounded-full shadow-lg hover:shadow-primary/40 transition-all order-1 sm:order-2">Submit</button>
+                    <button id="submit-btn" type="submit" class="flex-1 py-4 bg-primary hover:bg-darkPurple text-white font-bold rounded-full shadow-lg hover:shadow-primary/40 transition-all order-1 sm:order-2">Submit</button>
                 </div>
             </form>
         </div>
@@ -386,12 +387,12 @@
 
     <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[90] px-6">
         <div class="bg-white border border-slate-200 w-full max-w-sm rounded-3xl p-10 text-center animate-fadeInUp shadow-2xl">
-            <div class="w-16 h-16 bg-purple-50 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
+            <div class="w-16 h-16 bg-secondary/20 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             </div>
-            <h3 class="text-2xl font-bold mb-2 uppercase text-slate-900">Message Sent</h3>
+            <h3 class="text-2xl font-bold mb-2 uppercase text-darkPurple">Message Sent</h3>
             <p class="text-slate-500 mb-8 font-medium">We will be in touch with you shortly.</p>
-            <button onclick="hideSuccessModal()" class="w-full py-4 bg-primary text-white font-bold rounded-full uppercase shadow-lg hover:shadow-primary/40 transition-all">Close</button>
+            <button onclick="hideSuccessModal()" class="w-full py-4 bg-primary hover:bg-darkPurple text-white font-bold rounded-full uppercase shadow-lg hover:shadow-primary/40 transition-all">Close</button>
         </div>
     </div>
 
@@ -399,7 +400,7 @@
         <div class="bg-white border border-slate-200 w-full max-w-2xl rounded-3xl p-8 md:p-10 animate-fadeInUp relative text-slate-900 shadow-2xl">
             <button onclick="closeServiceDetail()" class="absolute top-4 right-4 text-slate-400 hover:text-primary text-3xl transition-colors">&times;</button>
             <div id="service-content"></div>
-            <button onclick="closeServiceDetail(); showJoinModal();" class="mt-8 w-full py-4 bg-primary text-white font-bold rounded-full uppercase shadow-lg hover:shadow-primary/40 transition-all">Inquire Now</button>
+            <button onclick="closeServiceDetail(); showJoinModal();" class="mt-8 w-full py-4 bg-primary hover:bg-darkPurple text-white font-bold rounded-full uppercase shadow-lg hover:shadow-primary/40 transition-all">Inquire Now</button>
         </div>
     </div>
 
@@ -542,7 +543,7 @@
         function openServiceDetail(id) {
             const s = serviceData[id];
             document.getElementById("service-content").innerHTML = `
-                <h2 class="text-slate-900 text-3xl font-bold mb-4 uppercase">${s.title}</h2>
+                <h2 class="text-darkPurple text-3xl font-bold mb-4 uppercase">${s.title}</h2>
                 <p class="text-slate-600 text-lg mb-6 font-medium">${s.desc}</p>
                 <ul class="space-y-3">
                     ${s.features.map(f => `<li class="text-slate-700 font-medium flex items-center gap-2"><span class="text-primary text-xl">✦</span> ${f}</li>`).join('')}
