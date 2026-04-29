@@ -154,7 +154,7 @@
 <body class="antialiased selection:bg-primary selection:text-white">
     <nav id="main-nav" class="fixed top-0 w-full z-50 px-6 py-4 md:px-16 flex justify-between items-center transition-all">
         <a href="index.html" class="flex items-center">
-            <img src="https://i.postimg.cc/280Ld36X/Whats-App-Image-2026-04-22-at-13-45-01-(1).jpg" alt="Ngoako Funerals Logo" class="h-16 w-auto object-contain rounded-lg shadow-sm">
+            <img src="https://i.postimg.cc/280Ld36X/Whats-App-Image-2026-04-22-at-13-45-01-(1).jpg" alt="Ngoako Funerals Logo" class="w-56 md:w-72 h-16 md:h-20 object-contain rounded-lg shadow-sm">
         </a>
         <div class="hidden md:flex space-x-10 text-sm font-medium uppercase tracking-wide text-slate-700">
             <a href="index.html" class="hover:text-primary transition-colors text-primary font-bold">Home</a>
@@ -171,6 +171,12 @@
         <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://images.unsplash.com/photo-1544833058-bf25a17e0b5f?q=80&w=2000&auto=format&fit=crop');"></div>
         <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://images.unsplash.com/photo-1494522855154-9297ac14b55f?q=80&w=2000&auto=format&fit=crop');"></div>
         <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://images.unsplash.com/photo-1510060269411-bc66b37a4eec?q=80&w=2000&auto=format&fit=crop');"></div>
+
+        <div class="absolute bottom-8 left-0 right-0 z-20 flex justify-center space-x-3">
+            <button onclick="goToSlide(0)" id="dot-0" class="h-3 w-8 rounded-full bg-primary transition-all duration-300 shadow-sm"></button>
+            <button onclick="goToSlide(1)" id="dot-1" class="h-3 w-3 rounded-full bg-slate-300 hover:bg-white transition-all duration-300 shadow-sm"></button>
+            <button onclick="goToSlide(2)" id="dot-2" class="h-3 w-3 rounded-full bg-slate-300 hover:bg-white transition-all duration-300 shadow-sm"></button>
+        </div>
 
         <div id="hero-content" class="relative z-10 max-w-3xl animate-fadeInUp hero-shimmer">
             <div id="hero-text">
@@ -387,7 +393,23 @@
             document.getElementById('carousel-bg-2'),
             document.getElementById('carousel-bg-3')
         ];
+        const dots = [
+            document.getElementById('dot-0'),
+            document.getElementById('dot-1'),
+            document.getElementById('dot-2')
+        ];
         let currentSlide = 0;
+        let carouselInterval;
+
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.className = "h-3 w-8 rounded-full bg-primary transition-all duration-300 shadow-sm";
+                } else {
+                    dot.className = "h-3 w-3 rounded-full bg-slate-300 hover:bg-white transition-all duration-300 shadow-sm";
+                }
+            });
+        }
 
         function nextSlide() {
             carouselBgs[currentSlide].classList.remove('opacity-100');
@@ -395,8 +417,27 @@
             currentSlide = (currentSlide + 1) % carouselBgs.length;
             carouselBgs[currentSlide].classList.remove('opacity-0');
             carouselBgs[currentSlide].classList.add('opacity-100');
+            updateDots();
         }
-        setInterval(nextSlide, 5000);
+
+        function goToSlide(index) {
+            if (index === currentSlide) return;
+            carouselBgs[currentSlide].classList.remove('opacity-100');
+            carouselBgs[currentSlide].classList.add('opacity-0');
+            currentSlide = index;
+            carouselBgs[currentSlide].classList.remove('opacity-0');
+            carouselBgs[currentSlide].classList.add('opacity-100');
+            updateDots();
+            resetInterval();
+        }
+
+        function resetInterval() {
+            clearInterval(carouselInterval);
+            carouselInterval = setInterval(nextSlide, 5000);
+        }
+        
+        // Start the carousel
+        carouselInterval = setInterval(nextSlide, 5000);
 
         // Service Data
         let serviceData = {
