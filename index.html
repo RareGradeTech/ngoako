@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ngoako Tombstone & Funeral Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#E5B4E2', // Soft Pink/Purple based on logo
-                        secondary: '#9C27B0', // Deep Purple
-                        dark: '#050505',
-                        card: 'rgba(20, 20, 25, 0.6)', // Transparent for glassmorphism
+                        primary: '#9C27B0', // Deep Purple (Used for primary text/buttons in light mode)
+                        secondary: '#E5B4E2', // Soft Pink (Used for accents)
+                        light: '#F8FAFC', // Slate 50 background
+                        card: 'rgba(255, 255, 255, 0.85)', // Light glassmorphism
                     },
                     fontFamily: {
                         heading: ['Oswald', 'sans-serif'],
@@ -30,8 +30,8 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #050505;
-            color: white;
+            background-color: #F8FAFC;
+            color: #0f172a;
             overflow-x: hidden;
         }
         h1, h2, h3, .nav-logo {
@@ -39,7 +39,7 @@
             text-transform: uppercase;
         }
         .text-outline {
-            -webkit-text-stroke: 1.5px #E5B4E2;
+            -webkit-text-stroke: 1.5px #9C27B0;
             color: transparent;
         }
         .pill {
@@ -52,36 +52,37 @@
         }
         .card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(229, 180, 226, 0.15);
-            border-color: rgba(229, 180, 226, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(156, 39, 176, 0.15);
+            border-color: rgba(156, 39, 176, 0.3);
         }
         /* Navbar Scroll Logic */
         nav {
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, border 0.3s ease;
         }
         .nav-hidden {
             transform: translateY(-100%);
         }
         .nav-scrolled {
-            background: rgba(5, 5, 5, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(229, 180, 226, 0.2);
+            border-bottom: 1px solid rgba(156, 39, 176, 0.1);
             padding-top: 1rem !important;
             padding-bottom: 1rem !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
         .hover-lift {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .hover-lift:hover {
             transform: translateY(-8px);
-            box-shadow: 0 10px 30px rgba(156, 39, 176, 0.15);
+            box-shadow: 0 15px 30px rgba(156, 39, 176, 0.1);
         }
         .btn-primary {
             transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
         .btn-primary:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(229, 180, 226, 0.3);
+            box-shadow: 0 0 15px rgba(156, 39, 176, 0.3);
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -94,14 +95,14 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #050505;
+            background: #f1f5f9;
         }
         ::-webkit-scrollbar-thumb {
-            background: #333;
+            background: #cbd5e1;
             border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #E5B4E2;
+            background: #9C27B0;
         }
         .hero-shimmer {
             position: relative;
@@ -117,7 +118,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(229, 180, 226, 0.15),
+                rgba(229, 180, 226, 0.3),
                 transparent
             );
             animation: heroShimmer 1.5s linear infinite;
@@ -141,7 +142,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(45deg, rgba(5, 5, 5, 0.95), rgba(156, 39, 176, 0.2));
+            background: linear-gradient(45deg, rgba(248, 250, 252, 0.95), rgba(229, 180, 226, 0.3));
             z-index: 1;
         }
         #cta-content {
@@ -150,125 +151,125 @@
         }
     </style>
 </head>
-<body class="antialiased selection:bg-primary selection:text-black">
-    <nav id="main-nav" class="fixed top-0 w-full z-50 px-6 py-6 md:px-16 flex justify-between items-center">
-        <a href="index.html" class="flex items-center text-2xl font-heading font-bold text-white tracking-widest">
-            NGOAKO<span class="text-primary">FUNERALS</span>
+<body class="antialiased selection:bg-primary selection:text-white">
+    <nav id="main-nav" class="fixed top-0 w-full z-50 px-6 py-4 md:px-16 flex justify-between items-center transition-all">
+        <a href="index.html" class="flex items-center">
+            <img src="https://i.postimg.cc/280Ld36X/Whats-App-Image-2026-04-22-at-13-45-01-(1).jpg" alt="Ngoako Funerals Logo" class="h-16 w-auto object-contain rounded-lg shadow-sm">
         </a>
-        <div class="hidden md:flex space-x-10 text-sm font-medium uppercase tracking-wide">
-            <a href="index.html" class="hover:text-primary transition-colors text-primary">Home</a>
+        <div class="hidden md:flex space-x-10 text-sm font-medium uppercase tracking-wide text-slate-700">
+            <a href="index.html" class="hover:text-primary transition-colors text-primary font-bold">Home</a>
             <a href="#services" class="hover:text-primary transition-colors">Services</a>
             <a href="#about" class="hover:text-primary transition-colors">About Us</a>
             <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
         </div>
-        <button onclick="showJoinModal()" class="bg-primary text-black font-heading font-bold px-8 py-3 rounded-pill uppercase tracking-wider btn-primary pill">
+        <button onclick="showJoinModal()" class="bg-primary text-white font-heading font-bold px-8 py-3 rounded-pill uppercase tracking-wider btn-primary pill shadow-md">
             Get Assistance
         </button>
     </nav>
 
-    <header class="relative min-h-screen flex items-center pt-20 px-6 md:px-16 overflow-hidden">
-        <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100 z-0" style="background-image: linear-gradient(to right, rgba(5, 5, 5, 0.95) 30%, rgba(5, 5, 5, 0.5)), url('https://images.unsplash.com/photo-1544833058-bf25a17e0b5f?q=80&w=2000&auto=format&fit=crop');"></div>
-        <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(5, 5, 5, 0.95) 30%, rgba(5, 5, 5, 0.5)), url('https://images.unsplash.com/photo-1494522855154-9297ac14b55f?q=80&w=2000&auto=format&fit=crop');"></div>
-        <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(5, 5, 5, 0.95) 30%, rgba(5, 5, 5, 0.5)), url('https://images.unsplash.com/photo-1510060269411-bc66b37a4eec?q=80&w=2000&auto=format&fit=crop');"></div>
+    <header class="relative min-h-screen flex items-center pt-20 px-6 md:px-16 overflow-hidden bg-white">
+        <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://images.unsplash.com/photo-1544833058-bf25a17e0b5f?q=80&w=2000&auto=format&fit=crop');"></div>
+        <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://images.unsplash.com/photo-1494522855154-9297ac14b55f?q=80&w=2000&auto=format&fit=crop');"></div>
+        <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://images.unsplash.com/photo-1510060269411-bc66b37a4eec?q=80&w=2000&auto=format&fit=crop');"></div>
 
         <div id="hero-content" class="relative z-10 max-w-3xl animate-fadeInUp hero-shimmer">
             <div id="hero-text">
                 <h4 class="text-primary font-heading tracking-[0.2em] mb-4 text-sm md:text-base font-bold">Compassion & Craftsmanship</h4>
-                <h1 id="hero-main-heading" class="text-6xl md:text-8xl font-bold leading-none mb-6">
+                <h1 id="hero-main-heading" class="text-6xl md:text-8xl font-bold leading-none mb-6 text-slate-900">
                     HONOURING <span class="text-outline">MEMORIES</span>
                 </h1>
-                <p id="hero-subtext" class="text-gray-400 text-lg md:text-xl mb-10 max-w-xl font-light">
+                <p id="hero-subtext" class="text-slate-600 text-lg md:text-xl mb-10 max-w-xl font-medium">
                     We are here to accompany you through the sensitive journey of saying goodbye, providing support, and ensuring that every detail is handled with the utmost care.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button onclick="showJoinModal()" id="hero-button" class="bg-primary text-black font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill btn-primary pill">
+                    <button onclick="showJoinModal()" id="hero-button" class="bg-primary text-white font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill btn-primary pill shadow-lg">
                         Contact Us Now
                     </button>
-                    <button onclick="showVideoModal()" class="border border-secondary text-white font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill hover:bg-secondary transition-colors duration-300">
+                    <button onclick="showVideoModal()" class="border-2 border-primary text-primary font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill hover:bg-primary hover:text-white transition-colors duration-300">
                         Our Vision
                     </button>
                 </div>
                
-                <div class="flex gap-10 mt-16 border-t border-gray-800 pt-8">
+                <div class="flex gap-10 mt-16 border-t border-slate-200 pt-8">
                     <div>
-                        <h3 id="stat-trainers" class="text-3xl font-bold text-white mb-1">100%</h3>
-                        <p class="text-gray-500 text-sm">Black-Owned & Managed</p>
+                        <h3 id="stat-trainers" class="text-3xl font-bold text-slate-900 mb-1">100%</h3>
+                        <p class="text-slate-500 text-sm font-medium">Black-Owned & Managed</p>
                     </div>
                     <div>
-                        <h3 id="stat-members" class="text-3xl font-bold text-white mb-1">24/7</h3>
-                        <p class="text-gray-500 text-sm">Free Callout Day or Night</p>
+                        <h3 id="stat-members" class="text-3xl font-bold text-slate-900 mb-1">24/7</h3>
+                        <p class="text-slate-500 text-sm font-medium">Free Callout Day or Night</p>
                     </div>
                     <div>
-                        <h3 id="stat-programs" class="text-3xl font-bold text-white mb-1">SABS</h3>
-                        <p class="text-gray-500 text-sm">Specs Compliant Tombstones</p>
+                        <h3 id="stat-programs" class="text-3xl font-bold text-slate-900 mb-1">SABS</h3>
+                        <p class="text-slate-500 text-sm font-medium">Specs Compliant Tombstones</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="services" class="py-24 px-6 md:px-16 bg-dark">
+    <section id="services" class="py-24 px-6 md:px-16 bg-light">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16">
             <div>
-                <h4 class="text-white font-heading tracking-[0.2em] mb-2 text-sm font-bold">Comprehensive Solutions</h4>
-                <h2 class="text-4xl md:text-5xl font-bold">OUR <span class="text-primary">SERVICES</span></h2>
+                <h4 class="text-primary font-heading tracking-[0.2em] mb-2 text-sm font-bold">Comprehensive Solutions</h4>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900">OUR <span class="text-primary">SERVICES</span></h2>
             </div>
-            <a href="#" class="text-gray-400 hover:text-primary mt-4 md:mt-0 font-heading tracking-wider uppercase border-b border-gray-600 pb-1">View All</a>
+            <a href="#" class="text-slate-500 hover:text-primary mt-4 md:mt-0 font-heading tracking-wider uppercase border-b border-slate-300 pb-1 font-medium transition-colors">View All</a>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="card bg-card p-8 hover-lift group border border-gray-800 rounded-3xl">
-                <div class="w-14 h-14 bg-gray-900 text-secondary flex items-center justify-center rounded-full mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
+            <div class="card bg-white p-8 hover-lift group border border-slate-200 rounded-3xl shadow-sm">
+                <div class="w-14 h-14 bg-purple-50 text-primary flex items-center justify-center rounded-full mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 </div>
-                <h3 id="service1-title" class="text-2xl font-bold mb-3 text-white">Tombstone Design</h3>
-                <p id="service1-desc" class="text-gray-400 text-sm mb-6 leading-relaxed">Customized tombstones crafted from high-quality materials, designed to stand the test of time.</p>
+                <h3 id="service1-title" class="text-2xl font-bold mb-3 text-slate-900">Tombstone Design</h3>
+                <p id="service1-desc" class="text-slate-600 text-sm mb-6 leading-relaxed">Customized tombstones crafted from high-quality materials, designed to stand the test of time.</p>
                 <button onclick="openServiceDetail('tombstone')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
             </div>
             
-            <div class="card bg-card p-8 hover-lift group border border-gray-800 rounded-3xl">
-                <div class="w-14 h-14 bg-gray-900 text-secondary flex items-center justify-center rounded-full mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
+            <div class="card bg-white p-8 hover-lift group border border-slate-200 rounded-3xl shadow-sm">
+                <div class="w-14 h-14 bg-purple-50 text-primary flex items-center justify-center rounded-full mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                 </div>
-                <h3 id="service2-title" class="text-2xl font-bold mb-3 text-white">Funeral Planning</h3>
-                <p id="service2-desc" class="text-gray-400 text-sm mb-6 leading-relaxed">Full-service funeral planning tailored to cultural and religious preferences with professional coordination.</p>
+                <h3 id="service2-title" class="text-2xl font-bold mb-3 text-slate-900">Funeral Planning</h3>
+                <p id="service2-desc" class="text-slate-600 text-sm mb-6 leading-relaxed">Full-service funeral planning tailored to cultural and religious preferences with professional coordination.</p>
                 <button onclick="openServiceDetail('funeral')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
             </div>
             
-            <div class="card bg-card p-8 hover-lift group border border-gray-800 rounded-3xl">
-                <div class="w-14 h-14 bg-gray-900 text-secondary flex items-center justify-center rounded-full mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
+            <div class="card bg-white p-8 hover-lift group border border-slate-200 rounded-3xl shadow-sm">
+                <div class="w-14 h-14 bg-purple-50 text-primary flex items-center justify-center rounded-full mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                 </div>
-                <h3 id="service3-title" class="text-2xl font-bold mb-3 text-white">Exhumation Services</h3>
-                <p id="service3-desc" class="text-gray-400 text-sm mb-6 leading-relaxed">Expert handling of the removal and relocation of human remains with compassion, respect, and proper legal consultation.</p>
+                <h3 id="service3-title" class="text-2xl font-bold mb-3 text-slate-900">Exhumation Services</h3>
+                <p id="service3-desc" class="text-slate-600 text-sm mb-6 leading-relaxed">Expert handling of the removal and relocation of human remains with compassion, respect, and proper legal consultation.</p>
                 <button onclick="openServiceDetail('exhumation')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
             </div>
         </div>
     </section>
 
-    <section id="cta-section" class="py-20 relative text-center border-t border-b border-primary/20">
+    <section id="cta-section" class="py-20 relative text-center border-t border-b border-slate-200">
         <div id="cta-content" class="relative z-10 max-w-4xl mx-auto px-6">
-            <h2 id="cta-main-heading" class="text-5xl md:text-7xl font-bold mb-6 text-white text-outline animate-fadeInUp">DIGNITY & RESPECT</h2>
-            <p id="cta-sub-paragraph" class="text-xl text-gray-200 mb-10">Rely on us as your trusted partner, saving you time and effort by providing comprehensive solutions under one roof.</p>
-            <button onclick="showJoinModal()" id="cta-button" class="bg-primary text-black font-heading font-bold px-12 py-5 text-xl uppercase tracking-wider rounded-pill btn-primary pill shadow-[0_0_20px_rgba(229,180,226,0.4)]">
+            <h2 id="cta-main-heading" class="text-5xl md:text-7xl font-bold mb-6 text-slate-900 text-outline animate-fadeInUp">DIGNITY & RESPECT</h2>
+            <p id="cta-sub-paragraph" class="text-xl text-slate-700 mb-10 font-medium">Rely on us as your trusted partner, saving you time and effort by providing comprehensive solutions under one roof.</p>
+            <button onclick="showJoinModal()" id="cta-button" class="bg-primary text-white font-heading font-bold px-12 py-5 text-xl uppercase tracking-wider rounded-pill btn-primary pill shadow-lg shadow-primary/30">
                 Reach Out To Us
             </button>
         </div>
     </section>
 
-    <footer class="bg-dark pt-20 pb-10 px-6 md:px-16 border-t border-gray-800">
+    <footer class="bg-slate-100 pt-20 pb-10 px-6 md:px-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="space-y-6">
-                    <h2 class="text-2xl font-heading font-bold text-white tracking-widest uppercase">NGOAKO<span class="text-primary">FUNERALS</span></h2>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
+                    <img src="https://i.postimg.cc/280Ld36X/Whats-App-Image-2026-04-22-at-13-45-01-(1).jpg" alt="Ngoako Funerals Logo" class="h-14 w-auto rounded-md">
+                    <p class="text-slate-600 text-sm leading-relaxed max-w-xs font-medium">
                         Our goal is to provide an outstanding level of service delivery to each one of our customers, ensuring timely and high-quality service.
                     </p>
                 </div>
                 
                 <div>
-                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/30 pb-2">Our Services</h4>
-                    <ul class="space-y-4 text-sm text-gray-400">
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/20 pb-2">Our Services</h4>
+                    <ul class="space-y-4 text-sm text-slate-600 font-medium">
                         <li><a href="#" class="hover:text-primary transition-colors">Tombstones</a></li>
                         <li><a href="#" class="hover:text-primary transition-colors">Funeral Planning</a></li>
                         <li><a href="#" class="hover:text-primary transition-colors">Exhumation</a></li>
@@ -278,8 +279,8 @@
                 </div>
                 
                 <div>
-                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/30 pb-2">Member Benefits</h4>
-                    <ul class="space-y-4 text-sm text-gray-400">
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/20 pb-2">Member Benefits</h4>
+                    <ul class="space-y-4 text-sm text-slate-600 font-medium">
                         <li><a href="#" class="hover:text-primary transition-colors">Free Mortuary Facilities</a></li>
                         <li><a href="#" class="hover:text-primary transition-colors">Free Transport</a></li>
                         <li><a href="#" class="hover:text-primary transition-colors">Death Certificate Assist</a></li>
@@ -287,77 +288,77 @@
                 </div>
                 
                 <div>
-                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/30 pb-2">Contact</h4>
-                    <div class="space-y-4 text-sm text-gray-400">
-                        <p class="flex items-center gap-3">
-                            <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/20 pb-2">Contact</h4>
+                    <div class="space-y-4 text-sm text-slate-600 font-medium">
+                        <p class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             04 THABO MBEKI STREET, MOKOPANE, LIMPOPO, 0600
                         </p>
                         <p class="flex items-center gap-3">
-                            <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                             ngoakofun@webmail.com
                         </p>
                         <p class="flex items-center gap-3">
-                            <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                             015 065 0613 / 082 777 4825
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent my-8"></div>
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600 uppercase tracking-widest">
-                <p>© 2026 NGOAKO TOMBSTONE & FUNERAL SERVICES. <span class="text-primary font-medium">Reg No: 2004/119268/23.</span></p>
+            <div class="h-px bg-slate-200 my-8"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 uppercase tracking-widest font-bold">
+                <p>© 2026 NGOAKO TOMBSTONE & FUNERAL SERVICES. <span class="text-primary">Reg No: 2004/119268/23.</span></p>
             </div>
         </div>
     </footer>
 
-    <div id="video-modal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-[100] px-4 backdrop-blur-md">
-        <div class="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-primary/30">
-            <button onclick="hideVideoModal()" class="absolute top-4 right-4 z-50 text-white bg-black/50 hover:bg-primary hover:text-black w-10 h-10 rounded-full flex items-center justify-center transition-all text-2xl">&times;</button>
+    <div id="video-modal" class="hidden fixed inset-0 bg-slate-900/80 flex items-center justify-center z-[100] px-4 backdrop-blur-sm">
+        <div class="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
+            <button onclick="hideVideoModal()" class="absolute top-4 right-4 z-50 text-white bg-black/50 hover:bg-primary w-10 h-10 rounded-full flex items-center justify-center transition-all text-2xl">&times;</button>
             <iframe id="video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
-    <div id="join-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-        <div class="bg-card border border-primary/30 w-full max-w-lg rounded-3xl p-8 animate-fadeInUp shadow-[0_0_30px_rgba(229,180,226,0.1)]">
-            <h3 class="text-2xl font-bold mb-6 text-white">How Can We Help?</h3>
+    <div id="join-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50">
+        <div class="bg-white border border-slate-200 w-full max-w-lg rounded-3xl p-8 animate-fadeInUp shadow-2xl">
+            <h3 class="text-2xl font-bold mb-6 text-slate-900">How Can We Help?</h3>
             <form id="join-form" onsubmit="handleJoinSubmit(event)">
                 <div class="space-y-6">
-                    <input id="join-name" type="text" placeholder="Full Name" required class="w-full bg-black/50 border border-gray-700 rounded-2xl px-5 py-4 focus:border-primary outline-none text-white transition-colors">
-                    <input id="join-email" type="email" placeholder="Email Address" required class="w-full bg-black/50 border border-gray-700 rounded-2xl px-5 py-4 focus:border-primary outline-none text-white transition-colors">
-                    <input id="join-phone" type="tel" placeholder="Phone Number" required class="w-full bg-black/50 border border-gray-700 rounded-2xl px-5 py-4 focus:border-primary outline-none text-white transition-colors">
-                    <select id="join-plan" required class="w-full bg-black/50 border border-gray-700 rounded-2xl px-5 py-4 focus:border-primary outline-none text-white transition-colors">
-                        <option value="" class="bg-dark">Select Inquiry Type</option>
-                        <option value="Funeral" class="bg-dark">Funeral Arrangements</option>
-                        <option value="Tombstone" class="bg-dark">Tombstone Design</option>
-                        <option value="Exhumation" class="bg-dark">Exhumation Services</option>
-                        <option value="Other" class="bg-dark">Other / General Inquiry</option>
+                    <input id="join-name" type="text" placeholder="Full Name" required class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-5 py-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-slate-900 transition-colors">
+                    <input id="join-email" type="email" placeholder="Email Address" required class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-5 py-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-slate-900 transition-colors">
+                    <input id="join-phone" type="tel" placeholder="Phone Number" required class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-5 py-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-slate-900 transition-colors">
+                    <select id="join-plan" required class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-5 py-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-slate-900 transition-colors">
+                        <option value="">Select Inquiry Type</option>
+                        <option value="Funeral">Funeral Arrangements</option>
+                        <option value="Tombstone">Tombstone Design</option>
+                        <option value="Exhumation">Exhumation Services</option>
+                        <option value="Other">Other / General Inquiry</option>
                     </select>
                 </div>
                 <div class="flex gap-4 mt-8">
-                    <button type="button" onclick="hideJoinModal()" class="flex-1 py-4 border border-gray-700 text-white rounded-full hover:bg-gray-800 transition-colors">Cancel</button>
-                    <button id="submit-btn" type="submit" class="flex-1 py-4 bg-primary text-black font-bold rounded-full hover:shadow-[0_0_15px_rgba(229,180,226,0.4)] transition-all">Submit</button>
+                    <button type="button" onclick="hideJoinModal()" class="flex-1 py-4 border border-slate-300 text-slate-600 font-medium rounded-full hover:bg-slate-50 transition-colors">Cancel</button>
+                    <button id="submit-btn" type="submit" class="flex-1 py-4 bg-primary text-white font-bold rounded-full shadow-lg hover:shadow-primary/40 transition-all">Submit</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="success-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[70] px-6">
-        <div class="bg-card border border-primary/50 w-full max-w-sm rounded-3xl p-10 text-center animate-fadeInUp shadow-[0_0_30px_rgba(229,180,226,0.2)]">
-            <div class="w-16 h-16 bg-primary/20 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
+    <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[70] px-6">
+        <div class="bg-white border border-slate-200 w-full max-w-sm rounded-3xl p-10 text-center animate-fadeInUp shadow-2xl">
+            <div class="w-16 h-16 bg-purple-50 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
             </div>
-            <h3 class="text-2xl font-bold mb-2 uppercase text-white">Message Sent</h3>
-            <p class="text-gray-400 mb-8">We will be in touch with you shortly.</p>
-            <button onclick="hideSuccessModal()" class="w-full py-4 bg-primary text-black font-bold rounded-full uppercase hover:shadow-[0_0_15px_rgba(229,180,226,0.4)] transition-all">Close</button>
+            <h3 class="text-2xl font-bold mb-2 uppercase text-slate-900">Message Sent</h3>
+            <p class="text-slate-500 mb-8 font-medium">We will be in touch with you shortly.</p>
+            <button onclick="hideSuccessModal()" class="w-full py-4 bg-primary text-white font-bold rounded-full uppercase shadow-lg hover:shadow-primary/40 transition-all">Close</button>
         </div>
     </div>
 
-    <div id="service-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[60] px-6">
-        <div class="bg-card border border-primary/30 w-full max-w-2xl rounded-3xl p-10 animate-fadeInUp relative text-white shadow-[0_0_30px_rgba(229,180,226,0.15)]">
-            <button onclick="closeServiceDetail()" class="absolute top-6 right-6 text-gray-500 hover:text-white text-2xl transition-colors">&times;</button>
+    <div id="service-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[60] px-6">
+        <div class="bg-white border border-slate-200 w-full max-w-2xl rounded-3xl p-10 animate-fadeInUp relative text-slate-900 shadow-2xl">
+            <button onclick="closeServiceDetail()" class="absolute top-6 right-6 text-slate-400 hover:text-primary text-2xl transition-colors">&times;</button>
             <div id="service-content"></div>
-            <button onclick="closeServiceDetail(); showJoinModal();" class="mt-8 w-full py-4 bg-primary text-black font-bold rounded-full uppercase hover:shadow-[0_0_15px_rgba(229,180,226,0.4)] transition-all">Inquire Now</button>
+            <button onclick="closeServiceDetail(); showJoinModal();" class="mt-8 w-full py-4 bg-primary text-white font-bold rounded-full uppercase shadow-lg hover:shadow-primary/40 transition-all">Inquire Now</button>
         </div>
     </div>
 
@@ -389,19 +390,12 @@
         let currentSlide = 0;
 
         function nextSlide() {
-            // Fade out current
             carouselBgs[currentSlide].classList.remove('opacity-100');
             carouselBgs[currentSlide].classList.add('opacity-0');
-            
-            // Move to next index
             currentSlide = (currentSlide + 1) % carouselBgs.length;
-            
-            // Fade in next
             carouselBgs[currentSlide].classList.remove('opacity-0');
             carouselBgs[currentSlide].classList.add('opacity-100');
         }
-
-        // Change slide every 5 seconds
         setInterval(nextSlide, 5000);
 
         // Service Data
@@ -446,10 +440,10 @@
         function openServiceDetail(id) {
             const s = serviceData[id];
             document.getElementById("service-content").innerHTML = `
-                <h2 class="text-white text-4xl font-bold mb-4 uppercase">${s.title}</h2>
-                <p class="text-gray-300 text-lg mb-6">${s.desc}</p>
+                <h2 class="text-slate-900 text-3xl font-bold mb-4 uppercase">${s.title}</h2>
+                <p class="text-slate-600 text-lg mb-6 font-medium">${s.desc}</p>
                 <ul class="space-y-3">
-                    ${s.features.map(f => `<li class="text-gray-400 flex items-center gap-2"><span class="text-primary">✦</span> ${f}</li>`).join('')}
+                    ${s.features.map(f => `<li class="text-slate-700 font-medium flex items-center gap-2"><span class="text-primary text-xl">✦</span> ${f}</li>`).join('')}
                 </ul>`;
             document.getElementById("service-modal").classList.remove("hidden");
         }
@@ -466,8 +460,6 @@
             try {
                 btn.disabled = true;
                 btn.innerText = "Sending...";
-                
-                // Simulate network request processing
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
                 hideJoinModal();
