@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ngoako Tombstone & Funeral Services [cite: 3, 4]</title>
+    <title>Ngoako Tombstone & Funeral Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -39,11 +37,6 @@
         h1, h2, h3, .nav-logo {
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
-        }
-        .hero-section {
-            background-image: linear-gradient(to right, rgba(5, 5, 5, 0.95) 30%, rgba(5, 5, 5, 0.5));
-            background-size: cover;
-            background-position: center;
         }
         .text-outline {
             -webkit-text-stroke: 1.5px #E5B4E2;
@@ -160,7 +153,7 @@
 <body class="antialiased selection:bg-primary selection:text-black">
     <nav id="main-nav" class="fixed top-0 w-full z-50 px-6 py-6 md:px-16 flex justify-between items-center">
         <a href="index.html" class="flex items-center text-2xl font-heading font-bold text-white tracking-widest">
-            NGOAKO<span class="text-primary">FUNERALS</span> [cite: 2, 3]
+            NGOAKO<span class="text-primary">FUNERALS</span>
         </a>
         <div class="hidden md:flex space-x-10 text-sm font-medium uppercase tracking-wide">
             <a href="index.html" class="hover:text-primary transition-colors text-primary">Home</a>
@@ -173,37 +166,41 @@
         </button>
     </nav>
 
-    <header id="hero-section" class="hero-section min-h-screen flex items-center pt-20 px-6 md:px-16">
-        <div id="hero-content" class="max-w-3xl animate-fadeInUp hero-shimmer">
+    <header class="relative min-h-screen flex items-center pt-20 px-6 md:px-16 overflow-hidden">
+        <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100 z-0" style="background-image: linear-gradient(to right, rgba(5, 5, 5, 0.95) 30%, rgba(5, 5, 5, 0.5)), url('https://images.unsplash.com/photo-1544833058-bf25a17e0b5f?q=80&w=2000&auto=format&fit=crop');"></div>
+        <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(5, 5, 5, 0.95) 30%, rgba(5, 5, 5, 0.5)), url('https://images.unsplash.com/photo-1494522855154-9297ac14b55f?q=80&w=2000&auto=format&fit=crop');"></div>
+        <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(5, 5, 5, 0.95) 30%, rgba(5, 5, 5, 0.5)), url('https://images.unsplash.com/photo-1510060269411-bc66b37a4eec?q=80&w=2000&auto=format&fit=crop');"></div>
+
+        <div id="hero-content" class="relative z-10 max-w-3xl animate-fadeInUp hero-shimmer">
             <div id="hero-text">
-                <h4 class="text-primary font-heading tracking-[0.2em] mb-4 text-sm md:text-base font-bold">Compassion & Craftsmanship [cite: 10]</h4>
+                <h4 class="text-primary font-heading tracking-[0.2em] mb-4 text-sm md:text-base font-bold">Compassion & Craftsmanship</h4>
                 <h1 id="hero-main-heading" class="text-6xl md:text-8xl font-bold leading-none mb-6">
-                    HONOURING <span class="text-outline">MEMORIES</span> [cite: 11]
+                    HONOURING <span class="text-outline">MEMORIES</span>
                 </h1>
                 <p id="hero-subtext" class="text-gray-400 text-lg md:text-xl mb-10 max-w-xl font-light">
-                    We are here to accompany you through the sensitive journey of saying goodbye, providing support, and ensuring that every detail is handled with the utmost care[cite: 12].
+                    We are here to accompany you through the sensitive journey of saying goodbye, providing support, and ensuring that every detail is handled with the utmost care.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
                     <button onclick="showJoinModal()" id="hero-button" class="bg-primary text-black font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill btn-primary pill">
                         Contact Us Now
                     </button>
                     <button onclick="showVideoModal()" class="border border-secondary text-white font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill hover:bg-secondary transition-colors duration-300">
-                        Our Vision [cite: 26]
+                        Our Vision
                     </button>
                 </div>
                
                 <div class="flex gap-10 mt-16 border-t border-gray-800 pt-8">
                     <div>
                         <h3 id="stat-trainers" class="text-3xl font-bold text-white mb-1">100%</h3>
-                        <p class="text-gray-500 text-sm">Black-Owned & Managed [cite: 24]</p>
+                        <p class="text-gray-500 text-sm">Black-Owned & Managed</p>
                     </div>
                     <div>
                         <h3 id="stat-members" class="text-3xl font-bold text-white mb-1">24/7</h3>
-                        <p class="text-gray-500 text-sm">Free Callout Day or Night [cite: 111]</p>
+                        <p class="text-gray-500 text-sm">Free Callout Day or Night</p>
                     </div>
                     <div>
                         <h3 id="stat-programs" class="text-3xl font-bold text-white mb-1">SABS</h3>
-                        <p class="text-gray-500 text-sm">Specs Compliant Tombstones [cite: 69]</p>
+                        <p class="text-gray-500 text-sm">Specs Compliant Tombstones</p>
                     </div>
                 </div>
             </div>
@@ -213,7 +210,7 @@
     <section id="services" class="py-24 px-6 md:px-16 bg-dark">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16">
             <div>
-                <h4 class="text-white font-heading tracking-[0.2em] mb-2 text-sm font-bold">Comprehensive Solutions [cite: 16]</h4>
+                <h4 class="text-white font-heading tracking-[0.2em] mb-2 text-sm font-bold">Comprehensive Solutions</h4>
                 <h2 class="text-4xl md:text-5xl font-bold">OUR <span class="text-primary">SERVICES</span></h2>
             </div>
             <a href="#" class="text-gray-400 hover:text-primary mt-4 md:mt-0 font-heading tracking-wider uppercase border-b border-gray-600 pb-1">View All</a>
@@ -224,8 +221,8 @@
                 <div class="w-14 h-14 bg-gray-900 text-secondary flex items-center justify-center rounded-full mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 </div>
-                <h3 id="service1-title" class="text-2xl font-bold mb-3 text-white">Tombstone Design [cite: 14]</h3>
-                <p id="service1-desc" class="text-gray-400 text-sm mb-6 leading-relaxed">Customized tombstones crafted from high-quality materials [cite: 71], designed to stand the test of time[cite: 69].</p>
+                <h3 id="service1-title" class="text-2xl font-bold mb-3 text-white">Tombstone Design</h3>
+                <p id="service1-desc" class="text-gray-400 text-sm mb-6 leading-relaxed">Customized tombstones crafted from high-quality materials, designed to stand the test of time.</p>
                 <button onclick="openServiceDetail('tombstone')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
             </div>
             
@@ -233,8 +230,8 @@
                 <div class="w-14 h-14 bg-gray-900 text-secondary flex items-center justify-center rounded-full mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                 </div>
-                <h3 id="service2-title" class="text-2xl font-bold mb-3 text-white">Funeral Planning [cite: 74]</h3>
-                <p id="service2-desc" class="text-gray-400 text-sm mb-6 leading-relaxed">Full-service funeral planning tailored to cultural and religious preferences with professional coordination[cite: 76, 77].</p>
+                <h3 id="service2-title" class="text-2xl font-bold mb-3 text-white">Funeral Planning</h3>
+                <p id="service2-desc" class="text-gray-400 text-sm mb-6 leading-relaxed">Full-service funeral planning tailored to cultural and religious preferences with professional coordination.</p>
                 <button onclick="openServiceDetail('funeral')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
             </div>
             
@@ -242,8 +239,8 @@
                 <div class="w-14 h-14 bg-gray-900 text-secondary flex items-center justify-center rounded-full mb-6 group-hover:bg-secondary group-hover:text-white transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                 </div>
-                <h3 id="service3-title" class="text-2xl font-bold mb-3 text-white">Exhumation Services [cite: 85]</h3>
-                <p id="service3-desc" class="text-gray-400 text-sm mb-6 leading-relaxed">Expert handling of the removal and relocation of human remains with compassion, respect, and proper legal consultation[cite: 86, 90].</p>
+                <h3 id="service3-title" class="text-2xl font-bold mb-3 text-white">Exhumation Services</h3>
+                <p id="service3-desc" class="text-gray-400 text-sm mb-6 leading-relaxed">Expert handling of the removal and relocation of human remains with compassion, respect, and proper legal consultation.</p>
                 <button onclick="openServiceDetail('exhumation')" class="text-primary uppercase font-heading text-sm font-bold tracking-widest flex items-center gap-2">Details <span class="group-hover:translate-x-2 transition-transform">→</span></button>
             </div>
         </div>
@@ -251,8 +248,8 @@
 
     <section id="cta-section" class="py-20 relative text-center border-t border-b border-primary/20">
         <div id="cta-content" class="relative z-10 max-w-4xl mx-auto px-6">
-            <h2 id="cta-main-heading" class="text-5xl md:text-7xl font-bold mb-6 text-white text-outline animate-fadeInUp">DIGNITY & RESPECT [cite: 15]</h2>
-            <p id="cta-sub-paragraph" class="text-xl text-gray-200 mb-10">Rely on us as your trusted partner, saving you time and effort by providing comprehensive solutions under one roof[cite: 21, 23].</p>
+            <h2 id="cta-main-heading" class="text-5xl md:text-7xl font-bold mb-6 text-white text-outline animate-fadeInUp">DIGNITY & RESPECT</h2>
+            <p id="cta-sub-paragraph" class="text-xl text-gray-200 mb-10">Rely on us as your trusted partner, saving you time and effort by providing comprehensive solutions under one roof.</p>
             <button onclick="showJoinModal()" id="cta-button" class="bg-primary text-black font-heading font-bold px-12 py-5 text-xl uppercase tracking-wider rounded-pill btn-primary pill shadow-[0_0_20px_rgba(229,180,226,0.4)]">
                 Reach Out To Us
             </button>
@@ -265,51 +262,51 @@
                 <div class="space-y-6">
                     <h2 class="text-2xl font-heading font-bold text-white tracking-widest uppercase">NGOAKO<span class="text-primary">FUNERALS</span></h2>
                     <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
-                        Our goal is to provide an outstanding level of service delivery to each one of our customers, ensuring timely and high-quality service[cite: 30, 31].
+                        Our goal is to provide an outstanding level of service delivery to each one of our customers, ensuring timely and high-quality service.
                     </p>
                 </div>
                 
                 <div>
                     <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/30 pb-2">Our Services</h4>
                     <ul class="space-y-4 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-primary transition-colors">Tombstones [cite: 67]</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Funeral Planning [cite: 74]</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Exhumation [cite: 85]</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Memorial Services [cite: 104]</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Catering Services [cite: 116]</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Tombstones</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Funeral Planning</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Exhumation</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Memorial Services</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Catering Services</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/30 pb-2">Member Benefits [cite: 109]</h4>
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/30 pb-2">Member Benefits</h4>
                     <ul class="space-y-4 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-primary transition-colors">Free Mortuary Facilities [cite: 110]</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Free Transport [cite: 110]</a></li>
-                        <li><a href="#" class="hover:text-primary transition-colors">Death Certificate Assist [cite: 113]</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Free Mortuary Facilities</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Free Transport</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Death Certificate Assist</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/30 pb-2">Contact [cite: 125]</h4>
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-primary border-b border-primary/30 pb-2">Contact</h4>
                     <div class="space-y-4 text-sm text-gray-400">
                         <p class="flex items-center gap-3">
                             <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            04 THABO MBEKI STREET, MOKOPANE, LIMPOPO, 0600 [cite: 128, 129, 130, 131]
+                            04 THABO MBEKI STREET, MOKOPANE, LIMPOPO, 0600
                         </p>
                         <p class="flex items-center gap-3">
                             <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            ngoakofun@webmail.com [cite: 135]
+                            ngoakofun@webmail.com
                         </p>
                         <p class="flex items-center gap-3">
                             <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            015 065 0613 / 082 777 4825 [cite: 133]
+                            015 065 0613 / 082 777 4825
                         </p>
                     </div>
                 </div>
             </div>
             <div class="h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent my-8"></div>
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600 uppercase tracking-widest">
-                <p>© 2026 NGOAKO TOMBSTONE & FUNERAL SERVICES. <span class="text-primary font-medium">Reg No: 2004/119268/23[cite: 8].</span></p>
+                <p>© 2026 NGOAKO TOMBSTONE & FUNERAL SERVICES. <span class="text-primary font-medium">Reg No: 2004/119268/23.</span></p>
             </div>
         </div>
     </footer>
@@ -331,9 +328,9 @@
                     <input id="join-phone" type="tel" placeholder="Phone Number" required class="w-full bg-black/50 border border-gray-700 rounded-2xl px-5 py-4 focus:border-primary outline-none text-white transition-colors">
                     <select id="join-plan" required class="w-full bg-black/50 border border-gray-700 rounded-2xl px-5 py-4 focus:border-primary outline-none text-white transition-colors">
                         <option value="" class="bg-dark">Select Inquiry Type</option>
-                        <option value="Funeral" class="bg-dark">Funeral Arrangements [cite: 74]</option>
-                        <option value="Tombstone" class="bg-dark">Tombstone Design [cite: 67]</option>
-                        <option value="Exhumation" class="bg-dark">Exhumation Services [cite: 85]</option>
+                        <option value="Funeral" class="bg-dark">Funeral Arrangements</option>
+                        <option value="Tombstone" class="bg-dark">Tombstone Design</option>
+                        <option value="Exhumation" class="bg-dark">Exhumation Services</option>
                         <option value="Other" class="bg-dark">Other / General Inquiry</option>
                     </select>
                 </div>
@@ -365,19 +362,7 @@
     </div>
 
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyAxBT0oESoL62oz_x_Z8cMtdENWZPx4tMI",
-            authDomain: "pinotp-d7ef5.firebaseapp.com",
-            databaseURL: "https://pinotp-d7ef5-default-rtdb.firebaseio.com",
-            projectId: "pinotp-d7ef5",
-            storageBucket: "pinotp-d7ef5.firebasestorage.app",
-            messagingSenderId: "708458917827",
-            appId: "1:708458917827:web:375de278577df0adcf9776"
-        };
-        let db;
-        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-        db = firebase.database();
-
+        // Navbar Scroll Logic
         let lastScrollY = window.scrollY;
         const nav = document.getElementById('main-nav');
         window.addEventListener('scroll', () => {
@@ -395,29 +380,55 @@
             lastScrollY = currentScrollY;
         });
 
+        // Hero Carousel Logic
+        const carouselBgs = [
+            document.getElementById('carousel-bg-1'),
+            document.getElementById('carousel-bg-2'),
+            document.getElementById('carousel-bg-3')
+        ];
+        let currentSlide = 0;
+
+        function nextSlide() {
+            // Fade out current
+            carouselBgs[currentSlide].classList.remove('opacity-100');
+            carouselBgs[currentSlide].classList.add('opacity-0');
+            
+            // Move to next index
+            currentSlide = (currentSlide + 1) % carouselBgs.length;
+            
+            // Fade in next
+            carouselBgs[currentSlide].classList.remove('opacity-0');
+            carouselBgs[currentSlide].classList.add('opacity-100');
+        }
+
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Service Data
         let serviceData = {
             tombstone: { 
-                title: "Tombstone Design [cite: 67]", 
-                desc: "Our unique range of affordable, high-quality tombstones come in various colors and designs[cite: 68].", 
-                features: ["SABS specs compliant [cite: 69]", "Customized engravings and photographs [cite: 72]", "Markers for gravesites [cite: 72]"] 
+                title: "Tombstone Design", 
+                desc: "Our unique range of affordable, high-quality tombstones come in various colors and designs.", 
+                features: ["SABS specs compliant", "Customized engravings and photographs", "Markers for gravesites"] 
             },
             funeral: { 
-                title: "Funeral Planning [cite: 74]", 
-                desc: "We assist families in planning and organizing funeral services tailored to cultural and religious preferences[cite: 75, 76].", 
-                features: ["Caskets, Coffins & Urns [cite: 79, 82]", "Hearse / Van Coordination [cite: 80]", "Embalming room equipment [cite: 78]"] 
+                title: "Funeral Planning", 
+                desc: "We assist families in planning and organizing funeral services tailored to cultural and religious preferences.", 
+                features: ["Caskets, Coffins & Urns", "Hearse / Van Coordination", "Embalming room equipment"] 
             },
             exhumation: { 
-                title: "Exhumation Services [cite: 85]", 
-                desc: "Professional removal and relocation of human remains from their original burial site[cite: 86].", 
-                features: ["Legal Consultation & Permits [cite: 90, 91]", "Sensitive Communication & Family Support [cite: 92, 97]", "Reburial Services [cite: 95]"] 
+                title: "Exhumation Services", 
+                desc: "Professional removal and relocation of human remains from their original burial site.", 
+                features: ["Legal Consultation & Permits", "Sensitive Communication & Family Support", "Reburial Services"] 
             }
         };
 
-        async function syncHomepageContent() {
+        function syncHomepageContent() {
             document.getElementById("hero-content").classList.remove("hero-shimmer");
             document.getElementById("hero-text").style.opacity = "1";
         }
 
+        // Modals
         function showVideoModal() {
             const modal = document.getElementById("video-modal");
             const iframe = document.getElementById("video-iframe");
@@ -451,22 +462,24 @@
         async function handleJoinSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById("submit-btn");
-            const data = {
-                name: document.getElementById("join-name").value,
-                email: document.getElementById("join-email").value,
-                phone: document.getElementById("join-phone").value,
-                plan: document.getElementById("join-plan").value,
-                timestamp: Date.now()
-            };
+            
             try {
                 btn.disabled = true;
                 btn.innerText = "Sending...";
-                await db.ref('businessInquiries').push(data);
+                
+                // Simulate network request processing
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
                 hideJoinModal();
                 showSuccessModal();
                 document.getElementById("join-form").reset();
-            } catch (err) { alert("Connectivity issue. Try again."); }
-            finally { btn.disabled = false; btn.innerText = "Submit"; }
+            } catch (err) { 
+                alert("An error occurred. Please try again."); 
+            }
+            finally { 
+                btn.disabled = false; 
+                btn.innerText = "Submit"; 
+            }
         }
 
         window.onload = () => {
