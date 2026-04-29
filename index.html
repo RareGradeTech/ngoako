@@ -66,8 +66,8 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(156, 39, 176, 0.1);
-            padding-top: 1rem !important;
-            padding-bottom: 1rem !important;
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
         .hover-lift {
@@ -152,72 +152,105 @@
     </style>
 </head>
 <body class="antialiased selection:bg-primary selection:text-white">
-    <nav id="main-nav" class="fixed top-0 w-full z-50 px-6 py-4 md:px-16 flex justify-between items-center transition-all">
-        <a href="index.html" class="flex items-center">
-            <img src="https://i.postimg.cc/j5dSjYVG/Whats-App-Image-2026-04-22-at-13-45-01-1-removebg-preview.png" alt="Ngoako Funerals Logo" class="w-56 md:w-72 h-16 md:h-20 object-contain rounded-lg shadow-sm">
+    <nav id="main-nav" class="fixed top-0 w-full z-50 px-4 md:px-16 py-3 md:py-4 flex justify-between items-center transition-all">
+        <a href="index.html" class="flex items-center shrink-0">
+            <img src="https://i.postimg.cc/j5dSjYVG/Whats-App-Image-2026-04-22-at-13-45-01-1-removebg-preview.png" alt="Ngoako Funerals Logo" class="w-40 sm:w-56 md:w-72 h-12 sm:h-16 md:h-20 object-contain rounded-lg shadow-sm">
         </a>
-        <div class="hidden md:flex space-x-10 text-sm font-medium uppercase tracking-wide text-slate-700">
+        
+        <div class="hidden lg:flex items-center space-x-10 text-sm font-medium uppercase tracking-wide text-slate-700">
             <a href="index.html" class="hover:text-primary transition-colors text-primary font-bold">Home</a>
             <a href="#services" class="hover:text-primary transition-colors">Services</a>
             <a href="#about" class="hover:text-primary transition-colors">About Us</a>
             <a href="#contact" class="hover:text-primary transition-colors">Contact</a>
+            <button onclick="showJoinModal()" class="bg-primary text-white font-heading font-bold px-8 py-3 rounded-pill uppercase tracking-wider btn-primary pill shadow-md">
+                Get Assistance
+            </button>
         </div>
-        <button onclick="showJoinModal()" class="bg-primary text-white font-heading font-bold px-8 py-3 rounded-pill uppercase tracking-wider btn-primary pill shadow-md">
-            Get Assistance
+
+        <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-700 hover:text-primary focus:outline-none p-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
         </button>
     </nav>
 
+    <div id="mobile-menu-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/50 z-[60] hidden backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+
+    <div id="mobile-menu-panel" class="fixed top-0 right-0 bottom-0 w-72 bg-white z-[70] transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+        <div class="flex justify-end p-5 border-b border-slate-100">
+            <button onclick="toggleMobileMenu()" class="text-slate-500 hover:text-primary transition-colors p-2 rounded-full hover:bg-purple-50">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col px-6 py-8 space-y-6 text-lg font-medium uppercase tracking-wide text-slate-700 overflow-y-auto">
+            <a href="index.html" onclick="toggleMobileMenu()" class="hover:text-primary text-primary font-bold transition-colors">Home</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="hover:text-primary transition-colors">Services</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="hover:text-primary transition-colors">About Us</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-primary transition-colors">Contact</a>
+            
+            <div class="pt-6 border-t border-slate-100">
+                <button onclick="toggleMobileMenu(); showJoinModal();" class="w-full bg-primary text-white font-heading font-bold px-6 py-4 rounded-pill uppercase tracking-wider shadow-md hover:shadow-primary/40 transition-all">
+                    Get Assistance
+                </button>
+            </div>
+        </div>
+    </div>
+
     <header class="relative min-h-screen flex items-center pt-20 px-6 md:px-16 overflow-hidden bg-white">
-        <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/jdjSTb6G/Whats-App-Image-2026-04-29-at-15-22-01.jpg');"></div>
-        <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/BnWkg5vb/Whats-App-Image-2026-04-29-at-15-22-08.jpg');"></div>
-        <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/q7mdjtSt/Whats-App-Image-2026-04-29-at-15-22-15.jpg');"></div>
-        <div id="carousel-bg-4" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/664y4w4N/Whats-App-Image-2026-04-29-at-15-22-28.jpg');"></div>
-        <div id="carousel-bg-5" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/650wy1cR/Whats-App-Image-2026-04-29-at-15-22-24.jpg');"></div>
+        <div id="carousel-bg-0" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/jdjSTb6G/Whats-App-Image-2026-04-29-at-15-22-01.jpg');"></div>
+        <div id="carousel-bg-1" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/BnWkg5vb/Whats-App-Image-2026-04-29-at-15-22-08.jpg');"></div>
+        <div id="carousel-bg-2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/q7mdjtSt/Whats-App-Image-2026-04-29-at-15-22-15.jpg');"></div>
+        <div id="carousel-bg-3" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/664y4w4N/Whats-App-Image-2026-04-29-at-15-22-28.jpg');"></div>
+        <div id="carousel-bg-4" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 z-0" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.95) 40%, rgba(255, 255, 255, 0.6)), url('https://i.postimg.cc/650wy1cR/Whats-App-Image-2026-04-29-at-15-22-24.jpg');"></div>
 
         <div class="absolute bottom-8 left-0 right-0 z-20 flex justify-center space-x-3">
             <button onclick="goToSlide(0)" id="dot-0" class="h-3 w-8 rounded-full bg-primary transition-all duration-300 shadow-sm"></button>
-            <button onclick="goToSlide(1)" id="dot-1" class="h-3 w-3 rounded-full bg-slate-300 hover:bg-white transition-all duration-300 shadow-sm"></button>
-            <button onclick="goToSlide(2)" id="dot-2" class="h-3 w-3 rounded-full bg-slate-300 hover:bg-white transition-all duration-300 shadow-sm"></button>
+            <button onclick="goToSlide(1)" id="dot-1" class="h-3 w-3 rounded-full bg-slate-300 hover:bg-primary/70 transition-all duration-300 shadow-sm"></button>
+            <button onclick="goToSlide(2)" id="dot-2" class="h-3 w-3 rounded-full bg-slate-300 hover:bg-primary/70 transition-all duration-300 shadow-sm"></button>
+            <button onclick="goToSlide(3)" id="dot-3" class="h-3 w-3 rounded-full bg-slate-300 hover:bg-primary/70 transition-all duration-300 shadow-sm"></button>
+            <button onclick="goToSlide(4)" id="dot-4" class="h-3 w-3 rounded-full bg-slate-300 hover:bg-primary/70 transition-all duration-300 shadow-sm"></button>
         </div>
 
         <div id="hero-content" class="relative z-10 max-w-3xl animate-fadeInUp hero-shimmer">
             <div id="hero-text">
                 <h4 class="text-primary font-heading tracking-[0.2em] mb-4 text-sm md:text-base font-bold">Compassion & Craftsmanship</h4>
-                <h1 id="hero-main-heading" class="text-6xl md:text-8xl font-bold leading-none mb-6 text-slate-900">
+                <h1 id="hero-main-heading" class="text-5xl md:text-8xl font-bold leading-none mb-6 text-slate-900">
                     HONOURING <span class="text-outline">MEMORIES</span>
                 </h1>
-                <p id="hero-subtext" class="text-slate-600 text-lg md:text-xl mb-10 max-w-xl font-medium">
+                <p id="hero-subtext" class="text-slate-600 text-base md:text-xl mb-10 max-w-xl font-medium">
                     We are here to accompany you through the sensitive journey of saying goodbye, providing support, and ensuring that every detail is handled with the utmost care.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button onclick="showJoinModal()" id="hero-button" class="bg-primary text-white font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill btn-primary pill shadow-lg">
+                    <button onclick="showJoinModal()" id="hero-button" class="bg-primary text-white font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill btn-primary pill shadow-lg text-center">
                         Contact Us Now
                     </button>
-                    <button onclick="showVideoModal()" class="border-2 border-primary text-primary font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill hover:bg-primary hover:text-white transition-colors duration-300">
+                    <button onclick="showVideoModal()" class="border-2 border-primary text-primary font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill hover:bg-primary hover:text-white transition-colors duration-300 text-center">
                         Our Vision
                     </button>
                 </div>
                
-                <div class="flex gap-10 mt-16 border-t border-slate-200 pt-8">
+                <div class="flex flex-wrap gap-8 md:gap-10 mt-16 border-t border-slate-200 pt-8">
                     <div>
-                        <h3 id="stat-trainers" class="text-3xl font-bold text-slate-900 mb-1">100%</h3>
-                        <p class="text-slate-500 text-sm font-medium">Black-Owned & Managed</p>
+                        <h3 id="stat-trainers" class="text-2xl md:text-3xl font-bold text-slate-900 mb-1">100%</h3>
+                        <p class="text-slate-500 text-xs md:text-sm font-medium">Black-Owned</p>
                     </div>
                     <div>
-                        <h3 id="stat-members" class="text-3xl font-bold text-slate-900 mb-1">24/7</h3>
-                        <p class="text-slate-500 text-sm font-medium">Free Callout Day or Night</p>
+                        <h3 id="stat-members" class="text-2xl md:text-3xl font-bold text-slate-900 mb-1">24/7</h3>
+                        <p class="text-slate-500 text-xs md:text-sm font-medium">Free Callout</p>
                     </div>
                     <div>
-                        <h3 id="stat-programs" class="text-3xl font-bold text-slate-900 mb-1">SABS</h3>
-                        <p class="text-slate-500 text-sm font-medium">Specs Compliant Tombstones</p>
+                        <h3 id="stat-programs" class="text-2xl md:text-3xl font-bold text-slate-900 mb-1">SABS</h3>
+                        <p class="text-slate-500 text-xs md:text-sm font-medium">Specs Compliant</p>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="services" class="py-24 px-6 md:px-16 bg-light">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+    <section id="services" class="py-20 md:py-24 px-6 md:px-16 bg-light">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
             <div>
                 <h4 class="text-primary font-heading tracking-[0.2em] mb-2 text-sm font-bold">Comprehensive Solutions</h4>
                 <h2 class="text-4xl md:text-5xl font-bold text-slate-900">OUR <span class="text-primary">SERVICES</span></h2>
@@ -257,15 +290,15 @@
 
     <section id="cta-section" class="py-20 relative text-center border-t border-b border-slate-200">
         <div id="cta-content" class="relative z-10 max-w-4xl mx-auto px-6">
-            <h2 id="cta-main-heading" class="text-5xl md:text-7xl font-bold mb-6 text-slate-900 text-outline animate-fadeInUp">DIGNITY & RESPECT</h2>
-            <p id="cta-sub-paragraph" class="text-xl text-slate-700 mb-10 font-medium">Rely on us as your trusted partner, saving you time and effort by providing comprehensive solutions under one roof.</p>
-            <button onclick="showJoinModal()" id="cta-button" class="bg-primary text-white font-heading font-bold px-12 py-5 text-xl uppercase tracking-wider rounded-pill btn-primary pill shadow-lg shadow-primary/30">
+            <h2 id="cta-main-heading" class="text-4xl md:text-7xl font-bold mb-6 text-slate-900 text-outline animate-fadeInUp">DIGNITY & RESPECT</h2>
+            <p id="cta-sub-paragraph" class="text-lg md:text-xl text-slate-700 mb-10 font-medium">Rely on us as your trusted partner, saving you time and effort by providing comprehensive solutions under one roof.</p>
+            <button onclick="showJoinModal()" id="cta-button" class="bg-primary text-white font-heading font-bold px-12 py-5 text-lg md:text-xl uppercase tracking-wider rounded-pill btn-primary pill shadow-lg shadow-primary/30">
                 Reach Out To Us
             </button>
         </div>
     </section>
 
-    <footer class="bg-slate-100 pt-20 pb-10 px-6 md:px-16 border-t border-slate-200">
+    <footer class="bg-slate-100 pt-16 pb-10 px-6 md:px-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="space-y-6">
@@ -327,8 +360,8 @@
         </div>
     </div>
 
-    <div id="join-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50">
-        <div class="bg-white border border-slate-200 w-full max-w-lg rounded-3xl p-8 animate-fadeInUp shadow-2xl">
+    <div id="join-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[80] px-4">
+        <div class="bg-white border border-slate-200 w-full max-w-lg rounded-3xl p-6 md:p-8 animate-fadeInUp shadow-2xl">
             <h3 class="text-2xl font-bold mb-6 text-slate-900">How Can We Help?</h3>
             <form id="join-form" onsubmit="handleJoinSubmit(event)">
                 <div class="space-y-6">
@@ -343,15 +376,15 @@
                         <option value="Other">Other / General Inquiry</option>
                     </select>
                 </div>
-                <div class="flex gap-4 mt-8">
-                    <button type="button" onclick="hideJoinModal()" class="flex-1 py-4 border border-slate-300 text-slate-600 font-medium rounded-full hover:bg-slate-50 transition-colors">Cancel</button>
-                    <button id="submit-btn" type="submit" class="flex-1 py-4 bg-primary text-white font-bold rounded-full shadow-lg hover:shadow-primary/40 transition-all">Submit</button>
+                <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                    <button type="button" onclick="hideJoinModal()" class="flex-1 py-4 border border-slate-300 text-slate-600 font-medium rounded-full hover:bg-slate-50 transition-colors order-2 sm:order-1">Cancel</button>
+                    <button id="submit-btn" type="submit" class="flex-1 py-4 bg-primary text-white font-bold rounded-full shadow-lg hover:shadow-primary/40 transition-all order-1 sm:order-2">Submit</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[70] px-6">
+    <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[90] px-6">
         <div class="bg-white border border-slate-200 w-full max-w-sm rounded-3xl p-10 text-center animate-fadeInUp shadow-2xl">
             <div class="w-16 h-16 bg-purple-50 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
@@ -362,16 +395,38 @@
         </div>
     </div>
 
-    <div id="service-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[60] px-6">
-        <div class="bg-white border border-slate-200 w-full max-w-2xl rounded-3xl p-10 animate-fadeInUp relative text-slate-900 shadow-2xl">
-            <button onclick="closeServiceDetail()" class="absolute top-6 right-6 text-slate-400 hover:text-primary text-2xl transition-colors">&times;</button>
+    <div id="service-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[80] px-4 md:px-6">
+        <div class="bg-white border border-slate-200 w-full max-w-2xl rounded-3xl p-8 md:p-10 animate-fadeInUp relative text-slate-900 shadow-2xl">
+            <button onclick="closeServiceDetail()" class="absolute top-4 right-4 text-slate-400 hover:text-primary text-3xl transition-colors">&times;</button>
             <div id="service-content"></div>
             <button onclick="closeServiceDetail(); showJoinModal();" class="mt-8 w-full py-4 bg-primary text-white font-bold rounded-full uppercase shadow-lg hover:shadow-primary/40 transition-all">Inquire Now</button>
         </div>
     </div>
 
     <script>
-        // Navbar Scroll Logic
+        // --- Mobile Menu Drawer Logic ---
+        function toggleMobileMenu() {
+            const panel = document.getElementById('mobile-menu-panel');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            
+            if (panel.classList.contains('translate-x-full')) {
+                // Open menu
+                panel.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                // Small delay to allow display:block to apply before opacity transition
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            } else {
+                // Close menu
+                panel.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                // Wait for opacity transition before hiding completely
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+                document.body.style.overflow = 'auto'; // Restore background scrolling
+            }
+        }
+
+        // --- Navbar Scroll Logic ---
         let lastScrollY = window.scrollY;
         const nav = document.getElementById('main-nav');
         window.addEventListener('scroll', () => {
@@ -389,16 +444,20 @@
             lastScrollY = currentScrollY;
         });
 
-        // Hero Carousel Logic
+        // --- Hero Carousel Logic ---
         const carouselBgs = [
+            document.getElementById('carousel-bg-0'),
             document.getElementById('carousel-bg-1'),
             document.getElementById('carousel-bg-2'),
-            document.getElementById('carousel-bg-3')
+            document.getElementById('carousel-bg-3'),
+            document.getElementById('carousel-bg-4')
         ];
         const dots = [
             document.getElementById('dot-0'),
             document.getElementById('dot-1'),
-            document.getElementById('dot-2')
+            document.getElementById('dot-2'),
+            document.getElementById('dot-3'),
+            document.getElementById('dot-4')
         ];
         let currentSlide = 0;
         let carouselInterval;
@@ -408,7 +467,7 @@
                 if (index === currentSlide) {
                     dot.className = "h-3 w-8 rounded-full bg-primary transition-all duration-300 shadow-sm";
                 } else {
-                    dot.className = "h-3 w-3 rounded-full bg-slate-300 hover:bg-white transition-all duration-300 shadow-sm";
+                    dot.className = "h-3 w-3 rounded-full bg-slate-300 hover:bg-primary/70 transition-all duration-300 shadow-sm";
                 }
             });
         }
@@ -441,7 +500,7 @@
         // Start the carousel
         carouselInterval = setInterval(nextSlide, 5000);
 
-        // Service Data
+        // --- Service Data ---
         let serviceData = {
             tombstone: { 
                 title: "Tombstone Design", 
@@ -465,7 +524,7 @@
             document.getElementById("hero-text").style.opacity = "1";
         }
 
-        // Modals
+        // --- Modals ---
         function showVideoModal() {
             const modal = document.getElementById("video-modal");
             const iframe = document.getElementById("video-iframe");
