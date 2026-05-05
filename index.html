@@ -232,14 +232,16 @@
                     We are here to accompany you through the sensitive journey of saying goodbye, providing support, and ensuring that every detail is handled with the utmost care.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button onclick="showJoinModal()" id="hero-button" class="bg-primary hover:bg-darkPurple text-white font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill btn-primary pill shadow-lg text-center transition-colors">
+                    <!-- CHANGED: onclick redirects to contact.html -->
+                    <button onclick="window.location.href='contact.html'" id="hero-button" class="bg-primary hover:bg-darkPurple text-white font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill btn-primary pill shadow-lg text-center transition-colors">
                         Contact Us Now
                     </button>
-                    <button onclick="showVideoModal()" class="border-2 border-primary text-primary font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill hover:bg-primary hover:text-white transition-colors duration-300 text-center">
-                        Our Vision
+                    <!-- CHANGED: onclick redirects to services.html, text changed to Our Plans -->
+                    <button onclick="window.location.href='services.html'" class="border-2 border-primary text-primary font-heading font-bold px-10 py-4 text-lg uppercase tracking-wider rounded-pill hover:bg-primary hover:text-white transition-colors duration-300 text-center">
+                        Our Plans
                     </button>
                 </div>
-               
+                
                 <div class="flex flex-wrap gap-8 md:gap-10 mt-16 border-t border-slate-200 pt-8">
                     <div>
                         <h3 id="stat-trainers" class="text-2xl md:text-3xl font-bold text-darkPurple mb-1">100%</h3>
