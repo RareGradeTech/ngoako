@@ -11,127 +11,588 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#6e0db2',
-                        secondary: '#f086ee',
-                        darkPurple: '#3f0771',
-                        light: '#F8FAFC',
+                        primary: '#6e0db2', // Main Purple
+                        secondary: '#f086ee', // Pink
+                        darkPurple: '#3f0771', // Dark Purple
+                        light: '#F8FAFC', // Slate 50 background
+                        card: 'rgba(255, 255, 255, 0.85)', // Light glassmorphism
                     },
                     fontFamily: {
                         heading: ['Oswald', 'sans-serif'],
                         body: ['Poppins', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'pill': '9999px',
                     }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #F8FAFC; }
-        h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
-        .text-outline { -webkit-text-stroke: 1.5px #f086ee; color: transparent; }
-        .card { backdrop-filter: blur(16px); transition: all 0.4s ease; }
-        .nav-scrolled { background: rgba(63, 7, 113, 0.98); backdrop-filter: blur(16px); }
-        .page-header-bg { background: linear-gradient(135deg, rgba(63, 7, 113, 0.95) 0%, rgba(110, 13, 178, 0.85) 100%), url('https://images.unsplash.com/photo-1510060269411-bc66b37a4eec?q=80&w=2000&auto=format&fit=crop') center/cover; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F8FAFC;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .nav-logo {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+        .text-outline {
+            -webkit-text-stroke: 1.5px #f086ee;
+            color: transparent;
+        }
+        .pill {
+            border-radius: 9999px;
+        }
+        .card {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(110, 13, 178, 0.15);
+            border-color: rgba(110, 13, 178, 0.3);
+        }
+        nav {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, border 0.3s ease;
+        }
+        .nav-scrolled {
+            background: rgba(63, 7, 113, 0.98); 
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(240, 134, 238, 0.2);
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+            box-shadow: 0 4px 15px -1px rgba(0, 0, 0, 0.3);
+        }
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(110, 13, 178, 0.15);
+        }
+        .btn-primary {
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(110, 13, 178, 0.4);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6e0db2;
+        }
+        .page-header-bg {
+            background: linear-gradient(135deg, rgba(63, 7, 113, 0.95) 0%, rgba(110, 13, 178, 0.85) 100%), url('https://images.unsplash.com/photo-1510060269411-bc66b37a4eec?q=80&w=2000&auto=format&fit=crop') center/cover;
+        }
+        ul.service-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        ul.service-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #6e0db2;
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-primary selection:text-white">
 
     <!-- Navigation -->
-    <nav id="main-nav" class="fixed top-0 w-full z-50 px-4 md:px-16 py-4 flex justify-between items-center transition-all bg-darkPurple shadow-lg">
-        <a href="index.html"><img src="https://i.postimg.cc/L4Z5Pw3S/white-logo-ngoako.png" alt="Logo" class="w-40 md:w-64"></a>
-        <div class="hidden lg:flex items-center space-x-10 text-white font-medium uppercase tracking-wide text-sm">
-            <a href="index.html" class="hover:text-secondary">Home</a>
-            <a href="services.html" class="text-secondary font-bold">Services</a>
-            <button onclick="showJoinModal()" class="bg-white text-darkPurple px-8 py-3 rounded-full font-bold hover:bg-secondary transition-all">Get Assistance</button>
+    <nav id="main-nav" class="fixed top-0 w-full z-50 px-4 md:px-16 py-3 md:py-4 flex justify-between items-center transition-all bg-darkPurple shadow-lg border-b border-white/10">
+        <a href="index.html" class="flex items-center shrink-0">
+            <img src="https://i.postimg.cc/L4Z5Pw3S/white-logo-ngoako.png" alt="Ngoako Funerals Logo" class="w-48 sm:w-64 md:w-80 lg:w-96 h-16 sm:h-20 md:h-24 lg:h-28 object-contain">
+        </a>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center space-x-10 text-sm font-medium uppercase tracking-wide text-white">
+            <a href="index.html" class="hover:text-secondary transition-colors text-white">Home</a>
+            <a href="services.html" class="hover:text-secondary transition-colors text-secondary font-bold">Services</a>
+            <a href="about.html" class="hover:text-secondary transition-colors text-white">About Us</a>
+            <a href="contact.html" class="hover:text-secondary transition-colors text-white">Contact</a>
+            <button onclick="showJoinModal()" class="bg-white text-darkPurple hover:text-white font-heading font-bold px-8 py-3 rounded-pill uppercase tracking-wider btn-primary pill shadow-md hover:bg-primary transition-colors duration-300">
+                Get Assistance
+            </button>
         </div>
+
+        <!-- Mobile Hamburger Button -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden text-white hover:text-secondary focus:outline-none p-2">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
     </nav>
 
+    <!-- Mobile Drawer Overlay & Panel -->
+    <div id="mobile-menu-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-slate-900/50 z-[60] hidden backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+    <div id="mobile-menu-panel" class="fixed top-0 right-0 bottom-0 w-72 bg-white z-[70] transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+        <div class="flex justify-end p-5 border-b border-slate-100">
+            <button onclick="toggleMobileMenu()" class="text-slate-500 hover:text-primary transition-colors p-2 rounded-full hover:bg-secondary/20">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="flex flex-col px-6 py-8 space-y-6 text-lg font-medium uppercase tracking-wide text-slate-700 overflow-y-auto">
+            <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+            <a href="services.html" class="hover:text-primary text-primary font-bold transition-colors">Services</a>
+            <a href="about.html" class="hover:text-primary transition-colors">About Us</a>
+            <a href="contact.html" class="hover:text-primary transition-colors">Contact</a>
+            <div class="pt-6 border-t border-slate-100">
+                <button onclick="toggleMobileMenu(); showJoinModal();" class="w-full bg-primary hover:bg-darkPurple text-white font-heading font-bold px-6 py-4 rounded-pill uppercase tracking-wider shadow-md transition-all">
+                    Get Assistance
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Page Header -->
-    <header class="page-header-bg pt-40 pb-24 px-6 text-center">
-        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-wide">OUR <span class="text-outline">SERVICES</span></h1>
+    <header class="page-header-bg pt-40 pb-24 md:pt-52 md:pb-32 px-6 md:px-16 text-center lg:text-left shadow-inner">
+        <div class="max-w-7xl mx-auto animate-fadeInUp">
+            <div class="max-w-3xl">
+                <div class="w-16 h-1 bg-secondary mb-6 mx-auto lg:mx-0 rounded-full"></div>
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-wide">OUR <span class="text-outline">SERVICES</span></h1>
+                <p class="text-lg md:text-2xl text-slate-200 font-medium leading-relaxed">
+                    Comprehensive, dignified, and professional solutions tailored to honour your loved ones and support your family.
+                </p>
+            </div>
+        </div>
     </header>
 
     <!-- Main Services Grid -->
-    <section class="py-20 px-6 md:px-16 bg-light">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
-            <div class="card bg-white p-10 rounded-[2rem] border border-slate-200">
-                <h3 class="text-3xl font-bold text-darkPurple mb-4">Tombstone Design</h3>
-                <p class="text-slate-600 mb-6">High-quality, SABS compliant tombstones crafted to honour your loved ones.</p>
+    <section class="py-20 md:py-28 px-6 md:px-16 bg-light">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14">
+            
+            <!-- Tombstone Design & Manufacturing -->
+            <div id="tombstones" class="card bg-white p-8 md:p-12 rounded-[2rem] border border-slate-200 shadow-sm flex flex-col h-full scroll-mt-32">
+                <div class="w-16 h-16 bg-secondary/20 text-primary rounded-full flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-3xl font-bold text-darkPurple mb-4">Tombstone Design & Manufacturing</h3>
+                <p class="text-slate-600 mb-6 font-medium leading-relaxed flex-grow">
+                    Our unique range of affordable, high-quality tombstones come in various colors and designs, allowing you to select a unique creation that suits your needs and traditional burial customs.
+                </p>
+                <ul class="service-list text-slate-700 font-medium">
+                    <li>Customized tombstones crafted from high-quality materials</li>
+                    <li>SABS specs compliant, designed to withstand the elements</li>
+                    <li>Personalized designs including engravings, photographs, and epitaphs</li>
+                    <li>Various styles, finishes, and markers for gravesites</li>
+                </ul>
             </div>
-            <div class="card bg-white p-10 rounded-[2rem] border border-slate-200">
-                <h3 class="text-3xl font-bold text-darkPurple mb-4">Funeral Planning</h3>
-                <p class="text-slate-600 mb-6">Compassionate, professional planning for dignified funeral services.</p>
+
+            <!-- Funeral Planning/Arrangements -->
+            <div id="funeral" class="card bg-white p-8 md:p-12 rounded-[2rem] border border-slate-200 shadow-sm flex flex-col h-full scroll-mt-32">
+                <div class="w-16 h-16 bg-secondary/20 text-primary rounded-full flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                </div>
+                <h3 class="text-3xl font-bold text-darkPurple mb-4">Funeral Planning & Arrangements</h3>
+                <p class="text-slate-600 mb-6 font-medium leading-relaxed flex-grow">
+                    We assist families in planning and organizing complete funeral services. Our professional and compassionate staff will help coordinate all aspects to ensure a seamless process.
+                </p>
+                <ul class="service-list text-slate-700 font-medium">
+                    <li>Full-service planning tailored to cultural and religious preferences</li>
+                    <li>Coordination with cemeteries, crematoriums, and service providers</li>
+                    <li>Provision of high-quality Caskets, Coffins, and Urns</li>
+                    <li>Hearse and Van coordination</li>
+                    <li>Embalming room equipment and professional preparation</li>
+                </ul>
+            </div>
+
+            <!-- Exhumation Services -->
+            <div id="exhumation" class="card bg-white p-8 md:p-12 rounded-[2rem] border border-slate-200 shadow-sm flex flex-col h-full scroll-mt-32">
+                <div class="w-16 h-16 bg-secondary/20 text-primary rounded-full flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h3 class="text-3xl font-bold text-darkPurple mb-4">Exhumation Services</h3>
+                <p class="text-slate-600 mb-6 font-medium leading-relaxed flex-grow">
+                    We handle the delicate process of exhumation with compassion, respect, and expertise, whether for relocation or further examination.
+                </p>
+                <ul class="service-list text-slate-700 font-medium">
+                    <li>Legal consultation and assistance obtaining necessary permits</li>
+                    <li>Expert team utilizing proper equipment and respectful techniques</li>
+                    <li>Guidance and support for reburial services</li>
+                    <li>Full documentation assistance (updated death certificates)</li>
+                    <li>Clear, sensitive communication and cost transparency</li>
+                </ul>
+            </div>
+
+            <!-- Memorial & Catering Services -->
+            <div id="memorial" class="card bg-white p-8 md:p-12 rounded-[2rem] border border-slate-200 shadow-sm flex flex-col h-full scroll-mt-32">
+                <div class="w-16 h-16 bg-secondary/20 text-primary rounded-full flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path></svg>
+                </div>
+                <h3 class="text-3xl font-bold text-darkPurple mb-4">Memorial & Catering Services</h3>
+                <p class="text-slate-600 mb-6 font-medium leading-relaxed flex-grow">
+                    We help organize memorial services and celebrations of life, personalized to reflect the interests of the deceased, providing a meaningful way for family to gather.
+                </p>
+                <ul class="service-list text-slate-700 font-medium">
+                    <li>Traditional funeral services (visitation, ceremony, graveside)</li>
+                    <li>Cremation services with personalized urn options</li>
+                    <li>Supply of tents, tables, and chairs</li>
+                    <li>Mobile toilets and VIP toilets</li>
+                    <li>Professional decorations, foods, and drinks based on capacity</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== FAMILY PACKAGES SECTION (MOVED BELOW SERVICES) ==================== -->
+    <section class="py-24 px-6 md:px-16 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Hero Image Banner for Packages -->
+            <div class="relative rounded-[2rem] overflow-hidden mb-16 shadow-2xl">
+                <!-- Replace src with your actual desired hero image if needed -->
+                <img src="https://images.unsplash.com/photo-1594905190984-01579df9dba6?q=80&w=2000&auto=format&fit=crop" alt="Family Support" class="w-full h-64 md:h-96 object-cover">
+                <div class="absolute inset-0 bg-darkPurple/80 flex flex-col items-center justify-center text-center p-6 backdrop-blur-sm">
+                    <h2 class="text-4xl md:text-6xl font-heading font-bold text-white mb-4">Family Packages</h2>
+                    <p class="text-slate-200 text-lg md:text-xl font-body max-w-2xl">Choose the perfect, comprehensive cover plan for your family to ensure peace of mind.</p>
+                </div>
+            </div>
+
+            <!-- Packages Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                
+                <!-- PLAN A - SILVER -->
+                <div class="plan-card border border-slate-200 hover:border-primary rounded-3xl overflow-hidden shadow-sm card flex flex-col h-full transition-all duration-300">
+                    <div class="bg-gradient-to-br from-slate-700 to-slate-800 p-6 text-white text-center">
+                        <h3 class="text-3xl font-bold">PLAN - A (SILVER)</h3>
+                        <div class="mt-6 flex items-baseline justify-center gap-1">
+                            <span class="text-5xl font-bold">R180.00</span>
+                            <span class="text-slate-300">/month</span>
+                        </div>
+                        <p class="text-sm mt-2">Joining Fee <span class="font-semibold">R50.00</span></p>
+                    </div>
+
+                    <div class="p-6 flex-1">
+                        <img src="YOUR_SILVER_CASKET_IMAGE_URL" alt="Silver Plan Casket" class="w-full h-52 object-contain mx-auto mb-6">
+                        
+                        <div class="bg-slate-50 rounded-2xl p-5 text-center mb-6">
+                            <p class="text-xs uppercase tracking-widest text-slate-500 mb-1">Covers up to</p>
+                            <p class="text-4xl font-bold text-darkPurple">7 members</p>
+                            <p class="text-xs text-slate-500 mt-1">3 Months waiting period</p>
+                        </div>
+
+                        <ul class="space-y-2.5 text-sm text-slate-700">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> 1 x Hearse</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> 2 x Family Car</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> 60 Programmes</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> 1 x Gravemaker</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Graveite Decor</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Refreshments</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Mortuary Services (24/7)</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Repatriation (100km Radius Free)</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Home Tent + 60 Chairs</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-t p-6 bg-slate-50 text-xs mt-auto">
+                        <p class="font-medium mb-3 text-slate-700">GROCERY:</p>
+                        <p class="text-slate-600 leading-relaxed">
+                            50kg Maize Meal, 12.5kg Sugar, 5Lt Cooking Oil,<br>
+                            2x500g Five Roses, 1kg Omo, 2 Cremora,<br>
+                            Box Tomatoes, Bag of Potatoes, Bag of Cabbages
+                        </p>
+                    </div>
+                </div>
+
+                <!-- PLAN B - GOLD -->
+                <div class="plan-card border-2 border-amber-500 hover:border-amber-600 rounded-3xl overflow-hidden shadow-2xl scale-100 lg:scale-[1.05] z-10 flex flex-col h-full relative transition-all duration-300">
+                    <div class="absolute -top-1 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-xs font-bold px-8 py-2 rounded-b-xl shadow">MOST POPULAR</div>
+                    
+                    <div class="bg-gradient-to-br from-amber-600 to-amber-700 p-6 pt-10 text-white text-center">
+                        <h3 class="text-3xl font-bold">PLAN - B (GOLD)</h3>
+                        <div class="mt-6 flex items-baseline justify-center gap-1">
+                            <span class="text-5xl font-bold">R210.00</span>
+                            <span class="text-amber-200">/month</span>
+                        </div>
+                        <p class="text-sm mt-2">Joining Fee <span class="font-semibold">R50.00</span></p>
+                    </div>
+
+                    <div class="p-6 flex-1 bg-amber-50/10">
+                        <img src="YOUR_GOLD_CASKET_IMAGE_URL" alt="Gold Plan Casket" class="w-full h-52 object-contain mx-auto mb-6">
+                        
+                        <div class="bg-amber-50 rounded-2xl p-5 text-center mb-6">
+                            <p class="text-xs uppercase tracking-widest text-amber-600 mb-1">Covers up to</p>
+                            <p class="text-4xl font-bold text-amber-700">9 members</p>
+                            <p class="text-xs text-amber-600 mt-1">3 Months waiting period</p>
+                        </div>
+
+                        <ul class="space-y-2.5 text-sm text-slate-700">
+                            <li class="flex items-start gap-2"><span class="text-amber-600 mt-1">✔</span> 1 x Hearse</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-600 mt-1">✔</span> 2 x Family Car</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-600 mt-1">✔</span> 80 Programmes</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-600 mt-1">✔</span> 1 x Gravemaker</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-600 mt-1">✔</span> Graveite Decor</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-600 mt-1">✔</span> Refreshments</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-600 mt-1">✔</span> Mortuary Services (24/7)</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-600 mt-1">✔</span> Repatriation (100km Radius Free)</li>
+                            <li class="flex items-start gap-2"><span class="text-amber-600 mt-1">✔</span> Home Tent + 80 Chairs</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-t p-6 bg-amber-50 text-xs mt-auto">
+                        <p class="font-medium mb-3 text-slate-700">GROCERY:</p>
+                        <p class="text-slate-600 leading-relaxed">
+                            50kg Maize Meal, 12.5kg Sugar, 5Lt Cooking Oil,<br>
+                            2x500g Five Roses, 1kg Omo, 2 Cremora,<br>
+                            Box Tomatoes, Bag of Potatoes, Bag of Cabbages
+                        </p>
+                    </div>
+                </div>
+
+                <!-- PLAN C - PLATINUM -->
+                <div class="plan-card border border-purple-600 hover:border-primary rounded-3xl overflow-hidden shadow-sm card flex flex-col h-full transition-all duration-300">
+                    <div class="bg-gradient-to-br from-purple-700 to-primary p-6 text-white text-center">
+                        <h3 class="text-3xl font-bold">PLAN - C (PLATINUM)</h3>
+                        <div class="mt-6 flex items-baseline justify-center gap-1">
+                            <span class="text-5xl font-bold">R240.00</span>
+                            <span class="text-purple-200">/month</span>
+                        </div>
+                        <p class="text-sm mt-2">Joining Fee <span class="font-semibold">R50.00</span></p>
+                    </div>
+
+                    <div class="p-6 flex-1">
+                        <img src="YOUR_PLATINUM_CASKET_IMAGE_URL" alt="Platinum Plan Casket" class="w-full h-52 object-contain mx-auto mb-6">
+                        
+                        <div class="bg-purple-50 rounded-2xl p-5 text-center mb-6">
+                            <p class="text-xs uppercase tracking-widest text-primary mb-1">Covers up to</p>
+                            <p class="text-4xl font-bold text-primary">13 members</p>
+                            <p class="text-xs text-slate-500 mt-1">3 Months waiting period</p>
+                        </div>
+
+                        <ul class="space-y-2.5 text-sm text-slate-700">
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> 1 x Hearse</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> 2 x Family Car</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> 100 Programmes</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> 3 x A3 Photos</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> 1 x Gravemaker</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Graveite Decor</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Fresh Flower</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Refreshments</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Mortuary Services (24/7)</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Repatriation (100km Radius Free)</li>
+                            <li class="flex items-start gap-2"><span class="text-primary mt-1">✔</span> Home Tent + 100 Chairs</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-t p-6 bg-purple-50 text-xs mt-auto">
+                        <p class="font-medium mb-3 text-slate-700">GROCERY:</p>
+                        <p class="text-slate-600 leading-relaxed">
+                            50kg Maize Meal, 12.5kg Sugar, 5Lt Cooking Oil,<br>
+                            2x500g Five Roses, 1kg Omo, 2 Cremora,<br>
+                            Box Tomatoes, Bag of Potatoes, Bag of Cabbages
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- SEPARATED FAMILY PACKAGES SECTION -->
-    <section class="py-24 px-6 md:px-16 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <!-- Hero Image Header -->
-            <div class="relative rounded-[2rem] overflow-hidden mb-16 shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1594905190984-01579df9dba6?q=80&w=2000&auto=format&fit=crop" alt="Family Support" class="w-full h-64 md:h-96 object-cover">
-                <div class="absolute inset-0 bg-darkPurple/80 flex flex-col items-center justify-center text-center p-6">
-                    <h2 class="text-4xl md:text-6xl font-bold text-white mb-4">Family Funeral Packages</h2>
-                    <p class="text-slate-200 text-lg md:text-xl max-w-2xl">Peace of mind for you and your loved ones with our comprehensive, all-inclusive cover plans.</p>
-                </div>
+    <!-- Member Benefits Banner -->
+    <section class="py-16 bg-primary border-t-4 border-secondary">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-heading font-bold text-white tracking-widest mb-10">EXCLUSIVE MEMBER BENEFITS</h2>
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                <span class="bg-white/10 text-white px-6 py-3 rounded-full font-medium border border-white/20 shadow-sm backdrop-blur-sm">Free Mortuary Facilities</span>
+                <span class="bg-white/10 text-white px-6 py-3 rounded-full font-medium border border-white/20 shadow-sm backdrop-blur-sm">Free Transport</span>
+                <span class="bg-white/10 text-white px-6 py-3 rounded-full font-medium border border-white/20 shadow-sm backdrop-blur-sm">Free Callout (Day or Night)</span>
+                <span class="bg-white/10 text-white px-6 py-3 rounded-full font-medium border border-white/20 shadow-sm backdrop-blur-sm">Coffin Stand & Screen</span>
+                <span class="bg-white/10 text-white px-6 py-3 rounded-full font-medium border border-white/20 shadow-sm backdrop-blur-sm">Death Certificate Assistance</span>
+                <span class="bg-white/10 text-white px-6 py-3 rounded-full font-medium border border-white/20 shadow-sm backdrop-blur-sm">Claims Processing</span>
+                <span class="bg-white/10 text-white px-6 py-3 rounded-full font-medium border border-white/20 shadow-sm backdrop-blur-sm">Custom Name Plate</span>
             </div>
+        </div>
+    </section>
 
-            <!-- Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Silver -->
-                <div class="border border-slate-200 rounded-3xl p-8 flex flex-col shadow-sm">
-                    <h3 class="text-2xl font-bold text-slate-800">SILVER</h3>
-                    <p class="text-4xl font-bold text-primary my-4">R180 <span class="text-sm text-slate-400">/month</span></p>
-                    <ul class="space-y-3 mb-8 text-slate-600 flex-grow">
-                        <li>✔ 7 Members Covered</li>
-                        <li>✔ 60 Programmes</li>
-                        <li>✔ Hearse & 2 Family Cars</li>
-                    </ul>
-                </div>
-                <!-- Gold -->
-                <div class="border-2 border-amber-500 rounded-3xl p-8 flex flex-col shadow-xl scale-105 bg-amber-50/30">
-                    <h3 class="text-2xl font-bold text-amber-600">GOLD (Popular)</h3>
-                    <p class="text-4xl font-bold text-amber-700 my-4">R210 <span class="text-sm text-amber-500">/month</span></p>
-                    <ul class="space-y-3 mb-8 text-slate-600 flex-grow">
-                        <li>✔ 9 Members Covered</li>
-                        <li>✔ 80 Programmes</li>
-                        <li>✔ Hearse & 2 Family Cars</li>
-                    </ul>
-                </div>
-                <!-- Platinum -->
-                <div class="border border-slate-200 rounded-3xl p-8 flex flex-col shadow-sm">
-                    <h3 class="text-2xl font-bold text-slate-800">PLATINUM</h3>
-                    <p class="text-4xl font-bold text-primary my-4">R240 <span class="text-sm text-slate-400">/month</span></p>
-                    <ul class="space-y-3 mb-8 text-slate-600 flex-grow">
-                        <li>✔ 13 Members Covered</li>
-                        <li>✔ 100 Programmes</li>
-                        <li>✔ Hearse & 2 Family Cars</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- CTA Section -->
+    <section id="cta-section" class="py-20 relative text-center border-t border-b border-slate-200">
+        <div id="cta-content" class="relative z-10 max-w-4xl mx-auto px-6">
+            <h2 id="cta-main-heading" class="text-4xl md:text-7xl font-bold mb-6 text-darkPurple text-outline animate-fadeInUp">DIGNITY & RESPECT</h2>
+            <p id="cta-sub-paragraph" class="text-lg md:text-xl text-slate-700 mb-10 font-medium">Rely on us as your trusted partner, saving you time and effort by providing comprehensive solutions under one roof.</p>
+            <button onclick="showJoinModal()" id="cta-button" class="bg-primary hover:bg-darkPurple text-white font-heading font-bold px-12 py-5 text-lg md:text-xl uppercase tracking-wider rounded-pill btn-primary pill shadow-lg shadow-primary/30 transition-colors">
+                Reach Out To Us
+            </button>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-12 px-16 text-center">
-        <p>© 2026 NGOAKO TOMBSTONE & FUNERAL SERVICES</p>
+    <footer class="bg-slate-100 pt-16 pb-10 px-6 md:px-16 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-6">
+                    <img src="https://i.postimg.cc/j5dSjYVG/Whats-App-Image-2026-04-22-at-13-45-01-1-removebg-preview.png" alt="Ngoako Funerals Logo" class="h-14 w-auto rounded-md">
+                    <p class="text-slate-600 text-sm leading-relaxed max-w-xs font-medium">
+                        Our goal is to provide an outstanding level of service delivery to each one of our customers, ensuring timely and high-quality service.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-darkPurple border-b border-primary/20 pb-2">Our Services</h4>
+                    <ul class="space-y-4 text-sm text-slate-600 font-medium">
+                        <li><a href="#tombstones" class="hover:text-primary transition-colors">Tombstones</a></li>
+                        <li><a href="#funeral" class="hover:text-primary transition-colors">Funeral Planning</a></li>
+                        <li><a href="#exhumation" class="hover:text-primary transition-colors">Exhumation</a></li>
+                        <li><a href="#memorial" class="hover:text-primary transition-colors">Memorial Services</a></li>
+                        <li><a href="#memorial" class="hover:text-primary transition-colors">Catering Services</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-darkPurple border-b border-primary/20 pb-2">Member Benefits</h4>
+                    <ul class="space-y-4 text-sm text-slate-600 font-medium">
+                        <li><span class="hover:text-primary transition-colors">Free Mortuary Facilities</span></li>
+                        <li><span class="hover:text-primary transition-colors">Free Transport</span></li>
+                        <li><span class="hover:text-primary transition-colors">Death Certificate Assist</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-heading font-bold text-lg mb-6 tracking-wider text-darkPurple border-b border-primary/20 pb-2">Contact</h4>
+                    <div class="space-y-4 text-sm text-slate-600 font-medium">
+                        <p class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            04 THABO MBEKI STREET, MOKOPANE, LIMPOPO, 0600
+                        </p>
+                        <p class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            ngoakofun@webmail.com
+                        </p>
+                        <p class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            015 065 0613 / 082 777 4825
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="h-px bg-slate-200 my-8"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 uppercase tracking-widest font-bold">
+                <p>© 2026 NGOAKO TOMBSTONE & FUNERAL SERVICES. <span class="text-primary">Reg No: 2004/119268/23.</span></p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Modals -->
-    <div id="join-modal" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-[80] px-4">
-        <div class="bg-white w-full max-w-lg rounded-3xl p-8">
-            <h3 class="text-2xl font-bold mb-6 text-darkPurple">Get Assistance</h3>
-            <button onclick="hideJoinModal()" class="w-full py-4 bg-primary text-white rounded-full font-bold">Close</button>
+    <!-- Join Modal -->
+    <div id="join-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[80] px-4">
+        <div class="bg-white border border-slate-200 w-full max-w-lg rounded-3xl p-6 md:p-8 animate-fadeInUp shadow-2xl">
+            <h3 class="text-2xl font-bold mb-6 text-darkPurple">How Can We Help?</h3>
+            <form id="join-form" onsubmit="handleJoinSubmit(event)">
+                <div class="space-y-6">
+                    <input type="text" placeholder="Full Name" required class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-5 py-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-slate-900 transition-colors">
+                    <input type="email" placeholder="Email Address" required class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-5 py-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-slate-900 transition-colors">
+                    <input type="tel" placeholder="Phone Number" required class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-5 py-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-slate-900 transition-colors">
+                    <select required class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-5 py-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-slate-900 transition-colors">
+                        <option value="">Select Inquiry Type</option>
+                        <option value="Funeral">Funeral Arrangements</option>
+                        <option value="Tombstone">Tombstone Design</option>
+                        <option value="Exhumation">Exhumation Services</option>
+                        <option value="Other">Other / General Inquiry</option>
+                    </select>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                    <button type="button" onclick="hideJoinModal()" class="flex-1 py-4 border border-slate-300 text-slate-600 font-medium rounded-full hover:bg-slate-50 transition-colors order-2 sm:order-1">Cancel</button>
+                    <button id="submit-btn" type="submit" class="flex-1 py-4 bg-primary hover:bg-darkPurple text-white font-bold rounded-full shadow-lg hover:shadow-primary/40 transition-all order-1 sm:order-2">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[90] px-6">
+        <div class="bg-white border border-slate-200 w-full max-w-sm rounded-3xl p-10 text-center animate-fadeInUp shadow-2xl">
+            <div class="w-16 h-16 bg-secondary/20 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-2 uppercase text-darkPurple">Message Sent</h3>
+            <p class="text-slate-500 mb-8 font-medium">We will be in touch with you shortly.</p>
+            <button onclick="hideSuccessModal()" class="w-full py-4 bg-primary hover:bg-darkPurple text-white font-bold rounded-full uppercase shadow-lg hover:shadow-primary/40 transition-all">Close</button>
         </div>
     </div>
 
     <script>
+        function toggleMobileMenu() {
+            const panel = document.getElementById('mobile-menu-panel');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            if (panel.classList.contains('translate-x-full')) {
+                panel.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                panel.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        let lastScrollY = window.scrollY;
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                nav.classList.add('nav-hidden');
+            } else {
+                nav.classList.remove('nav-hidden');
+            }
+            if (currentScrollY > 50) {
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+            }
+            lastScrollY = currentScrollY;
+        });
+
         function showJoinModal() { document.getElementById("join-modal").classList.remove("hidden"); }
         function hideJoinModal() { document.getElementById("join-modal").classList.add("hidden"); }
-        window.onscroll = () => {
-            const nav = document.getElementById('main-nav');
-            window.scrollY > 50 ? nav.classList.add('nav-scrolled') : nav.classList.remove('nav-scrolled');
-        };
+        function showSuccessModal() { document.getElementById("success-modal").classList.remove("hidden"); }
+        function hideSuccessModal() { document.getElementById("success-modal").classList.add("hidden"); }
+        
+        async function handleJoinSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById("submit-btn");
+            try {
+                btn.disabled = true;
+                btn.innerText = "Sending...";
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                hideJoinModal();
+                showSuccessModal();
+                document.getElementById("join-form").reset();
+            } catch (err) { 
+                alert("An error occurred. Please try again."); 
+            } finally { 
+                btn.disabled = false; 
+                btn.innerText = "Submit"; 
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") {
+                hideJoinModal();
+                hideSuccessModal();
+            }
+        });
     </script>
 </body>
 </html>
